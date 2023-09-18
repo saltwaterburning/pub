@@ -134,34 +134,44 @@
                 "type": "object",
                 "properties": {
                     "actualCoreAssemblyDate": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "The new shop date or null if none."
                     },
                     "actualG1CloseDate": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "The new shop date or null if none."
                     },
                     "actualG3CloseDate": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "The new shop date or null if none."
                     },
                     "actualG3StartDate": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "The new shop date or null if none."
                     },
                     "actualInductDate": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "The new shop date or null if none."
                     },
                     "actualKitCompleteDate": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "The new shop date or null if none."
                     },
                     "actualReceiptDate": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "The new shop date or null if none."
                     },
                     "actualReceiveDate": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "The new shop date or null if none."
                     },
                     "actualTestCompleteDate": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "The new shop date or null if none."
                     },
                     "actualTestStartDate": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "The new shop date or null if none."
                     },
                     "dateFormat": {
                         "pattern": "^(\\d{4}-\\d{2}-\\d{2})|(\\d{2}-\\d{2}-\\d{4})|(\\d{2}/\\d{2}/\\d{4})$",
