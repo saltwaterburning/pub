@@ -166,19 +166,23 @@
                     "dateFormat": {
                         "pattern": "^(\\d{4}-\\d{2}-\\d{2})|(\\d{2}-\\d{2}-\\d{4})|(\\d{2}/\\d{2}/\\d{4})$",
                         "type": "string",
-                        "description": "Date format as YYYY-MM-DD, DD-MM-YYYY or MM/DD/YYYY"
+                        "description": "The mandatory date format. Either YYYY-MM-DD, DD-MM-YYYY or MM/DD/YYYY"
                     },
                     "engineCenter": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "The mandatory engine center Id. Example: EC342"
                     },
                     "engineCenterName": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "The mandatory engine center name. Example: LHT AERO Alzey"
                     },
                     "engineSerialNumber": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "The mandatory ESN."
                     },
                     "eventId": {
                         "type": "integer",
+                        "description": "The optional eventId.",
                         "format": "int32"
                     }
                 },
