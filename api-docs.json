@@ -1,185 +1,202 @@
 {
-  "openapi" : "3.0.1",
-  "info" : {
-    "contact" : {
-      "email" : "chuck.marco@prattwhitney.com",
-      "name" : "Chuck Marco",
-      "url" : "https://www.dbds.com"
+    "openapi": "3.0.1",
+    "info": {
+        "contact": {
+            "email": "chuck.marco@prattwhitney.com",
+            "name": "Chuck Marco",
+            "url": "https://www.dbds.com"
+        },
+        "description": "DOME Application RESTful API for shop use.",
+        "title": "Digital Overhaul Management of Engines",
+        "version": "2023-09-18"
     },
-    "description" : "DOME Application RESTful API for use by MRO Application.",
-    "title" : "Digital Overhaul Management of Engines",
-    "version" : "2023-03-20"
-  },
-  "externalDocs" : {
-    "description" : "Project SharePoint"
-  },
-  "servers" : [ {
-    "url" : "http://192.168.3.171:81/dome",
-    "description" : "DBDS Devlelopment"
-  }, {
-    "url" : "http://192.168.3.171:82/dome",
-    "description" : "DBDS Stage"
-  }, {
-    "url" : "https://dome-ui-test.prattwhitney.com/dome",
-    "description" : "P&W Stage"
-  } ],
-  "security" : [ {
-    "bearerAuth" : [ ]
-  } ],
-  "tags" : [ {
-    "description" : "MRO (maintenance, repair and operations) Collaboration API.",
-    "name" : "MRO Collab"
-  } ],
-  "paths" : {
-    "/v1/shop/dome-dates" : {
-      "post" : {
-        "description" : "Updates the matching DOME record with the actual shop dates.",
-        "operationId" : "updateEngineComments",
-        "requestBody" : {
-          "content" : {
-            "application/json" : {
-              "schema" : {
-                "$ref" : "#/components/schemas/ShopDatesRequest"
-              }
-            }
-          },
-          "required" : true
+    "externalDocs": {
+        "description": "Project SharePoint"
+    },
+    "servers": [
+        {
+            "url": "http://192.168.3.171:81/dome",
+            "description": "DBDS Devlelopment"
         },
-        "responses" : {
-          "200" : {
-            "content" : {
-              "application/json" : {
-                "examples" : {
-                  "OK" : {
-                    "description" : "OK",
-                    "value" : "Success"
-                  }
-                },
-                "schema" : {
-                  "$ref" : "#/components/schemas/ErrorResponse"
-                }
-              }
-            },
-            "description" : "Successfully updated the matching DOME record."
-          },
-          "404" : {
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ErrorResponse"
-                }
-              }
-            },
-            "description" : "The matching DOME record was not found."
-          },
-          "409" : {
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ErrorResponse"
-                }
-              }
-            },
-            "description" : "The approval date wasn't updated as one already exists."
-          }
+        {
+            "url": "http://192.168.3.171:82/dome",
+            "description": "DBDS Stage"
         },
-        "tags" : [ "Shop Dates" ]
-      }
-    }
-  },
-  "components" : {
-    "schemas" : {
-      "ErrorResponse" : {
-        "type" : "object",
-        "description" : "Application response schema.",
-        "properties" : {
-          "errors" : {
-            "type" : "array",
-            "description" : "Chain of application error messages.",
-            "items" : {
-              "type" : "string",
-              "description" : "Chain of application error messages."
-            }
-          },
-          "message" : {
-            "type" : "string",
-            "description" : "Application message."
-          },
-          "reason" : {
-            "type" : "string",
-            "description" : "The HttpStatus Reason Phrase  (e.g., NOT FOUND)."
-          },
-          "status" : {
-            "type" : "string",
-            "description" : "The HttpStatus name (e.g., NOT_FOUND)."
-          },
-          "statusCode" : {
-            "type" : "integer",
-            "description" : "The HttpStatus value  (e.g., 404).",
-            "format" : "int32"
-          }
+        {
+            "url": "https://dome-ui-test.prattwhitney.com/dome",
+            "description": "P&W Stage"
         }
-      },
-      "ShopDatesRequest" : {
-        "type" : "object",
-        "properties" : {
-          "actualCoreAssemblyDate" : {
-            "type" : "string"
-          },
-          "actualG1CLoseDate" : {
-            "type" : "string"
-          },
-          "actualG3CloseDate" : {
-            "type" : "string"
-          },
-          "actualG3StartDate" : {
-            "type" : "string"
-          },
-          "actualInductDate" : {
-            "type" : "string"
-          },
-          "actualKitCompleteDate" : {
-            "type" : "string"
-          },
-          "actualReceiptDate" : {
-            "type" : "string"
-          },
-          "actualReceiveDate" : {
-            "type" : "string"
-          },
-          "actualTestCompleteDate" : {
-            "type" : "string"
-          },
-          "actualTestStartDate" : {
-            "type" : "string"
-          },
-          "dateFormat" : {
-            "type" : "string"
-          },
-          "engineCenter" : {
-            "type" : "string"
-          },
-          "engineCenterName" : {
-            "type" : "string"
-          },
-          "engineSerialNumber" : {
-            "type" : "string"
-          },
-          "eventId" : {
-            "type" : "integer",
-            "format" : "int32"
-          }
-        },
-        "required" : [ "dateFormat", "engineCenter", "engineCenterName", "engineSerialNumber" ]
-      }
+    ],
+    "security": [
+        {
+            "bearerAuth": []
+        }
+    ],
+    "tags": [
+        {
+            "description": "Shop Collaboration API.",
+            "name": "Shop Dates"
+        }
+    ],
+    "paths": {
+        "/v1/shop/dome-dates": {
+            "post": {
+                "description": "Updates the matching DOME record with the actual shop dates.",
+                "operationId": "updateEngineComments",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ShopDatesRequest"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "OK": {
+                                        "description": "OK",
+                                        "value": "Success"
+                                    }
+                                },
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        },
+                        "description": "Successfully updated the matching DOME record."
+                    },
+                    "400": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        },
+                        "description": "Invalid request."
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        },
+                        "description": "The matching DOME record was not found."
+                    }
+                },
+                "tags": [
+                    "Shop Dates"
+                ]
+            }
+        }
     },
-    "securitySchemes" : {
-      "bearerAuth" : {
-        "bearerFormat" : "jwt",
-        "description" : "JWT Bearer Authorization.",
-        "scheme" : "bearer",
-        "type" : "http"
-      }
+    "components": {
+        "schemas": {
+            "ErrorResponse": {
+                "type": "object",
+                "description": "Application response schema.",
+                "properties": {
+                    "errors": {
+                        "type": "array",
+                        "description": "Chain of application error messages.",
+                        "items": {
+                            "type": "string",
+                            "description": "Chain of application error messages."
+                        }
+                    },
+                    "message": {
+                        "type": "string",
+                        "description": "Application message."
+                    },
+                    "reason": {
+                        "type": "string",
+                        "description": "The HttpStatus Reason Phrase  (e.g., NOT FOUND)."
+                    },
+                    "status": {
+                        "type": "string",
+                        "description": "The HttpStatus name (e.g., NOT_FOUND)."
+                    },
+                    "statusCode": {
+                        "type": "integer",
+                        "description": "The HttpStatus value  (e.g., 404).",
+                        "format": "int32"
+                    }
+                }
+            },
+            "ShopDatesRequest": {
+                "type": "object",
+                "properties": {
+                    "actualCoreAssemblyDate": {
+                        "type": "string"
+                    },
+                    "actualG1CloseDate": {
+                        "type": "string"
+                    },
+                    "actualG3CloseDate": {
+                        "type": "string"
+                    },
+                    "actualG3StartDate": {
+                        "type": "string"
+                    },
+                    "actualInductDate": {
+                        "type": "string"
+                    },
+                    "actualKitCompleteDate": {
+                        "type": "string"
+                    },
+                    "actualReceiptDate": {
+                        "type": "string"
+                    },
+                    "actualReceiveDate": {
+                        "type": "string"
+                    },
+                    "actualTestCompleteDate": {
+                        "type": "string"
+                    },
+                    "actualTestStartDate": {
+                        "type": "string"
+                    },
+                    "dateFormat": {
+                        "pattern": "^(\\d{4}-\\d{2}-\\d{2})|(\\d{2}-\\d{2}-\\d{4})|(\\d{2}/\\d{2}/\\d{4})$",
+                        "type": "string",
+                        "description": "Date format as YYYY-MM-DD, DD-MM-YYYY or MM/DD/YYYY"
+                    },
+                    "engineCenter": {
+                        "type": "string"
+                    },
+                    "engineCenterName": {
+                        "type": "string"
+                    },
+                    "engineSerialNumber": {
+                        "type": "string"
+                    },
+                    "eventId": {
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                },
+                "required": [
+                    "dateFormat",
+                    "engineCenter",
+                    "engineCenterName",
+                    "engineSerialNumber"
+                ]
+            }
+        },
+        "securitySchemes": {
+            "bearerAuth": {
+                "bearerFormat": "jwt",
+                "description": "JWT Bearer Authorization.",
+                "scheme": "bearer",
+                "type": "http"
+            }
+        }
     }
-  }
 }
