@@ -6,9 +6,9 @@
             "name": "Chuck Marco",
             "url": "https://www.dbds.com"
         },
-        "description": "DOME Application RESTful API for use by MRO Application.",
+        "description": "DOME Application RESTful API for use by Shipping Application.",
         "title": "Digital Overhaul Management of Engines",
-        "version": "2023-03-20"
+        "version": "2024-11-08"
     },
     "externalDocs": {
         "description": "Project SharePoint"
@@ -92,7 +92,7 @@
                     }
                 },
                 "tags": [
-                    "ShipDates"
+                    "ShippingInfo"
                 ]
             }
         }
@@ -149,20 +149,20 @@
                     },
                     "currentLocation": {
                         "type": "string",
-                        "description": "TThe current location or null if none."
+                        "description": "The current location or null if none."
                     },
                     "engineSerialNumber": {
                         "type": "string",
-                        "description": "The mandatory ESN."
+                        "description": "The mandatory engine serial number (ESN)."
                     },
-                    "etaEBUDate": {
+                    "estimatedArrivalEBUDate": {
                         "type": "string",
-                        "description": "The EBU ETA date or null if none.",
+                        "description": "The EBU estimated time of arrival or null if none.",
                         "format": "date"
                     },
-                    "etaMaintCenterDate": {
+                    "estimatedArrivalMaintCenterDate": {
                         "type": "string",
-                        "description": "The maintenance center ETA date or null if none..",
+                        "description": "The maintenance center estimated time of arrival date or null if none.",
                         "format": "date"
                     },
                     "pickUpDate": {
