@@ -40,7 +40,7 @@
 		}
 	],
 	"paths": {
-		"/v1/shop/dome-dates": {
+		"/v1/external/shop/dome-dates": {
 			"post": {
 				"description": "Updates the matching DOME record(s) with the provided non-null shop dates. Dates are required to be in ISO 8601 format (yyyy-MM-dd).",
 				"operationId": "updateEngineComments",
