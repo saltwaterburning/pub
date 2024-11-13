@@ -40,7 +40,7 @@
 		}
 	],
 	"paths": {
-		"/v1/ship/dome-shipping-info": {
+		"/v1/external/shipping/dome-shipping-details": {
 			"post": {
 				"description": "Updates the matching DOME record with the actual shipping information.",
 				"operationId": "updateEngineComments",
