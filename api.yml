@@ -40,15 +40,15 @@
 		}
 	],
 	"paths": {
-		"/v1/external/shipping/dome-shipping-details": {
+		"/v1/shop/dome-dates": {
 			"post": {
-				"description": "Updates the matching DOME record with the actual shipping information.",
+				"description": "Updates the matching DOME record(s) with the provided non-null shop dates. Dates are required to be in ISO 8601 format (yyyy-MM-dd).",
 				"operationId": "updateEngineComments",
 				"requestBody": {
 					"content": {
 						"application/json": {
 							"schema": {
-								"$ref": "#/components/schemas/ShipDatesRequest"
+								"$ref": "#/components/schemas/ShopDatesRequest"
 							}
 						}
 					},
@@ -93,7 +93,7 @@
 					}
 				},
 				"tags": [
-					"ShipDates"
+					"ShopDates"
 				]
 			}
 		}
@@ -131,56 +131,135 @@
 					}
 				}
 			},
-			"ShipDatesRequest": {
+			"ShopDatesRequest": {
 				"type": "object",
 				"properties": {
-					"actualArrivalEBUDate": {
+					"actualCoreAssemblyDate": {
 						"type": "string",
-						"description": "The EBU actual arrival date or null if none. ISO 8601 format (yyyy-MM-dd) required.",
+						"description": "The new shop date or null if none.",
 						"format": "date"
 					},
-					"actualArrivalMaintCenterDate": {
+					"actualG1CloseDate": {
 						"type": "string",
-						"description": "The maintenance center actual arrival date or null if none.  ISO 8601 format (yyyy-MM-dd) required.",
+						"description": "The new shop date or null if none.",
 						"format": "date"
 					},
-					"airwayBill": {
+					"actualG3CloseDate": {
 						"type": "string",
-						"description": "The airway bill or null if none."
+						"description": "The new shop date or null if none.",
+						"format": "date"
 					},
-					"currentLocation": {
+					"actualG3StartDate": {
 						"type": "string",
-						"description": "The current location or null if none."
+						"description": "The new shop date or null if none.",
+						"format": "date"
+					},
+					"actualInductDate": {
+						"type": "string",
+						"description": "The new shop date or null if none.",
+						"format": "date"
+					},
+					"actualKitCompleteDate": {
+						"type": "string",
+						"description": "The new shop date or null if none.",
+						"format": "date"
+					},
+					"actualReceiptDate": {
+						"type": "string",
+						"description": "The new shop date or null if none.",
+						"format": "date"
+					},
+					"actualReceiveDate": {
+						"type": "string",
+						"description": "The new shop date or null if none.",
+						"format": "date"
+					},
+					"actualTestCompleteDate": {
+						"type": "string",
+						"description": "The new shop date or null if none.",
+						"format": "date"
+					},
+					"actualTestStartDate": {
+						"type": "string",
+						"description": "The new shop date or null if none.",
+						"format": "date"
+					},
+					"engineCenter": {
+						"type": "string",
+						"description": "The mandatory engine center Id. Example: EC342"
+					},
+					"engineCenterName": {
+						"type": "string",
+						"description": "The mandatory engine center name. Example: LHT AERO Alzey"
 					},
 					"engineSerialNumber": {
 						"type": "string",
-						"description": "The mandatory engine serial number (ESN)."
+						"description": "The mandatory ESN."
 					},
-					"estimatedArrivalEBUDate": {
+					"eventId": {
+						"type": "integer",
+						"description": "The optional eventId.",
+						"format": "int32"
+					},
+					"planAssetCompleteDate": {
 						"type": "string",
-						"description": "The EBU estimated time of arrival or null if none. ISO 8601 format (yyyy-MM-dd) required.",
+						"description": "The new planned shop date or null if none.",
 						"format": "date"
 					},
-					"estimatedArrivalMaintCenterDate": {
+					"planCoreAssemblyDate": {
 						"type": "string",
-						"description": "The maintenance center estimated time of arrival date or null if none. ISO 8601 format (yyyy-MM-dd) required.",
+						"description": "The new planned shop date or null if none.",
 						"format": "date"
 					},
-					"pickUpDate": {
+					"planGate1CloseDate": {
 						"type": "string",
-						"description": "The pickup date or null if none. ISO 8601 format (yyyy-MM-dd) required.",
+						"description": "The new planned shop date or null if none.",
 						"format": "date"
 					},
-					"shipmentStatus": {
+					"planGate3CloseDate": {
 						"type": "string",
-						"description": "The shipping status or null if none."
+						"description": "The new planned shop date or null if none.",
+						"format": "date"
 					},
-					"shippingCompany": {
+					"planGate3StartDate": {
 						"type": "string",
-						"description": "The shipping company or null if none."
+						"description": "The new planned shop date or null if none.",
+						"format": "date"
+					},
+					"planKitCompleteDate": {
+						"type": "string",
+						"description": "The new planned shop date or null if none.",
+						"format": "date"
+					},
+					"planReceiptDate": {
+						"type": "string",
+						"description": "The new planned shop date or null if none.",
+						"format": "date"
+					},
+					"planReceiveDate": {
+						"type": "string",
+						"description": "The new planned shop date or null if none.",
+						"format": "date"
+					},
+					"planShipDate": {
+						"type": "string",
+						"description": "The new planned shop date or null if none.",
+						"format": "date"
+					},
+					"planTestCompleteDate": {
+						"type": "string",
+						"description": "The new planned shop date or null if none.",
+						"format": "date"
+					},
+					"planTestStartDate": {
+						"type": "string",
+						"description": "The new planned shop date or null if none.",
+						"format": "date"
 					}
 				},
 				"required": [
+					"engineCenter",
+					"engineCenterName",
 					"engineSerialNumber"
 				]
 			}
