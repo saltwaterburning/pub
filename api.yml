@@ -6,7 +6,7 @@
 			"name": "Chuck Marco",
 			"url": "https://www.dbds.com"
 		},
-		"description": "DOME Application RESTful MML Forecast API.",
+		"description": "DOME Application RESTful Forecast MML API.",
 		"title": "Digital Overhaul Management of Engines",
 		"version": "2024-11-25"
 	},
@@ -542,7 +542,7 @@
 					},
 					"planCalendar": {
 						"type": "string",
-						"description": "The PlanCalendar enumeration.",
+						"description": "The PlanCalendar enumeration. Numeric enum values: 0=CALENDAR, 1=FISCAL",
 						"enum": [
 							"0",
 							"1"
@@ -550,7 +550,7 @@
 					},
 					"planMarket": {
 						"type": "string",
-						"description": "The PlanMarket enumeration.",
+						"description": "The PlanMarket enumeration. Numeric enum values: 0=COMMERCIAL, 1=AFTERMARKET",
 						"enum": [
 							"0",
 							"1"
@@ -558,7 +558,7 @@
 					},
 					"planType": {
 						"type": "string",
-						"description": "The PlanPlanType enumeration.",
+						"description": "The PlanPlanType enumeration. Numeric enum values: 0=INDUCTION, 1=SHIPMENT, 2=REVENUE, 3=INDUCTION_QTY, 4=SHIPMENT_QTY, 5=REVENUE_QTY",
 						"enum": [
 							"0",
 							"1",
@@ -622,7 +622,7 @@
 					},
 					"planCalendar": {
 						"type": "string",
-						"description": "The PlanCalendar enumeration.",
+						"description": "The PlanCalendar enumeration. Numeric enum values: 0=CALENDAR, 1=FISCAL",
 						"enum": [
 							"0",
 							"1"
@@ -630,7 +630,7 @@
 					},
 					"planMarket": {
 						"type": "string",
-						"description": "The PlanMarket enumeration.",
+						"description": "The PlanMarket enumeration. Numeric enum values: 0=COMMERCIAL, 1=AFTERMARKET",
 						"enum": [
 							"0",
 							"1"
@@ -638,7 +638,7 @@
 					},
 					"planType": {
 						"type": "string",
-						"description": "The PlanPlanType enumeration.",
+						"description": "The PlanPlanType enumeration. Numeric enum values: 0=INDUCTION, 1=SHIPMENT, 2=REVENUE, 3=INDUCTION_QTY, 4=SHIPMENT_QTY, 5=REVENUE_QTY",
 						"enum": [
 							"0",
 							"1",
@@ -730,7 +730,7 @@
 					},
 					"planCalendar": {
 						"type": "string",
-						"description": "The PlanCalendar enumeration.",
+						"description": "The PlanCalendar enumeration. Numeric enum values: 0=CALENDAR, 1=FISCAL",
 						"enum": [
 							"0",
 							"1"
@@ -738,7 +738,7 @@
 					},
 					"planMarket": {
 						"type": "string",
-						"description": "The PlanMarket enumeration.",
+						"description": "The PlanMarket enumeration. Numeric enum values: 0=COMMERCIAL, 1=AFTERMARKET",
 						"enum": [
 							"0",
 							"1"
@@ -746,7 +746,7 @@
 					},
 					"planType": {
 						"type": "string",
-						"description": "The PlanPlanType enumeration.",
+						"description": "The PlanPlanType enumeration. Numeric enum values: 0=INDUCTION, 1=SHIPMENT, 2=REVENUE, 3=INDUCTION_QTY, 4=SHIPMENT_QTY, 5=REVENUE_QTY",
 						"enum": [
 							"0",
 							"1",
@@ -874,7 +874,7 @@
 					},
 					"planCalendar": {
 						"type": "string",
-						"description": "The PlanCalendar enumeration.",
+						"description": "The PlanCalendar enumeration. Numeric enum values: 0=CALENDAR, 1=FISCAL",
 						"enum": [
 							"0",
 							"1"
@@ -882,7 +882,7 @@
 					},
 					"planMarket": {
 						"type": "string",
-						"description": "The PlanMarket enumeration.",
+						"description": "The PlanMarket enumeration. Numeric enum values: 0=COMMERCIAL, 1=AFTERMARKET",
 						"enum": [
 							"0",
 							"1"
@@ -890,7 +890,7 @@
 					},
 					"planType": {
 						"type": "string",
-						"description": "The PlanPlanType enumeration.",
+						"description": "The PlanPlanType enumeration. Numeric enum values: 0=INDUCTION, 1=SHIPMENT, 2=REVENUE, 3=INDUCTION_QTY, 4=SHIPMENT_QTY, 5=REVENUE_QTY",
 						"enum": [
 							"0",
 							"1",
@@ -960,7 +960,7 @@
 					},
 					"planCalendar": {
 						"type": "string",
-						"description": "The PlanCalendar enumeration.",
+						"description": "The PlanCalendar enumeration. Numeric enum values: 0=CALENDAR, 1=FISCAL",
 						"enum": [
 							"0",
 							"1"
@@ -968,7 +968,7 @@
 					},
 					"planMarket": {
 						"type": "string",
-						"description": "The PlanMarket enumeration.",
+						"description": "The PlanMarket enumeration. Numeric enum values: 0=COMMERCIAL, 1=AFTERMARKET",
 						"enum": [
 							"0",
 							"1"
@@ -976,7 +976,7 @@
 					},
 					"planType": {
 						"type": "string",
-						"description": "The PlanPlanType enumeration.",
+						"description": "The PlanPlanType enumeration. Numeric enum values: 0=INDUCTION, 1=SHIPMENT, 2=REVENUE, 3=INDUCTION_QTY, 4=SHIPMENT_QTY, 5=REVENUE_QTY",
 						"enum": [
 							"0",
 							"1",
@@ -1100,7 +1100,7 @@
 					},
 					"planCalendar": {
 						"type": "string",
-						"description": "The PlanCalendar enumeration.",
+						"description": "The PlanCalendar enumeration. Numeric enum values: 0=CALENDAR, 1=FISCAL",
 						"enum": [
 							"0",
 							"1"
@@ -1108,7 +1108,7 @@
 					},
 					"planMarket": {
 						"type": "string",
-						"description": "The PlanMarket enumeration.",
+						"description": "The PlanMarket enumeration. Numeric enum values: 0=COMMERCIAL, 1=AFTERMARKET",
 						"enum": [
 							"0",
 							"1"
@@ -1116,7 +1116,7 @@
 					},
 					"planType": {
 						"type": "string",
-						"description": "The PlanPlanType enumeration.",
+						"description": "The PlanPlanType enumeration. Numeric enum values: 0=INDUCTION, 1=SHIPMENT, 2=REVENUE, 3=INDUCTION_QTY, 4=SHIPMENT_QTY, 5=REVENUE_QTY",
 						"enum": [
 							"0",
 							"1",
@@ -1186,7 +1186,7 @@
 					},
 					"planCalendar": {
 						"type": "string",
-						"description": "The PlanCalendar enumeration.",
+						"description": "The PlanCalendar enumeration. Numeric enum values: 0=CALENDAR, 1=FISCAL",
 						"enum": [
 							"0",
 							"1"
@@ -1194,7 +1194,7 @@
 					},
 					"planMarket": {
 						"type": "string",
-						"description": "The PlanMarket enumeration.",
+						"description": "The PlanMarket enumeration. Numeric enum values: 0=COMMERCIAL, 1=AFTERMARKET",
 						"enum": [
 							"0",
 							"1"
@@ -1202,7 +1202,7 @@
 					},
 					"planType": {
 						"type": "string",
-						"description": "The PlanPlanType enumeration.",
+						"description": "The PlanPlanType enumeration. Numeric enum values: 0=INDUCTION, 1=SHIPMENT, 2=REVENUE, 3=INDUCTION_QTY, 4=SHIPMENT_QTY, 5=REVENUE_QTY",
 						"enum": [
 							"0",
 							"1",
