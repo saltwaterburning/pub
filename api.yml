@@ -6,7 +6,7 @@
 			"name": "Chuck Marco",
 			"url": "https://www.dbds.com"
 		},
-		"description": "DOME Application RESTful Forecast MML API.",
+		"description": "DOME Application RESTful Forecasting MML API.",
 		"title": "Digital Overhaul Management of Engines",
 		"version": "2024-11-25"
 	},
@@ -42,6 +42,7 @@
 	"paths": {
 		"/v1/forecasting/annual/planned-monthly": {
 			"patch": {
+				"description": "Update the annual monthly forecast records (MML) with any user changes.",
 				"operationId": "updateMonthlyPlans",
 				"requestBody": {
 					"content": {
@@ -55,14 +56,50 @@
 				},
 				"responses": {
 					"200": {
-						"description": "OK"
+						"content": {
+							"application/json": {
+								"examples": {
+									"OK": {
+										"description": "OK",
+										"value": "Void (no body)"
+									}
+								},
+								"schema": {
+									"$ref": "#/components/schemas/ErrorResponse"
+								}
+							}
+						},
+						"description": "Successfully processed the provided request and no user changes detected. Client should not make another requst to get weekly details."
+					},
+					"201": {
+						"content": {
+							"application/json": {
+								"examples": {
+									"CREATED": {
+										"description": "CREATED",
+										"value": "Void (no body)"
+									}
+								},
+								"schema": {
+									"$ref": "#/components/schemas/ErrorResponse"
+								}
+							}
+						},
+						"description": "Successfully processed the provided request and user changes were detected. Client should make another requst to get weekly details."
+					},
+					"400": {
+						"description": "Invalid request."
+					},
+					"404": {
+						"description": "The matching DOME record was not found."
 					}
 				},
 				"tags": [
-					"forecast-plan-controller"
+					"Annual MML Forecasting"
 				]
 			},
 			"post": {
+				"description": "Returns the annual planned monthly forecasting details (MML) for the provided request.",
 				"operationId": "getMonthlyAnnualPlans",
 				"requestBody": {
 					"content": {
@@ -78,21 +115,48 @@
 					"200": {
 						"content": {
 							"application/json": {
+								"examples": {
+									"OK": {
+										"description": "OK",
+										"value": "AnnualMonthlyForecastPlanResponse"
+									}
+								},
 								"schema": {
 									"$ref": "#/components/schemas/AnnualMonthlyForecastPlanResponse"
 								}
 							}
 						},
-						"description": "OK"
+						"description": "Successfully processed the provided request."
+					},
+					"400": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/AnnualMonthlyForecastPlanResponse"
+								}
+							}
+						},
+						"description": "Invalid request."
+					},
+					"404": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/AnnualMonthlyForecastPlanResponse"
+								}
+							}
+						},
+						"description": "The matching DOME record was not found."
 					}
 				},
 				"tags": [
-					"forecast-plan-controller"
+					"Annual MML Forecasting"
 				]
 			}
 		},
 		"/v1/forecasting/annual/planned-weekly": {
 			"patch": {
+				"description": "Update the annual planned weekly forecast records (MML) with any user changes.",
 				"operationId": "updateWeeklyPlans",
 				"requestBody": {
 					"content": {
@@ -108,19 +172,62 @@
 					"200": {
 						"content": {
 							"application/json": {
+								"examples": {
+									"OK": {
+										"description": "OK",
+										"value": "Void"
+									}
+								},
+								"schema": {
+									"$ref": "#/components/schemas/ErrorResponse"
+								}
+							}
+						},
+						"description": "Successfully processed the provided request and no user changes detected. Client should not make another requst to get weekly details."
+					},
+					"201": {
+						"content": {
+							"application/json": {
+								"examples": {
+									"OK": {
+										"description": "OK",
+										"value": "Void"
+									}
+								},
+								"schema": {
+									"$ref": "#/components/schemas/ErrorResponse"
+								}
+							}
+						},
+						"description": "Successfully processed the provided request and user changes were detected. Client should make another requst to get weekly details."
+					},
+					"400": {
+						"content": {
+							"application/json": {
 								"schema": {
 									"$ref": "#/components/schemas/AnnualWeeklyForecastPlanResponse"
 								}
 							}
 						},
-						"description": "OK"
+						"description": "Invalid request."
+					},
+					"404": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/AnnualWeeklyForecastPlanResponse"
+								}
+							}
+						},
+						"description": "The matching DOME record was not found."
 					}
 				},
 				"tags": [
-					"forecast-plan-controller"
+					"Annual MML Forecasting"
 				]
 			},
 			"post": {
+				"description": "Returns the annual planned weekly forecasting details (MML) for the provided request.",
 				"operationId": "getWeeklyAnnualPlans",
 				"requestBody": {
 					"content": {
@@ -136,16 +243,42 @@
 					"200": {
 						"content": {
 							"application/json": {
+								"examples": {
+									"OK": {
+										"description": "OK",
+										"value": "AnnualWeeklyForecastPlanResponse"
+									}
+								},
 								"schema": {
 									"$ref": "#/components/schemas/AnnualWeeklyForecastPlanResponse"
 								}
 							}
 						},
-						"description": "OK"
+						"description": "Successfully processed the provided request."
+					},
+					"400": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/AnnualWeeklyForecastPlanResponse"
+								}
+							}
+						},
+						"description": "Invalid request."
+					},
+					"404": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/AnnualWeeklyForecastPlanResponse"
+								}
+							}
+						},
+						"description": "The matching DOME record was not found."
 					}
 				},
 				"tags": [
-					"forecast-plan-controller"
+					"Annual MML Forecasting"
 				]
 			}
 		},
@@ -181,7 +314,7 @@
 								"examples": {
 									"OK": {
 										"description": "OK",
-										"value": "Void"
+										"value": "Void (no body)"
 									}
 								},
 								"schema": {
@@ -195,9 +328,9 @@
 						"content": {
 							"application/json": {
 								"examples": {
-									"OK": {
-										"description": "OK",
-										"value": "Void"
+									"CREATED": {
+										"description": "CREATED",
+										"value": "Void (no body)"
 									}
 								},
 								"schema": {
@@ -219,7 +352,7 @@
 				]
 			},
 			"post": {
-				"description": "Returns the annual monthly forecasting details for the provided request.",
+				"description": "Returns the monthly forecasting details (MML) for the provided request.",
 				"operationId": "getMonthlyData",
 				"requestBody": {
 					"content": {
@@ -238,11 +371,11 @@
 								"examples": {
 									"OK": {
 										"description": "OK",
-										"value": "Success"
+										"value": "MmlMonthlyPlanResponse"
 									}
 								},
 								"schema": {
-									"$ref": "#/components/schemas/ErrorResponse"
+									"$ref": "#/components/schemas/MmlMonthlyResponse"
 								}
 							}
 						},
@@ -274,9 +407,9 @@
 				]
 			}
 		},
-		"/v1/forecasting/monthly/plan-details": {
+		"/v1/forecasting/monthly/planned-details": {
 			"post": {
-				"description": "Returns the annual planned monthly forecasting details for the provided request.",
+				"description": "Returns the planned monthly forecasting details (MML) for the provided request.",
 				"operationId": "getMonthlyPlanData",
 				"requestBody": {
 					"content": {
@@ -295,11 +428,11 @@
 								"examples": {
 									"OK": {
 										"description": "OK",
-										"value": "Success"
+										"value": "MmlMonthlyPlanResponse"
 									}
 								},
 								"schema": {
-									"$ref": "#/components/schemas/ErrorResponse"
+									"$ref": "#/components/schemas/MmlMonthlyPlanResponse"
 								}
 							}
 						},
@@ -363,7 +496,7 @@
 								"examples": {
 									"OK": {
 										"description": "OK",
-										"value": "Void"
+										"value": "Void (no body)"
 									}
 								},
 								"schema": {
@@ -377,9 +510,9 @@
 						"content": {
 							"application/json": {
 								"examples": {
-									"OK": {
-										"description": "OK",
-										"value": "Void"
+									"CREATED": {
+										"description": "CREATED",
+										"value": "Void (no body)"
 									}
 								},
 								"schema": {
@@ -401,7 +534,7 @@
 				]
 			},
 			"post": {
-				"description": "Returns the annual weekly forecasting details for the provided request.",
+				"description": "Returns the weekly forecasting details (MML) for the provided request.",
 				"operationId": "getWeeklyData",
 				"requestBody": {
 					"content": {
@@ -420,11 +553,11 @@
 								"examples": {
 									"OK": {
 										"description": "OK",
-										"value": "Success"
+										"value": "MmlWeeklyResponse"
 									}
 								},
 								"schema": {
-									"$ref": "#/components/schemas/ErrorResponse"
+									"$ref": "#/components/schemas/MmlWeeklyResponse"
 								}
 							}
 						},
@@ -456,9 +589,9 @@
 				]
 			}
 		},
-		"/v1/forecasting/weekly/plan-details": {
+		"/v1/forecasting/weekly/planned-details": {
 			"post": {
-				"description": "Returns the annual planned weekly forecasting details for the provided request.",
+				"description": "Returns the planned weekly forecasting details (MML) for the provided request.",
 				"operationId": "getWeeklyPlanData",
 				"requestBody": {
 					"content": {
