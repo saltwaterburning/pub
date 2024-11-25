@@ -40,9 +40,9 @@
 		}
 	],
 	"paths": {
-		"/v1/forecasting/annual/planned-monthly": {
+		"/v1/forecast/annual/planned-monthly": {
 			"patch": {
-				"description": "Update the annual monthly forecast records (MML) with any user changes.",
+				"description": "Update the annual monthly forecast (MML) record(s) with any user changes.",
 				"operationId": "updateMonthlyPlans",
 				"requestBody": {
 					"content": {
@@ -69,7 +69,7 @@
 								}
 							}
 						},
-						"description": "Successfully processed the provided request and no user changes detected. Client should not make another requst to get weekly details."
+						"description": "Successfully processed the provided request and no user changes detected. Client should not make another request to refresh weekly details."
 					},
 					"201": {
 						"content": {
@@ -85,7 +85,7 @@
 								}
 							}
 						},
-						"description": "Successfully processed the provided request and user changes were detected. Client should make another requst to get weekly details."
+						"description": "Successfully processed the provided request and user changes were detected. Client should make another request to refresh weekly details."
 					},
 					"400": {
 						"content": {
@@ -105,11 +105,11 @@
 					}
 				},
 				"tags": [
-					"Annual MML Forecasting"
+					"Annual Forecasting (MML)"
 				]
 			},
 			"post": {
-				"description": "Returns the annual planned monthly forecasting details (MML) for the provided request.",
+				"description": "Returns the annual planned monthly forecast (MML) details for the provided request.",
 				"operationId": "getMonthlyAnnualPlans",
 				"requestBody": {
 					"content": {
@@ -156,13 +156,13 @@
 					}
 				},
 				"tags": [
-					"Annual MML Forecasting"
+					"Annual Forecasting (MML)"
 				]
 			}
 		},
-		"/v1/forecasting/annual/planned-weekly": {
+		"/v1/forecast/annual/planned-weekly": {
 			"patch": {
-				"description": "Update the annual planned weekly forecast records (MML) with any user changes.",
+				"description": "Update the annual planned weekly forecast (MML) record(s) with any user changes.",
 				"operationId": "updateWeeklyPlans",
 				"requestBody": {
 					"content": {
@@ -189,7 +189,7 @@
 								}
 							}
 						},
-						"description": "Successfully processed the provided request and no user changes detected. Client should not make another requst to get weekly details."
+						"description": "Successfully processed the provided request and no user changes detected. Client should not make another request to refresh weekly details."
 					},
 					"201": {
 						"content": {
@@ -205,7 +205,7 @@
 								}
 							}
 						},
-						"description": "Successfully processed the provided request and user changes were detected. Client should make another requst to get weekly details."
+						"description": "Successfully processed the provided request and user changes were detected. Client should make another request to refresh weekly details."
 					},
 					"400": {
 						"content": {
@@ -225,11 +225,11 @@
 					}
 				},
 				"tags": [
-					"Annual MML Forecasting"
+					"Annual Forecasting (MML)"
 				]
 			},
 			"post": {
-				"description": "Returns the annual planned weekly forecasting details (MML) for the provided request.",
+				"description": "Returns the annual planned weekly forecast (MML) details for the provided request.",
 				"operationId": "getWeeklyAnnualPlans",
 				"requestBody": {
 					"content": {
@@ -276,13 +276,13 @@
 					}
 				},
 				"tags": [
-					"Annual MML Forecasting"
+					"Annual Forecasting (MML)"
 				]
 			}
 		},
-		"/v1/forecasting/monthly/details": {
+		"/v1/forecast/monthly/details": {
 			"patch": {
-				"description": "Update the monthly MML records with any user changes.",
+				"description": "Update the monthly MML record(s) with any user changes.",
 				"operationId": "updateMonthlyData",
 				"parameters": [
 					{
@@ -320,7 +320,7 @@
 								}
 							}
 						},
-						"description": "Successfully processed the provided request and no user changes detected. Client should not make another requst to get monthly details."
+						"description": "Successfully processed the provided request and no user changes detected. Client should not make another request to refresh monthly details."
 					},
 					"201": {
 						"content": {
@@ -333,7 +333,7 @@
 								}
 							}
 						},
-						"description": "Successfully processed the provided request and user changes were detected. Client should make another requst to get monthly details."
+						"description": "Successfully processed the provided request and user changes were detected. Client should make another request to refresh monthly details."
 					},
 					"400": {
 						"content": {
@@ -353,11 +353,11 @@
 					}
 				},
 				"tags": [
-					"MML Forecasting"
+					"Forecasting (MML)"
 				]
 			},
 			"post": {
-				"description": "Returns the monthly forecasting details (MML) for the provided request.",
+				"description": "Returns the monthly forecast (MML) details for the provided request.",
 				"operationId": "getMonthlyData",
 				"requestBody": {
 					"content": {
@@ -404,13 +404,13 @@
 					}
 				},
 				"tags": [
-					"MML Forecasting"
+					"Forecasting (MML)"
 				]
 			}
 		},
-		"/v1/forecasting/monthly/planned-details": {
+		"/v1/forecast/monthly/planned-details": {
 			"post": {
-				"description": "Returns the planned monthly forecasting details (MML) for the provided request.",
+				"description": "Returns the planned monthly forecast (MML) details for the provided request.",
 				"operationId": "getMonthlyPlanData",
 				"requestBody": {
 					"content": {
@@ -457,13 +457,13 @@
 					}
 				},
 				"tags": [
-					"MML Forecasting"
+					"Forecasting (MML)"
 				]
 			}
 		},
-		"/v1/forecasting/weekly/details": {
+		"/v1/forecast/weekly/details": {
 			"patch": {
-				"description": "Update the weekly MML records with any user changes.",
+				"description": "Update the weekly MML record(s) with any user changes.",
 				"operationId": "updateWeeklyData",
 				"parameters": [
 					{
@@ -501,7 +501,7 @@
 								}
 							}
 						},
-						"description": "Successfully processed the provided request and no user changes detected. Client should not make another requst to get weekly details."
+						"description": "Successfully processed the provided request and no user changes detected. Client should not make another request to refresh weekly details."
 					},
 					"201": {
 						"content": {
@@ -514,7 +514,7 @@
 								}
 							}
 						},
-						"description": "Successfully processed the provided request and user changes were detected. Client should make another requst to get weekly details."
+						"description": "Successfully processed the provided request and user changes were detected. Client should make another request to refresh weekly details."
 					},
 					"400": {
 						"content": {
@@ -534,11 +534,11 @@
 					}
 				},
 				"tags": [
-					"MML Forecasting"
+					"Forecasting (MML)"
 				]
 			},
 			"post": {
-				"description": "Returns the weekly forecasting details (MML) for the provided request.",
+				"description": "Returns the weekly forecast (MML) details for the provided request.",
 				"operationId": "getWeeklyData",
 				"requestBody": {
 					"content": {
@@ -585,13 +585,13 @@
 					}
 				},
 				"tags": [
-					"MML Forecasting"
+					"Forecasting (MML)"
 				]
 			}
 		},
-		"/v1/forecasting/weekly/planned-details": {
+		"/v1/forecast/weekly/planned-details": {
 			"post": {
-				"description": "Returns the planned weekly forecasting details (MML) for the provided request.",
+				"description": "Returns the planned weekly forecast (MML) details for the provided request.",
 				"operationId": "getWeeklyPlanData",
 				"requestBody": {
 					"content": {
@@ -638,7 +638,7 @@
 					}
 				},
 				"tags": [
-					"MML Forecasting"
+					"Forecasting (MML)"
 				]
 			}
 		}
