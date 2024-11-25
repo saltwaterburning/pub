@@ -88,10 +88,20 @@
 						"description": "Successfully processed the provided request and user changes were detected. Client should make another requst to get weekly details."
 					},
 					"400": {
-						"description": "Invalid request."
-					},
-					"404": {
-						"description": "The matching DOME record was not found."
+						"content": {
+							"application/json": {
+								"examples": {
+									"BAD_REQUEST": {
+										"description": "BAD_REQUEST",
+										"value": "ErrorResponse"
+									}
+								},
+								"schema": {
+									"$ref": "#/components/schemas/ErrorResponse"
+								}
+							}
+						},
+						"description": "Bad request."
 					}
 				},
 				"tags": [
@@ -131,22 +141,18 @@
 					"400": {
 						"content": {
 							"application/json": {
+								"examples": {
+									"BAD_REQUEST": {
+										"description": "BAD_REQUEST",
+										"value": "ErrorResponse"
+									}
+								},
 								"schema": {
-									"$ref": "#/components/schemas/AnnualMonthlyForecastPlanResponse"
+									"$ref": "#/components/schemas/ErrorResponse"
 								}
 							}
 						},
-						"description": "Invalid request."
-					},
-					"404": {
-						"content": {
-							"application/json": {
-								"schema": {
-									"$ref": "#/components/schemas/AnnualMonthlyForecastPlanResponse"
-								}
-							}
-						},
-						"description": "The matching DOME record was not found."
+						"description": "Bad request."
 					}
 				},
 				"tags": [
@@ -204,22 +210,18 @@
 					"400": {
 						"content": {
 							"application/json": {
+								"examples": {
+									"BAD_REQUEST": {
+										"description": "BAD_REQUEST",
+										"value": "ErrorResponse"
+									}
+								},
 								"schema": {
-									"$ref": "#/components/schemas/AnnualWeeklyForecastPlanResponse"
+									"$ref": "#/components/schemas/ErrorResponse"
 								}
 							}
 						},
-						"description": "Invalid request."
-					},
-					"404": {
-						"content": {
-							"application/json": {
-								"schema": {
-									"$ref": "#/components/schemas/AnnualWeeklyForecastPlanResponse"
-								}
-							}
-						},
-						"description": "The matching DOME record was not found."
+						"description": "Bad request."
 					}
 				},
 				"tags": [
@@ -259,22 +261,18 @@
 					"400": {
 						"content": {
 							"application/json": {
+								"examples": {
+									"BAD_REQUEST": {
+										"description": "BAD_REQUEST",
+										"value": "ErrorResponse"
+									}
+								},
 								"schema": {
-									"$ref": "#/components/schemas/AnnualWeeklyForecastPlanResponse"
+									"$ref": "#/components/schemas/ErrorResponse"
 								}
 							}
 						},
-						"description": "Invalid request."
-					},
-					"404": {
-						"content": {
-							"application/json": {
-								"schema": {
-									"$ref": "#/components/schemas/AnnualWeeklyForecastPlanResponse"
-								}
-							}
-						},
-						"description": "The matching DOME record was not found."
+						"description": "Bad request."
 					}
 				},
 				"tags": [
@@ -332,19 +330,26 @@
 										"description": "CREATED",
 										"value": "Void (no body)"
 									}
-								},
-								"schema": {
-									"$ref": "#/components/schemas/ErrorResponse"
 								}
 							}
 						},
 						"description": "Successfully processed the provided request and user changes were detected. Client should make another requst to get monthly details."
 					},
 					"400": {
-						"description": "Invalid request."
-					},
-					"404": {
-						"description": "The matching DOME record was not found."
+						"content": {
+							"application/json": {
+								"examples": {
+									"BAD_REQUEST": {
+										"description": "BAD_REQUEST",
+										"value": "ErrorResponse"
+									}
+								},
+								"schema": {
+									"$ref": "#/components/schemas/ErrorResponse"
+								}
+							}
+						},
+						"description": "Bad request."
 					}
 				},
 				"tags": [
@@ -384,22 +389,18 @@
 					"400": {
 						"content": {
 							"application/json": {
+								"examples": {
+									"BAD_REQUEST": {
+										"description": "BAD_REQUEST",
+										"value": "ErrorResponse"
+									}
+								},
 								"schema": {
-									"$ref": "#/components/schemas/MmlMonthlyResponse"
+									"$ref": "#/components/schemas/ErrorResponse"
 								}
 							}
 						},
-						"description": "Invalid request."
-					},
-					"404": {
-						"content": {
-							"application/json": {
-								"schema": {
-									"$ref": "#/components/schemas/MmlMonthlyResponse"
-								}
-							}
-						},
-						"description": "The matching DOME record was not found."
+						"description": "Bad request."
 					}
 				},
 				"tags": [
@@ -441,22 +442,18 @@
 					"400": {
 						"content": {
 							"application/json": {
+								"examples": {
+									"BAD_REQUEST": {
+										"description": "BAD_REQUEST",
+										"value": "ErrorResponse"
+									}
+								},
 								"schema": {
-									"$ref": "#/components/schemas/MmlMonthlyPlanResponse"
+									"$ref": "#/components/schemas/ErrorResponse"
 								}
 							}
 						},
-						"description": "Invalid request."
-					},
-					"404": {
-						"content": {
-							"application/json": {
-								"schema": {
-									"$ref": "#/components/schemas/MmlMonthlyPlanResponse"
-								}
-							}
-						},
-						"description": "The matching DOME record was not found."
+						"description": "Bad request."
 					}
 				},
 				"tags": [
@@ -514,19 +511,26 @@
 										"description": "CREATED",
 										"value": "Void (no body)"
 									}
-								},
-								"schema": {
-									"$ref": "#/components/schemas/ErrorResponse"
 								}
 							}
 						},
 						"description": "Successfully processed the provided request and user changes were detected. Client should make another requst to get weekly details."
 					},
 					"400": {
-						"description": "Invalid request."
-					},
-					"404": {
-						"description": "The matching DOME record was not found."
+						"content": {
+							"application/json": {
+								"examples": {
+									"BAD_REQUEST": {
+										"description": "BAD_REQUEST",
+										"value": "ErrorResponse"
+									}
+								},
+								"schema": {
+									"$ref": "#/components/schemas/ErrorResponse"
+								}
+							}
+						},
+						"description": "Bad request."
 					}
 				},
 				"tags": [
@@ -566,22 +570,18 @@
 					"400": {
 						"content": {
 							"application/json": {
+								"examples": {
+									"BAD_REQUEST": {
+										"description": "BAD_REQUEST",
+										"value": "ErrorResponse"
+									}
+								},
 								"schema": {
-									"$ref": "#/components/schemas/MmlWeeklyResponse"
+									"$ref": "#/components/schemas/ErrorResponse"
 								}
 							}
 						},
-						"description": "Invalid request."
-					},
-					"404": {
-						"content": {
-							"application/json": {
-								"schema": {
-									"$ref": "#/components/schemas/MmlWeeklyResponse"
-								}
-							}
-						},
-						"description": "The matching DOME record was not found."
+						"description": "Bad request."
 					}
 				},
 				"tags": [
@@ -623,22 +623,18 @@
 					"400": {
 						"content": {
 							"application/json": {
+								"examples": {
+									"BAD_REQUEST": {
+										"description": "BAD_REQUEST",
+										"value": "ErrorResponse"
+									}
+								},
 								"schema": {
-									"$ref": "#/components/schemas/MmlWeeklyPlanResponse"
+									"$ref": "#/components/schemas/ErrorResponse"
 								}
 							}
 						},
-						"description": "Invalid request."
-					},
-					"404": {
-						"content": {
-							"application/json": {
-								"schema": {
-									"$ref": "#/components/schemas/MmlWeeklyPlanResponse"
-								}
-							}
-						},
-						"description": "The matching DOME record was not found."
+						"description": "Bad request."
 					}
 				},
 				"tags": [
@@ -1201,22 +1197,6 @@
 					"engineSerialNumber",
 					"planInductionDate",
 					"week"
-				]
-			},
-			"MmlWeeklyPlanResponse": {
-				"type": "object",
-				"description": "Response with weekly MML forecasting details.",
-				"properties": {
-					"mmlPlanDetails": {
-						"type": "array",
-						"description": "Collection of weekly MML forecasting details.",
-						"items": {
-							"$ref": "#/components/schemas/MmlWeeklyDetails"
-						}
-					}
-				},
-				"required": [
-					"mmlPlanDetails"
 				]
 			},
 			"MmlWeeklyRequest": {
