@@ -6,7 +6,7 @@
 			"name": "Chuck Marco",
 			"url": "https://www.dbds.com"
 		},
-		"description": "DOME Application RESTful API for shop use.",
+		"description": "DOME Application RESTful MML API.",
 		"title": "Digital Overhaul Management of Engines",
 		"version": "2024-11-11"
 	},
@@ -40,15 +40,192 @@
 		}
 	],
 	"paths": {
-		"/v1/external/shop/dome-dates": {
-			"post": {
-				"description": "Updates the matching DOME record(s) with the provided non-null shop dates. Dates are required to be in ISO 8601 format (yyyy-MM-dd).",
-				"operationId": "updateEngineComments",
+		"/v1/forecasting/annual/planned-monthly": {
+			"patch": {
+				"operationId": "updateMonthlyPlans",
 				"requestBody": {
 					"content": {
 						"application/json": {
 							"schema": {
-								"$ref": "#/components/schemas/ShopDatesRequest"
+								"$ref": "#/components/schemas/AnnualMonthlyForecastPlanResponse"
+							}
+						}
+					},
+					"required": true
+				},
+				"responses": {
+					"200": {
+						"description": "OK"
+					}
+				},
+				"tags": [
+					"forecast-plan-controller"
+				]
+			},
+			"post": {
+				"operationId": "getMonthlyAnnualPlans",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/ForecastPlanRequest"
+							}
+						}
+					},
+					"required": true
+				},
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/AnnualMonthlyForecastPlanResponse"
+								}
+							}
+						},
+						"description": "OK"
+					}
+				},
+				"tags": [
+					"forecast-plan-controller"
+				]
+			}
+		},
+		"/v1/forecasting/annual/planned-weekly": {
+			"patch": {
+				"operationId": "updateWeeklyPlans",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/AnnualWeeklyForecastPlanResponse"
+							}
+						}
+					},
+					"required": true
+				},
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/AnnualWeeklyForecastPlanResponse"
+								}
+							}
+						},
+						"description": "OK"
+					}
+				},
+				"tags": [
+					"forecast-plan-controller"
+				]
+			},
+			"post": {
+				"operationId": "getWeeklyAnnualPlans",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/ForecastPlanRequest"
+							}
+						}
+					},
+					"required": true
+				},
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/AnnualWeeklyForecastPlanResponse"
+								}
+							}
+						},
+						"description": "OK"
+					}
+				},
+				"tags": [
+					"forecast-plan-controller"
+				]
+			}
+		},
+		"/v1/forecasting/monthly/details": {
+			"patch": {
+				"description": "Update the monthly MML records with any user changes.",
+				"operationId": "updateMonthlyData",
+				"parameters": [
+					{
+						"description": "Copy to monthly",
+						"in": "query",
+						"name": "copy-to-monthly",
+						"required": false,
+						"schema": {
+							"type": "boolean"
+						}
+					}
+				],
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/MmlMonthlyUpdateRequest"
+							}
+						}
+					},
+					"required": true
+				},
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"examples": {
+									"OK": {
+										"description": "OK",
+										"value": "Void"
+									}
+								},
+								"schema": {
+									"$ref": "#/components/schemas/ErrorResponse"
+								}
+							}
+						},
+						"description": "Successfully processed the provided request and no user changes detected. Client should not make another requst to get monthly details."
+					},
+					"201": {
+						"content": {
+							"application/json": {
+								"examples": {
+									"OK": {
+										"description": "OK",
+										"value": "Void"
+									}
+								},
+								"schema": {
+									"$ref": "#/components/schemas/ErrorResponse"
+								}
+							}
+						},
+						"description": "Successfully processed the provided request and user changes were detected. Client should make another requst to get monthly details."
+					},
+					"400": {
+						"description": "Invalid request."
+					},
+					"404": {
+						"description": "The matching DOME record was not found."
+					}
+				},
+				"tags": [
+					"MML Forecasting"
+				]
+			},
+			"post": {
+				"description": "Returns the annual monthly forecasting details for the provided request.",
+				"operationId": "getMonthlyData",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/MmlMonthlyRequest"
 							}
 						}
 					},
@@ -69,13 +246,13 @@
 								}
 							}
 						},
-						"description": "Successfully updated the matching DOME record."
+						"description": "Successfully processed the provided request."
 					},
 					"400": {
 						"content": {
 							"application/json": {
 								"schema": {
-									"$ref": "#/components/schemas/ErrorResponse"
+									"$ref": "#/components/schemas/MmlMonthlyResponse"
 								}
 							}
 						},
@@ -85,7 +262,7 @@
 						"content": {
 							"application/json": {
 								"schema": {
-									"$ref": "#/components/schemas/ErrorResponse"
+									"$ref": "#/components/schemas/MmlMonthlyResponse"
 								}
 							}
 						},
@@ -93,13 +270,424 @@
 					}
 				},
 				"tags": [
-					"ShopDates"
+					"MML Forecasting"
+				]
+			}
+		},
+		"/v1/forecasting/monthly/plan-details": {
+			"post": {
+				"description": "Returns the annual planned monthly forecasting details for the provided request.",
+				"operationId": "getMonthlyPlanData",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/MmlMonthlyRequest"
+							}
+						}
+					},
+					"required": true
+				},
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"examples": {
+									"OK": {
+										"description": "OK",
+										"value": "Success"
+									}
+								},
+								"schema": {
+									"$ref": "#/components/schemas/ErrorResponse"
+								}
+							}
+						},
+						"description": "Successfully processed the provided request."
+					},
+					"400": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/MmlMonthlyPlanResponse"
+								}
+							}
+						},
+						"description": "Invalid request."
+					},
+					"404": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/MmlMonthlyPlanResponse"
+								}
+							}
+						},
+						"description": "The matching DOME record was not found."
+					}
+				},
+				"tags": [
+					"MML Forecasting"
+				]
+			}
+		},
+		"/v1/forecasting/weekly/details": {
+			"patch": {
+				"description": "Update the weekly MML records with any user changes.",
+				"operationId": "updateWeeklyData",
+				"parameters": [
+					{
+						"description": "Copy to monthly",
+						"in": "query",
+						"name": "copy-to-monthly",
+						"required": false,
+						"schema": {
+							"type": "boolean"
+						}
+					}
+				],
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/MmlWeeklyUpdateRequest"
+							}
+						}
+					},
+					"required": true
+				},
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"examples": {
+									"OK": {
+										"description": "OK",
+										"value": "Void"
+									}
+								},
+								"schema": {
+									"$ref": "#/components/schemas/ErrorResponse"
+								}
+							}
+						},
+						"description": "Successfully processed the provided request and no user changes detected. Client should not make another requst to get weekly details."
+					},
+					"201": {
+						"content": {
+							"application/json": {
+								"examples": {
+									"OK": {
+										"description": "OK",
+										"value": "Void"
+									}
+								},
+								"schema": {
+									"$ref": "#/components/schemas/ErrorResponse"
+								}
+							}
+						},
+						"description": "Successfully processed the provided request and user changes were detected. Client should make another requst to get weekly details."
+					},
+					"400": {
+						"description": "Invalid request."
+					},
+					"404": {
+						"description": "The matching DOME record was not found."
+					}
+				},
+				"tags": [
+					"MML Forecasting"
+				]
+			},
+			"post": {
+				"description": "Returns the annual weekly forecasting details for the provided request.",
+				"operationId": "getWeeklyData",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/MmlWeeklyRequest"
+							}
+						}
+					},
+					"required": true
+				},
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"examples": {
+									"OK": {
+										"description": "OK",
+										"value": "Success"
+									}
+								},
+								"schema": {
+									"$ref": "#/components/schemas/ErrorResponse"
+								}
+							}
+						},
+						"description": "Successfully processed the provided request."
+					},
+					"400": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/MmlWeeklyResponse"
+								}
+							}
+						},
+						"description": "Invalid request."
+					},
+					"404": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/MmlWeeklyResponse"
+								}
+							}
+						},
+						"description": "The matching DOME record was not found."
+					}
+				},
+				"tags": [
+					"MML Forecasting"
+				]
+			}
+		},
+		"/v1/forecasting/weekly/plan-details": {
+			"post": {
+				"description": "Returns the annual planned weekly forecasting details for the provided request.",
+				"operationId": "getWeeklyPlanData",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/MmlWeeklyRequest"
+							}
+						}
+					},
+					"required": true
+				},
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"examples": {
+									"OK": {
+										"description": "OK",
+										"value": "Success"
+									}
+								},
+								"schema": {
+									"$ref": "#/components/schemas/ErrorResponse"
+								}
+							}
+						},
+						"description": "Successfully processed the provided request."
+					},
+					"400": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/MmlWeeklyPlanResponse"
+								}
+							}
+						},
+						"description": "Invalid request."
+					},
+					"404": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/MmlWeeklyPlanResponse"
+								}
+							}
+						},
+						"description": "The matching DOME record was not found."
+					}
+				},
+				"tags": [
+					"MML Forecasting"
 				]
 			}
 		}
 	},
 	"components": {
 		"schemas": {
+			"AnnualMonthlyForecastPlan": {
+				"type": "object",
+				"properties": {
+					"category": {
+						"type": "string"
+					},
+					"engCenterId": {
+						"type": "string"
+					},
+					"engCenterName": {
+						"type": "string"
+					},
+					"engGroupId": {
+						"type": "string"
+					},
+					"engGroupName": {
+						"type": "string"
+					},
+					"monthlyPlans": {
+						"type": "array",
+						"items": {
+							"$ref": "#/components/schemas/MonthlyForecastPlan"
+						}
+					},
+					"planCalendar": {
+						"type": "string",
+						"description": "The PlanCalendar enumeration.",
+						"enum": [
+							"0",
+							"1"
+						]
+					},
+					"planMarket": {
+						"type": "string",
+						"description": "The PlanMarket enumeration.",
+						"enum": [
+							"0",
+							"1"
+						]
+					},
+					"planType": {
+						"type": "string",
+						"description": "The PlanPlanType enumeration.",
+						"enum": [
+							"0",
+							"1",
+							"2",
+							"3",
+							"4",
+							"5"
+						]
+					},
+					"planYear": {
+						"type": "integer",
+						"format": "int32"
+					},
+					"salesOrderType": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"category",
+					"engCenterId",
+					"engGroupId",
+					"monthlyPlans",
+					"planCalendar",
+					"planMarket",
+					"planType",
+					"planYear",
+					"salesOrderType"
+				]
+			},
+			"AnnualMonthlyForecastPlanResponse": {
+				"type": "object",
+				"properties": {
+					"annualPlans": {
+						"type": "array",
+						"items": {
+							"$ref": "#/components/schemas/AnnualMonthlyForecastPlan"
+						}
+					}
+				},
+				"required": [
+					"annualPlans"
+				]
+			},
+			"AnnualWeeklyForecastPlan": {
+				"type": "object",
+				"properties": {
+					"category": {
+						"type": "string"
+					},
+					"engCenterId": {
+						"type": "string"
+					},
+					"engCenterName": {
+						"type": "string"
+					},
+					"engGroupId": {
+						"type": "string"
+					},
+					"engGroupName": {
+						"type": "string"
+					},
+					"planCalendar": {
+						"type": "string",
+						"description": "The PlanCalendar enumeration.",
+						"enum": [
+							"0",
+							"1"
+						]
+					},
+					"planMarket": {
+						"type": "string",
+						"description": "The PlanMarket enumeration.",
+						"enum": [
+							"0",
+							"1"
+						]
+					},
+					"planType": {
+						"type": "string",
+						"description": "The PlanPlanType enumeration.",
+						"enum": [
+							"0",
+							"1",
+							"2",
+							"3",
+							"4",
+							"5"
+						]
+					},
+					"planYear": {
+						"type": "integer",
+						"format": "int32"
+					},
+					"salesOrderType": {
+						"type": "string"
+					},
+					"weeklyPlans": {
+						"type": "array",
+						"items": {
+							"$ref": "#/components/schemas/WeeklyForecastPlan"
+						}
+					}
+				},
+				"required": [
+					"category",
+					"engCenterId",
+					"engGroupId",
+					"planCalendar",
+					"planMarket",
+					"planType",
+					"planYear",
+					"salesOrderType",
+					"weeklyPlans"
+				]
+			},
+			"AnnualWeeklyForecastPlanResponse": {
+				"type": "object",
+				"properties": {
+					"annualPlans": {
+						"type": "array",
+						"items": {
+							"$ref": "#/components/schemas/AnnualWeeklyForecastPlan"
+						}
+					}
+				},
+				"required": [
+					"annualPlans"
+				]
+			},
 			"ErrorResponse": {
 				"type": "object",
 				"description": "Application response schema.",
@@ -131,137 +719,552 @@
 					}
 				}
 			},
-			"ShopDatesRequest": {
+			"ForecastPlanRequest": {
 				"type": "object",
 				"properties": {
-					"actualCoreAssemblyDate": {
+					"engineCenterId": {
+						"type": "string"
+					},
+					"engineGroupId": {
+						"type": "string"
+					},
+					"planCalendar": {
 						"type": "string",
-						"description": "The new shop date or null if none.",
+						"description": "The PlanCalendar enumeration.",
+						"enum": [
+							"0",
+							"1"
+						]
+					},
+					"planMarket": {
+						"type": "string",
+						"description": "The PlanMarket enumeration.",
+						"enum": [
+							"0",
+							"1"
+						]
+					},
+					"planType": {
+						"type": "string",
+						"description": "The PlanPlanType enumeration.",
+						"enum": [
+							"0",
+							"1",
+							"2",
+							"3",
+							"4",
+							"5"
+						]
+					},
+					"year": {
+						"type": "integer",
+						"format": "int32"
+					}
+				},
+				"required": [
+					"engineCenterId",
+					"engineGroupId",
+					"planCalendar",
+					"planMarket",
+					"planType",
+					"year"
+				]
+			},
+			"MmlMonthlyDetails": {
+				"type": "object",
+				"description": "Monthly MML forecasting details.",
+				"properties": {
+					"actualReceipentDate": {
+						"type": "string",
+						"description": "EngineTrack actual receive date.",
 						"format": "date"
 					},
-					"actualG1CloseDate": {
+					"customerName": {
 						"type": "string",
-						"description": "The new shop date or null if none.",
-						"format": "date"
+						"description": "Engine customer name."
 					},
-					"actualG3CloseDate": {
+					"engineCategory": {
 						"type": "string",
-						"description": "The new shop date or null if none.",
-						"format": "date"
-					},
-					"actualG3StartDate": {
-						"type": "string",
-						"description": "The new shop date or null if none.",
-						"format": "date"
-					},
-					"actualInductDate": {
-						"type": "string",
-						"description": "The new shop date or null if none.",
-						"format": "date"
-					},
-					"actualKitCompleteDate": {
-						"type": "string",
-						"description": "The new shop date or null if none.",
-						"format": "date"
-					},
-					"actualReceiptDate": {
-						"type": "string",
-						"description": "The new shop date or null if none.",
-						"format": "date"
-					},
-					"actualReceiveDate": {
-						"type": "string",
-						"description": "The new shop date or null if none.",
-						"format": "date"
-					},
-					"actualTestCompleteDate": {
-						"type": "string",
-						"description": "The new shop date or null if none.",
-						"format": "date"
-					},
-					"actualTestStartDate": {
-						"type": "string",
-						"description": "The new shop date or null if none.",
-						"format": "date"
-					},
-					"engineCenter": {
-						"type": "string",
-						"description": "The mandatory engine center Id. Example: EC342"
+						"description": "Engine category."
 					},
 					"engineCenterName": {
 						"type": "string",
-						"description": "The mandatory engine center name. Example: LHT AERO Alzey"
+						"description": "Engine center name."
+					},
+					"engineGroupId": {
+						"type": "string",
+						"description": "Engine group Id."
+					},
+					"engineGroupName": {
+						"type": "string",
+						"description": "Engine group name."
+					},
+					"engineId": {
+						"type": "integer",
+						"description": "Engine Id.",
+						"format": "int32"
 					},
 					"engineSerialNumber": {
 						"type": "string",
-						"description": "The mandatory ESN."
+						"description": "Engine serial number."
 					},
-					"eventId": {
+					"month": {
 						"type": "integer",
-						"description": "The optional eventId.",
+						"description": "Month of the year.",
 						"format": "int32"
 					},
-					"planAssetCompleteDate": {
-						"type": "string",
-						"description": "The new planned shop date or null if none.",
-						"format": "date"
+					"planId": {
+						"type": "integer",
+						"description": "DB Plan record Id.",
+						"format": "int32"
 					},
-					"planCoreAssemblyDate": {
+					"planInductionDate": {
 						"type": "string",
-						"description": "The new planned shop date or null if none.",
-						"format": "date"
-					},
-					"planGate1CloseDate": {
-						"type": "string",
-						"description": "The new planned shop date or null if none.",
-						"format": "date"
-					},
-					"planGate3CloseDate": {
-						"type": "string",
-						"description": "The new planned shop date or null if none.",
-						"format": "date"
-					},
-					"planGate3StartDate": {
-						"type": "string",
-						"description": "The new planned shop date or null if none.",
-						"format": "date"
-					},
-					"planKitCompleteDate": {
-						"type": "string",
-						"description": "The new planned shop date or null if none.",
-						"format": "date"
-					},
-					"planReceiptDate": {
-						"type": "string",
-						"description": "The new planned shop date or null if none.",
-						"format": "date"
-					},
-					"planReceiveDate": {
-						"type": "string",
-						"description": "The new planned shop date or null if none.",
-						"format": "date"
-					},
-					"planShipDate": {
-						"type": "string",
-						"description": "The new planned shop date or null if none.",
-						"format": "date"
-					},
-					"planTestCompleteDate": {
-						"type": "string",
-						"description": "The new planned shop date or null if none.",
-						"format": "date"
-					},
-					"planTestStartDate": {
-						"type": "string",
-						"description": "The new planned shop date or null if none.",
+						"description": "EngineTrack planned induction date.",
 						"format": "date"
 					}
 				},
 				"required": [
-					"engineCenter",
+					"actualReceipentDate",
+					"customerName",
+					"engineCategory",
 					"engineCenterName",
-					"engineSerialNumber"
+					"engineGroupId",
+					"engineGroupName",
+					"engineId",
+					"engineSerialNumber",
+					"month",
+					"planInductionDate"
 				]
+			},
+			"MmlMonthlyPlanResponse": {
+				"type": "object",
+				"description": "Response with monthly MML planned forecasting details.",
+				"properties": {
+					"mmlPlanDetails": {
+						"type": "array",
+						"description": "Collection of monthly MML planned forecasting details.",
+						"items": {
+							"$ref": "#/components/schemas/MmlMonthlyDetails"
+						}
+					}
+				},
+				"required": [
+					"mmlPlanDetails"
+				]
+			},
+			"MmlMonthlyRequest": {
+				"type": "object",
+				"description": "Request for monthly MML forecasting details.",
+				"properties": {
+					"engineCenterId": {
+						"type": "string",
+						"description": "The selected engine center Id."
+					},
+					"engineGroupId": {
+						"type": "string",
+						"description": "The selected engine group Id."
+					},
+					"month": {
+						"maximum": 12,
+						"type": "integer",
+						"description": "The month number.",
+						"format": "int32"
+					},
+					"planCalendar": {
+						"type": "string",
+						"description": "The PlanCalendar enumeration.",
+						"enum": [
+							"0",
+							"1"
+						]
+					},
+					"planMarket": {
+						"type": "string",
+						"description": "The PlanMarket enumeration.",
+						"enum": [
+							"0",
+							"1"
+						]
+					},
+					"planType": {
+						"type": "string",
+						"description": "The PlanPlanType enumeration.",
+						"enum": [
+							"0",
+							"1",
+							"2",
+							"3",
+							"4",
+							"5"
+						]
+					},
+					"year": {
+						"type": "integer",
+						"description": "The selected plan year.",
+						"format": "int32"
+					}
+				},
+				"required": [
+					"engineCenterId",
+					"engineGroupId",
+					"month",
+					"planCalendar",
+					"planMarket",
+					"planType",
+					"year"
+				]
+			},
+			"MmlMonthlyResponse": {
+				"type": "object",
+				"description": "Response with monthly MML forecasting details.",
+				"properties": {
+					"mmlDetails": {
+						"type": "array",
+						"description": "Collection of monthly MML forecasting details.",
+						"items": {
+							"$ref": "#/components/schemas/MmlMonthlyDetails"
+						}
+					}
+				},
+				"required": [
+					"mmlDetails"
+				]
+			},
+			"MmlMonthlyUpdateRequest": {
+				"type": "object",
+				"description": "Update request for monthly MML forecasting.",
+				"properties": {
+					"engineCenterId": {
+						"type": "string",
+						"description": "The selected engine center Id."
+					},
+					"engineGroupId": {
+						"type": "string",
+						"description": "The selected engine group Id."
+					},
+					"mmlDetails": {
+						"type": "array",
+						"description": "Collection of monthly MML forecasting details.",
+						"items": {
+							"$ref": "#/components/schemas/MmlMonthlyDetails"
+						}
+					},
+					"month": {
+						"maximum": 12,
+						"type": "integer",
+						"description": "The month number.",
+						"format": "int32"
+					},
+					"planCalendar": {
+						"type": "string",
+						"description": "The PlanCalendar enumeration.",
+						"enum": [
+							"0",
+							"1"
+						]
+					},
+					"planMarket": {
+						"type": "string",
+						"description": "The PlanMarket enumeration.",
+						"enum": [
+							"0",
+							"1"
+						]
+					},
+					"planType": {
+						"type": "string",
+						"description": "The PlanPlanType enumeration.",
+						"enum": [
+							"0",
+							"1",
+							"2",
+							"3",
+							"4",
+							"5"
+						]
+					},
+					"year": {
+						"type": "integer",
+						"description": "The selected plan year.",
+						"format": "int32"
+					}
+				},
+				"required": [
+					"engineCenterId",
+					"engineGroupId",
+					"mmlDetails",
+					"month",
+					"planCalendar",
+					"planMarket",
+					"planType",
+					"year"
+				]
+			},
+			"MmlWeeklyDetails": {
+				"type": "object",
+				"description": "Weekly MML forecasting details.",
+				"properties": {
+					"actualReceipentDate": {
+						"type": "string",
+						"description": "EngineTrack actual receive date.",
+						"format": "date"
+					},
+					"customerName": {
+						"type": "string",
+						"description": "Engine customer name."
+					},
+					"engineCategory": {
+						"type": "string",
+						"description": "Engine category."
+					},
+					"engineCenterName": {
+						"type": "string",
+						"description": "Engine center name."
+					},
+					"engineGroupId": {
+						"type": "string",
+						"description": "Engine group Id."
+					},
+					"engineGroupName": {
+						"type": "string",
+						"description": "Engine group name."
+					},
+					"engineId": {
+						"type": "integer",
+						"description": "Engine Id.",
+						"format": "int32"
+					},
+					"engineSerialNumber": {
+						"type": "string",
+						"description": "Engine serial number."
+					},
+					"planId": {
+						"type": "integer",
+						"description": "DB Plan record Id.",
+						"format": "int32"
+					},
+					"planInductionDate": {
+						"type": "string",
+						"description": "EngineTrack planned induction date.",
+						"format": "date"
+					},
+					"week": {
+						"type": "integer",
+						"description": "Week of the year.",
+						"format": "int32"
+					}
+				},
+				"required": [
+					"actualReceipentDate",
+					"customerName",
+					"engineCategory",
+					"engineCenterName",
+					"engineGroupId",
+					"engineGroupName",
+					"engineId",
+					"engineSerialNumber",
+					"planInductionDate",
+					"week"
+				]
+			},
+			"MmlWeeklyPlanResponse": {
+				"type": "object",
+				"description": "Response with weekly MML forecasting details.",
+				"properties": {
+					"mmlPlanDetails": {
+						"type": "array",
+						"description": "Collection of weekly MML forecasting details.",
+						"items": {
+							"$ref": "#/components/schemas/MmlWeeklyDetails"
+						}
+					}
+				},
+				"required": [
+					"mmlPlanDetails"
+				]
+			},
+			"MmlWeeklyRequest": {
+				"type": "object",
+				"description": "Request for weekly MML forecasting details.",
+				"properties": {
+					"engineCenterId": {
+						"type": "string",
+						"description": "The selected engine center Id."
+					},
+					"engineGroupId": {
+						"type": "string",
+						"description": "The selected engine group Id."
+					},
+					"planCalendar": {
+						"type": "string",
+						"description": "The PlanCalendar enumeration.",
+						"enum": [
+							"0",
+							"1"
+						]
+					},
+					"planMarket": {
+						"type": "string",
+						"description": "The PlanMarket enumeration.",
+						"enum": [
+							"0",
+							"1"
+						]
+					},
+					"planType": {
+						"type": "string",
+						"description": "The PlanPlanType enumeration.",
+						"enum": [
+							"0",
+							"1",
+							"2",
+							"3",
+							"4",
+							"5"
+						]
+					},
+					"week": {
+						"maximum": 52,
+						"type": "integer",
+						"description": "The week number.",
+						"format": "int32"
+					},
+					"year": {
+						"type": "integer",
+						"description": "The selected plan year.",
+						"format": "int32"
+					}
+				},
+				"required": [
+					"engineCenterId",
+					"engineGroupId",
+					"planCalendar",
+					"planMarket",
+					"planType",
+					"week",
+					"year"
+				]
+			},
+			"MmlWeeklyResponse": {
+				"type": "object",
+				"description": "Response with weekly MML forecasting details.",
+				"properties": {
+					"mmlDetails": {
+						"type": "array",
+						"description": "Collection of weekly MML forecasting details.",
+						"items": {
+							"$ref": "#/components/schemas/MmlWeeklyDetails"
+						}
+					}
+				},
+				"required": [
+					"mmlDetails"
+				]
+			},
+			"MmlWeeklyUpdateRequest": {
+				"type": "object",
+				"description": "Update request for weekly MML forecasting.",
+				"properties": {
+					"engineCenterId": {
+						"type": "string",
+						"description": "The selected engine center Id."
+					},
+					"engineGroupId": {
+						"type": "string",
+						"description": "The selected engine group Id."
+					},
+					"mmlDetails": {
+						"type": "array",
+						"description": "Update request for weekly MML forecasting.",
+						"items": {
+							"$ref": "#/components/schemas/MmlWeeklyDetails"
+						}
+					},
+					"planCalendar": {
+						"type": "string",
+						"description": "The PlanCalendar enumeration.",
+						"enum": [
+							"0",
+							"1"
+						]
+					},
+					"planMarket": {
+						"type": "string",
+						"description": "The PlanMarket enumeration.",
+						"enum": [
+							"0",
+							"1"
+						]
+					},
+					"planType": {
+						"type": "string",
+						"description": "The PlanPlanType enumeration.",
+						"enum": [
+							"0",
+							"1",
+							"2",
+							"3",
+							"4",
+							"5"
+						]
+					},
+					"week": {
+						"maximum": 52,
+						"type": "integer",
+						"description": "The week number.",
+						"format": "int32"
+					},
+					"year": {
+						"type": "integer",
+						"description": "The selected plan year.",
+						"format": "int32"
+					}
+				},
+				"required": [
+					"engineCenterId",
+					"engineGroupId",
+					"mmlDetails",
+					"planCalendar",
+					"planMarket",
+					"planType",
+					"week",
+					"year"
+				]
+			},
+			"MonthlyForecastPlan": {
+				"type": "object",
+				"properties": {
+					"planCounter": {
+						"type": "integer",
+						"format": "int32"
+					},
+					"planId": {
+						"type": "integer",
+						"format": "int32"
+					},
+					"planMonth": {
+						"type": "integer",
+						"format": "int32"
+					}
+				}
+			},
+			"WeeklyForecastPlan": {
+				"type": "object",
+				"properties": {
+					"planCounter": {
+						"type": "integer",
+						"format": "int32"
+					},
+					"planId": {
+						"type": "integer",
+						"format": "int32"
+					},
+					"planWeek": {
+						"type": "integer",
+						"format": "int32"
+					}
+				}
 			}
 		},
 		"securitySchemes": {
