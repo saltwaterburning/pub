@@ -687,14 +687,11 @@
 					},
 					"planType": {
 						"type": "string",
-						"description": "The PlanPlanType enumeration. Numeric enum values: 0=INDUCTION, 1=SHIPMENT, 2=REVENUE, 3=INDUCTION_QTY, 4=SHIPMENT_QTY, 5=REVENUE_QTY",
+						"description": "The PlanPlanType enumeration. Numeric enum values: 0=INDUCTION, 1=SHIPMENT, 2=REVENUE",
 						"enum": [
 							"0",
 							"1",
-							"2",
-							"3",
-							"4",
-							"5"
+							"2"
 						]
 					},
 					"planYear": {
@@ -767,14 +764,11 @@
 					},
 					"planType": {
 						"type": "string",
-						"description": "The PlanPlanType enumeration. Numeric enum values: 0=INDUCTION, 1=SHIPMENT, 2=REVENUE, 3=INDUCTION_QTY, 4=SHIPMENT_QTY, 5=REVENUE_QTY",
+						"description": "The PlanPlanType enumeration. Numeric enum values: 0=INDUCTION, 1=SHIPMENT, 2=REVENUE",
 						"enum": [
 							"0",
 							"1",
-							"2",
-							"3",
-							"4",
-							"5"
+							"2"
 						]
 					},
 					"planYear": {
@@ -875,14 +869,11 @@
 					},
 					"planType": {
 						"type": "string",
-						"description": "The PlanPlanType enumeration. Numeric enum values: 0=INDUCTION, 1=SHIPMENT, 2=REVENUE, 3=INDUCTION_QTY, 4=SHIPMENT_QTY, 5=REVENUE_QTY",
+						"description": "The PlanPlanType enumeration. Numeric enum values: 0=INDUCTION, 1=SHIPMENT, 2=REVENUE",
 						"enum": [
 							"0",
 							"1",
-							"2",
-							"3",
-							"4",
-							"5"
+							"2"
 						]
 					},
 					"year": {
@@ -1017,16 +1008,21 @@
 							"1"
 						]
 					},
+					"planSubtype": {
+						"type": "string",
+						"description": "The PlanSubtype enumeration. Numeric enum values: 0=ESN, 1=QUANTITY",
+						"enum": [
+							"0",
+							"1"
+						]
+					},
 					"planType": {
 						"type": "string",
-						"description": "The PlanPlanType enumeration. Numeric enum values: 0=INDUCTION, 1=SHIPMENT, 2=REVENUE, 3=INDUCTION_QTY, 4=SHIPMENT_QTY, 5=REVENUE_QTY",
+						"description": "The PlanPlanType enumeration. Numeric enum values: 0=INDUCTION, 1=SHIPMENT, 2=REVENUE",
 						"enum": [
 							"0",
 							"1",
-							"2",
-							"3",
-							"4",
-							"5"
+							"2"
 						]
 					},
 					"year": {
@@ -1041,6 +1037,7 @@
 					"month",
 					"planCalendar",
 					"planMarket",
+					"planSubtype",
 					"planType",
 					"year"
 				]
@@ -1103,16 +1100,21 @@
 							"1"
 						]
 					},
+					"planSubtype": {
+						"type": "string",
+						"description": "The PlanSubtype enumeration. Numeric enum values: 0=ESN, 1=QUANTITY",
+						"enum": [
+							"0",
+							"1"
+						]
+					},
 					"planType": {
 						"type": "string",
-						"description": "The PlanPlanType enumeration. Numeric enum values: 0=INDUCTION, 1=SHIPMENT, 2=REVENUE, 3=INDUCTION_QTY, 4=SHIPMENT_QTY, 5=REVENUE_QTY",
+						"description": "The PlanPlanType enumeration. Numeric enum values: 0=INDUCTION, 1=SHIPMENT, 2=REVENUE",
 						"enum": [
 							"0",
 							"1",
-							"2",
-							"3",
-							"4",
-							"5"
+							"2"
 						]
 					},
 					"year": {
@@ -1128,6 +1130,7 @@
 					"month",
 					"planCalendar",
 					"planMarket",
+					"planSubtype",
 					"planType",
 					"year"
 				]
@@ -1227,16 +1230,21 @@
 							"1"
 						]
 					},
+					"planSubtype": {
+						"type": "string",
+						"description": "The PlanSubtype enumeration. Numeric enum values: 0=ESN, 1=QUANTITY",
+						"enum": [
+							"0",
+							"1"
+						]
+					},
 					"planType": {
 						"type": "string",
-						"description": "The PlanPlanType enumeration. Numeric enum values: 0=INDUCTION, 1=SHIPMENT, 2=REVENUE, 3=INDUCTION_QTY, 4=SHIPMENT_QTY, 5=REVENUE_QTY",
+						"description": "The PlanPlanType enumeration. Numeric enum values: 0=INDUCTION, 1=SHIPMENT, 2=REVENUE",
 						"enum": [
 							"0",
 							"1",
-							"2",
-							"3",
-							"4",
-							"5"
+							"2"
 						]
 					},
 					"week": {
@@ -1257,6 +1265,7 @@
 					"engineGroupId",
 					"planCalendar",
 					"planMarket",
+					"planSubtype",
 					"planType",
 					"week",
 					"year"
@@ -1313,16 +1322,21 @@
 							"1"
 						]
 					},
+					"planSubtype": {
+						"type": "string",
+						"description": "The PlanSubtype enumeration. Numeric enum values: 0=ESN, 1=QUANTITY",
+						"enum": [
+							"0",
+							"1"
+						]
+					},
 					"planType": {
 						"type": "string",
-						"description": "The PlanPlanType enumeration. Numeric enum values: 0=INDUCTION, 1=SHIPMENT, 2=REVENUE, 3=INDUCTION_QTY, 4=SHIPMENT_QTY, 5=REVENUE_QTY",
+						"description": "The PlanPlanType enumeration. Numeric enum values: 0=INDUCTION, 1=SHIPMENT, 2=REVENUE",
 						"enum": [
 							"0",
 							"1",
-							"2",
-							"3",
-							"4",
-							"5"
+							"2"
 						]
 					},
 					"week": {
@@ -1344,6 +1358,7 @@
 					"mmlDetails",
 					"planCalendar",
 					"planMarket",
+					"planSubtype",
 					"planType",
 					"week",
 					"year"
