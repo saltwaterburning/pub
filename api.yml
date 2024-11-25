@@ -6,9 +6,9 @@
 			"name": "Chuck Marco",
 			"url": "https://www.dbds.com"
 		},
-		"description": "DOME Application RESTful MML API.",
+		"description": "DOME Application RESTful MML Forecast API.",
 		"title": "Digital Overhaul Management of Engines",
-		"version": "2024-11-11"
+		"version": "2024-11-25"
 	},
 	"externalDocs": {
 		"description": "Project SharePoint"
@@ -867,6 +867,7 @@
 					},
 					"month": {
 						"maximum": 12,
+						"minimum": 1,
 						"type": "integer",
 						"description": "The month number.",
 						"format": "int32"
@@ -952,6 +953,7 @@
 					},
 					"month": {
 						"maximum": 12,
+						"minimum": 1,
 						"type": "integer",
 						"description": "The month number.",
 						"format": "int32"
@@ -1126,6 +1128,7 @@
 					},
 					"week": {
 						"maximum": 52,
+						"minimum": 1,
 						"type": "integer",
 						"description": "The week number.",
 						"format": "int32"
@@ -1211,6 +1214,7 @@
 					},
 					"week": {
 						"maximum": 52,
+						"minimum": 1,
 						"type": "integer",
 						"description": "The week number.",
 						"format": "int32"
