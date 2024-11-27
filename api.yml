@@ -8,7 +8,7 @@
 		},
 		"description": "DOME Application RESTful Forecasting MML API.",
 		"title": "Digital Overhaul Management of Engines",
-		"version": "2024-11-25"
+		"version": "2024-11-27"
 	},
 	"externalDocs": {
 		"description": "Project SharePoint"
@@ -809,7 +809,7 @@
 					}
 				},
 				"tags": [
-					"Forecasting MML (aka MML)"
+					"Forecasting LE (aka MML)"
 				]
 			}
 		},
@@ -886,7 +886,7 @@
 					}
 				},
 				"tags": [
-					"Forecasting MML (aka MML)"
+					"Forecasting LE (aka MML)"
 				]
 			},
 			"post": {
@@ -937,7 +937,7 @@
 					}
 				},
 				"tags": [
-					"Forecasting MML (aka MML)"
+					"Forecasting LE (aka MML)"
 				]
 			}
 		},
@@ -1014,7 +1014,7 @@
 					}
 				},
 				"tags": [
-					"Forecasting MML (aka MML)"
+					"Forecasting LE (aka MML)"
 				]
 			},
 			"post": {
@@ -1065,7 +1065,7 @@
 					}
 				},
 				"tags": [
-					"Forecasting MML (aka MML)"
+					"Forecasting LE (aka MML)"
 				]
 			}
 		},
@@ -1118,7 +1118,7 @@
 					}
 				},
 				"tags": [
-					"Forecasting MML (aka MML)"
+					"Forecasting LE (aka MML)"
 				]
 			}
 		},
