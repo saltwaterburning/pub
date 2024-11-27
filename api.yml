@@ -40,7 +40,7 @@
 		}
 	],
 	"paths": {
-		"/v1/forecast/annual/le/planned-monthly": {
+		"/v1/forecast/annual/le/monthly": {
 			"patch": {
 				"description": "Update the monthly quantity forecast (MML) record(s) with any user changes.",
 				"operationId": "updateMonthlyPlans_2",
@@ -105,9 +105,11 @@
 					}
 				},
 				"tags": [
-					"Forecasting LE Annual (aka MML)"
+					"Forecasting Annual LE (aka MML)"
 				]
-			},
+			}
+		},
+		"/v1/forecast/annual/le/planned-monthly": {
 			"post": {
 				"description": "Returns details the annual forecast by month (MML) for the provided request.",
 				"operationId": "getMonthlyQtyPlans_1",
@@ -156,11 +158,64 @@
 					}
 				},
 				"tags": [
-					"Forecasting LE Annual (aka MML)"
+					"Forecasting Annual LE (aka MML)"
 				]
 			}
 		},
 		"/v1/forecast/annual/le/planned-weekly": {
+			"post": {
+				"description": "Returns details the annual forecast by week (MML) for the provided request.",
+				"operationId": "getWeeklyQtyPlans_1",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/MmlQtyRequest"
+							}
+						}
+					},
+					"required": true
+				},
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"examples": {
+									"OK": {
+										"description": "OK",
+										"value": "WeeklyQtyResponse"
+									}
+								},
+								"schema": {
+									"$ref": "#/components/schemas/MmlQtyWeeklyResponse"
+								}
+							}
+						},
+						"description": "Successfully processed the provided request."
+					},
+					"400": {
+						"content": {
+							"application/json": {
+								"examples": {
+									"BAD_REQUEST": {
+										"description": "BAD_REQUEST",
+										"value": "ErrorResponse"
+									}
+								},
+								"schema": {
+									"$ref": "#/components/schemas/ErrorResponse"
+								}
+							}
+						},
+						"description": "Bad request."
+					}
+				},
+				"tags": [
+					"Forecasting Annual LE (aka MML)"
+				]
+			}
+		},
+		"/v1/forecast/annual/le/weekly": {
 			"patch": {
 				"description": "Update the weekly quantity forecast (MML) record(s) with any user changes.",
 				"operationId": "updateWeeklyPlans_2",
@@ -225,62 +280,11 @@
 					}
 				},
 				"tags": [
-					"Forecasting LE Annual (aka MML)"
-				]
-			},
-			"post": {
-				"description": "Returns details the annual forecast by week (MML) for the provided request.",
-				"operationId": "getWeeklyQtyPlans_1",
-				"requestBody": {
-					"content": {
-						"application/json": {
-							"schema": {
-								"$ref": "#/components/schemas/MmlQtyRequest"
-							}
-						}
-					},
-					"required": true
-				},
-				"responses": {
-					"200": {
-						"content": {
-							"application/json": {
-								"examples": {
-									"OK": {
-										"description": "OK",
-										"value": "WeeklyQtyResponse"
-									}
-								},
-								"schema": {
-									"$ref": "#/components/schemas/MmlQtyWeeklyResponse"
-								}
-							}
-						},
-						"description": "Successfully processed the provided request."
-					},
-					"400": {
-						"content": {
-							"application/json": {
-								"examples": {
-									"BAD_REQUEST": {
-										"description": "BAD_REQUEST",
-										"value": "ErrorResponse"
-									}
-								},
-								"schema": {
-									"$ref": "#/components/schemas/ErrorResponse"
-								}
-							}
-						},
-						"description": "Bad request."
-					}
-				},
-				"tags": [
-					"Forecasting LE Annual (aka MML)"
+					"Forecasting Annual LE (aka MML)"
 				]
 			}
 		},
-		"/v1/forecast/annual/mml/planned-monthly": {
+		"/v1/forecast/annual/mml/monthly": {
 			"patch": {
 				"description": "Update the monthly quantity forecast (MML) record(s) with any user changes.",
 				"operationId": "updateMonthlyPlans_1",
@@ -345,9 +349,11 @@
 					}
 				},
 				"tags": [
-					"Forecasting MML Annual (aka MML)"
+					"Forecasting Annual MML (aka MML)"
 				]
-			},
+			}
+		},
+		"/v1/forecast/annual/mml/planned-monthly": {
 			"post": {
 				"description": "Returns the monthly quantity forecast (MML) details for the provided request.",
 				"operationId": "getMonthlyQtyPlans",
@@ -365,14 +371,11 @@
 					"200": {
 						"content": {
 							"application/json": {
-								"examples": {
-									"OK": {
-										"description": "OK",
-										"value": "MonthlyQtyResponse"
-									}
-								},
 								"schema": {
-									"$ref": "#/components/schemas/MmlQtyMonthlyResponse"
+									"type": "array",
+									"items": {
+										"$ref": "#/components/schemas/MmlQtyMonthlyPlanDetails"
+									}
 								}
 							}
 						},
@@ -396,11 +399,61 @@
 					}
 				},
 				"tags": [
-					"Forecasting MML Annual (aka MML)"
+					"Forecasting Annual MML (aka MML)"
 				]
 			}
 		},
 		"/v1/forecast/annual/mml/planned-weekly": {
+			"post": {
+				"description": "Returns the weekly quantity forecast (MML) details for the provided request.",
+				"operationId": "getWeeklyQtyPlans",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/MmlQtyRequest"
+							}
+						}
+					},
+					"required": true
+				},
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "array",
+									"items": {
+										"$ref": "#/components/schemas/MmlQtyWeeklyPlanDetails"
+									}
+								}
+							}
+						},
+						"description": "Successfully processed the provided request."
+					},
+					"400": {
+						"content": {
+							"application/json": {
+								"examples": {
+									"BAD_REQUEST": {
+										"description": "BAD_REQUEST",
+										"value": "ErrorResponse"
+									}
+								},
+								"schema": {
+									"$ref": "#/components/schemas/ErrorResponse"
+								}
+							}
+						},
+						"description": "Bad request."
+					}
+				},
+				"tags": [
+					"Forecasting Annual MML (aka MML)"
+				]
+			}
+		},
+		"/v1/forecast/annual/mml/weekly": {
 			"patch": {
 				"description": "Update the weekly quantity forecast (MML) record(s) with any user changes.",
 				"operationId": "updateWeeklyPlans_1",
@@ -465,62 +518,11 @@
 					}
 				},
 				"tags": [
-					"Forecasting MML Annual (aka MML)"
-				]
-			},
-			"post": {
-				"description": "Returns the weekly quantity forecast (MML) details for the provided request.",
-				"operationId": "getWeeklyQtyPlans",
-				"requestBody": {
-					"content": {
-						"application/json": {
-							"schema": {
-								"$ref": "#/components/schemas/MmlQtyRequest"
-							}
-						}
-					},
-					"required": true
-				},
-				"responses": {
-					"200": {
-						"content": {
-							"application/json": {
-								"examples": {
-									"OK": {
-										"description": "OK",
-										"value": "WeeklyQtyResponse"
-									}
-								},
-								"schema": {
-									"$ref": "#/components/schemas/MmlQtyWeeklyResponse"
-								}
-							}
-						},
-						"description": "Successfully processed the provided request."
-					},
-					"400": {
-						"content": {
-							"application/json": {
-								"examples": {
-									"BAD_REQUEST": {
-										"description": "BAD_REQUEST",
-										"value": "ErrorResponse"
-									}
-								},
-								"schema": {
-									"$ref": "#/components/schemas/ErrorResponse"
-								}
-							}
-						},
-						"description": "Bad request."
-					}
-				},
-				"tags": [
-					"Forecasting MML Annual (aka MML)"
+					"Forecasting Annual MML (aka MML)"
 				]
 			}
 		},
-		"/v1/forecast/annual/planned-monthly": {
+		"/v1/forecast/annual/monthly": {
 			"patch": {
 				"description": "Update the annual monthly forecast (MML) record(s) with any user changes.",
 				"operationId": "updateMonthlyPlans",
@@ -587,7 +589,9 @@
 				"tags": [
 					"Forecasting Annual (aka MML)"
 				]
-			},
+			}
+		},
+		"/v1/forecast/annual/planned-monthly": {
 			"post": {
 				"description": "Returns the annual planned monthly forecast (MML) details for the provided request.",
 				"operationId": "getMonthlyAnnualPlans",
@@ -641,6 +645,59 @@
 			}
 		},
 		"/v1/forecast/annual/planned-weekly": {
+			"post": {
+				"description": "Returns the annual planned weekly forecast (MML) details for the provided request.",
+				"operationId": "getWeeklyAnnualPlans",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/AnnualPlanRequest"
+							}
+						}
+					},
+					"required": true
+				},
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"examples": {
+									"OK": {
+										"description": "OK",
+										"value": "AnnualWeeklyForecastPlanResponse"
+									}
+								},
+								"schema": {
+									"$ref": "#/components/schemas/AnnualWeeklyForecastPlanResponse"
+								}
+							}
+						},
+						"description": "Successfully processed the provided request."
+					},
+					"400": {
+						"content": {
+							"application/json": {
+								"examples": {
+									"BAD_REQUEST": {
+										"description": "BAD_REQUEST",
+										"value": "ErrorResponse"
+									}
+								},
+								"schema": {
+									"$ref": "#/components/schemas/ErrorResponse"
+								}
+							}
+						},
+						"description": "Bad request."
+					}
+				},
+				"tags": [
+					"Forecasting Annual (aka MML)"
+				]
+			}
+		},
+		"/v1/forecast/annual/weekly": {
 			"patch": {
 				"description": "Update the annual planned weekly forecast (MML) record(s) with any user changes.",
 				"operationId": "updateWeeklyPlans",
@@ -707,113 +764,9 @@
 				"tags": [
 					"Forecasting Annual (aka MML)"
 				]
-			},
-			"post": {
-				"description": "Returns the annual planned weekly forecast (MML) details for the provided request.",
-				"operationId": "getWeeklyAnnualPlans",
-				"requestBody": {
-					"content": {
-						"application/json": {
-							"schema": {
-								"$ref": "#/components/schemas/AnnualPlanRequest"
-							}
-						}
-					},
-					"required": true
-				},
-				"responses": {
-					"200": {
-						"content": {
-							"application/json": {
-								"examples": {
-									"OK": {
-										"description": "OK",
-										"value": "AnnualWeeklyForecastPlanResponse"
-									}
-								},
-								"schema": {
-									"$ref": "#/components/schemas/AnnualWeeklyForecastPlanResponse"
-								}
-							}
-						},
-						"description": "Successfully processed the provided request."
-					},
-					"400": {
-						"content": {
-							"application/json": {
-								"examples": {
-									"BAD_REQUEST": {
-										"description": "BAD_REQUEST",
-										"value": "ErrorResponse"
-									}
-								},
-								"schema": {
-									"$ref": "#/components/schemas/ErrorResponse"
-								}
-							}
-						},
-						"description": "Bad request."
-					}
-				},
-				"tags": [
-					"Forecasting Annual (aka MML)"
-				]
 			}
 		},
 		"/v1/forecast/le/monthly": {
-			"post": {
-				"description": "Returns the monthly forecast (MML) details for the provided request.",
-				"operationId": "getMonthlyData_1",
-				"requestBody": {
-					"content": {
-						"application/json": {
-							"schema": {
-								"$ref": "#/components/schemas/MmlMonthlyRequest"
-							}
-						}
-					},
-					"required": true
-				},
-				"responses": {
-					"200": {
-						"content": {
-							"application/json": {
-								"examples": {
-									"OK": {
-										"description": "OK",
-										"value": "MmlMonthlyPlanResponse"
-									}
-								},
-								"schema": {
-									"$ref": "#/components/schemas/MmlMonthlyResponse"
-								}
-							}
-						},
-						"description": "Successfully processed the provided request."
-					},
-					"400": {
-						"content": {
-							"application/json": {
-								"examples": {
-									"BAD_REQUEST": {
-										"description": "BAD_REQUEST",
-										"value": "ErrorResponse"
-									}
-								},
-								"schema": {
-									"$ref": "#/components/schemas/ErrorResponse"
-								}
-							}
-						},
-						"description": "Bad request."
-					}
-				},
-				"tags": [
-					"Forecasting LE (aka MML)"
-				]
-			}
-		},
-		"/v1/forecast/le/planned-monthly": {
 			"patch": {
 				"description": "Update the monthly MML record(s) with any user changes.",
 				"operationId": "updateMonthlyData_1",
@@ -890,6 +843,59 @@
 				]
 			},
 			"post": {
+				"description": "Returns the monthly forecast (MML) details for the provided request.",
+				"operationId": "getMonthlyData_1",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/MmlMonthlyRequest"
+							}
+						}
+					},
+					"required": true
+				},
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"examples": {
+									"OK": {
+										"description": "OK",
+										"value": "MmlMonthlyPlanResponse"
+									}
+								},
+								"schema": {
+									"$ref": "#/components/schemas/MmlMonthlyResponse"
+								}
+							}
+						},
+						"description": "Successfully processed the provided request."
+					},
+					"400": {
+						"content": {
+							"application/json": {
+								"examples": {
+									"BAD_REQUEST": {
+										"description": "BAD_REQUEST",
+										"value": "ErrorResponse"
+									}
+								},
+								"schema": {
+									"$ref": "#/components/schemas/ErrorResponse"
+								}
+							}
+						},
+						"description": "Bad request."
+					}
+				},
+				"tags": [
+					"Forecasting LE (aka MML)"
+				]
+			}
+		},
+		"/v1/forecast/le/planned-monthly": {
+			"post": {
 				"description": "Returns the planned monthly forecast (MML) details for the provided request.",
 				"operationId": "getMonthlyPlanData_1",
 				"requestBody": {
@@ -942,6 +948,59 @@
 			}
 		},
 		"/v1/forecast/le/planned-weekly": {
+			"post": {
+				"description": "Returns the planned weekly forecast (MML) details for the provided request.",
+				"operationId": "getWeeklyPlanData_1",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/MmlWeeklyRequest"
+							}
+						}
+					},
+					"required": true
+				},
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"examples": {
+									"OK": {
+										"description": "OK",
+										"value": "Success"
+									}
+								},
+								"schema": {
+									"$ref": "#/components/schemas/ErrorResponse"
+								}
+							}
+						},
+						"description": "Successfully processed the provided request."
+					},
+					"400": {
+						"content": {
+							"application/json": {
+								"examples": {
+									"BAD_REQUEST": {
+										"description": "BAD_REQUEST",
+										"value": "ErrorResponse"
+									}
+								},
+								"schema": {
+									"$ref": "#/components/schemas/ErrorResponse"
+								}
+							}
+						},
+						"description": "Bad request."
+					}
+				},
+				"tags": [
+					"Forecasting LE (aka MML)"
+				]
+			}
+		},
+		"/v1/forecast/le/weekly": {
 			"patch": {
 				"description": "Update the weekly MML record(s) with any user changes.",
 				"operationId": "updateWeeklyData_1",
@@ -1018,59 +1077,6 @@
 				]
 			},
 			"post": {
-				"description": "Returns the planned weekly forecast (MML) details for the provided request.",
-				"operationId": "getWeeklyPlanData_1",
-				"requestBody": {
-					"content": {
-						"application/json": {
-							"schema": {
-								"$ref": "#/components/schemas/MmlWeeklyRequest"
-							}
-						}
-					},
-					"required": true
-				},
-				"responses": {
-					"200": {
-						"content": {
-							"application/json": {
-								"examples": {
-									"OK": {
-										"description": "OK",
-										"value": "Success"
-									}
-								},
-								"schema": {
-									"$ref": "#/components/schemas/ErrorResponse"
-								}
-							}
-						},
-						"description": "Successfully processed the provided request."
-					},
-					"400": {
-						"content": {
-							"application/json": {
-								"examples": {
-									"BAD_REQUEST": {
-										"description": "BAD_REQUEST",
-										"value": "ErrorResponse"
-									}
-								},
-								"schema": {
-									"$ref": "#/components/schemas/ErrorResponse"
-								}
-							}
-						},
-						"description": "Bad request."
-					}
-				},
-				"tags": [
-					"Forecasting LE (aka MML)"
-				]
-			}
-		},
-		"/v1/forecast/le/weekly": {
-			"post": {
 				"description": "Returns the weekly forecast (MML) details for the provided request.",
 				"operationId": "getWeeklyData_1",
 				"requestBody": {
@@ -1123,59 +1129,6 @@
 			}
 		},
 		"/v1/forecast/mml/monthly": {
-			"post": {
-				"description": "Returns the monthly forecast (MML) details for the provided request.",
-				"operationId": "getMonthlyData",
-				"requestBody": {
-					"content": {
-						"application/json": {
-							"schema": {
-								"$ref": "#/components/schemas/MmlMonthlyRequest"
-							}
-						}
-					},
-					"required": true
-				},
-				"responses": {
-					"200": {
-						"content": {
-							"application/json": {
-								"examples": {
-									"OK": {
-										"description": "OK",
-										"value": "MmlMonthlyPlanResponse"
-									}
-								},
-								"schema": {
-									"$ref": "#/components/schemas/MmlMonthlyResponse"
-								}
-							}
-						},
-						"description": "Successfully processed the provided request."
-					},
-					"400": {
-						"content": {
-							"application/json": {
-								"examples": {
-									"BAD_REQUEST": {
-										"description": "BAD_REQUEST",
-										"value": "ErrorResponse"
-									}
-								},
-								"schema": {
-									"$ref": "#/components/schemas/ErrorResponse"
-								}
-							}
-						},
-						"description": "Bad request."
-					}
-				},
-				"tags": [
-					"Forecasting MML (aka MML)"
-				]
-			}
-		},
-		"/v1/forecast/mml/planned-monthly": {
 			"patch": {
 				"description": "Update the monthly MML record(s) with any user changes.",
 				"operationId": "updateMonthlyData",
@@ -1252,6 +1205,50 @@
 				]
 			},
 			"post": {
+				"description": "Returns the monthly forecast (MML) details for the provided request.",
+				"operationId": "getMonthlyData",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/MmlMonthlyRequest"
+							}
+						}
+					},
+					"required": true
+				},
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "array",
+									"items": {
+										"$ref": "#/components/schemas/MmlMonthlyDetails"
+									}
+								}
+							}
+						},
+						"description": "Successfully processed the provided request."
+					},
+					"400": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ErrorResponse"
+								}
+							}
+						},
+						"description": "Bad request."
+					}
+				},
+				"tags": [
+					"Forecasting MML (aka MML)"
+				]
+			}
+		},
+		"/v1/forecast/mml/planned-monthly": {
+			"post": {
 				"description": "Returns the planned monthly forecast (MML) details for the provided request.",
 				"operationId": "getMonthlyPlanData",
 				"requestBody": {
@@ -1268,14 +1265,11 @@
 					"200": {
 						"content": {
 							"application/json": {
-								"examples": {
-									"OK": {
-										"description": "OK",
-										"value": "MmlMonthlyPlanResponse"
-									}
-								},
 								"schema": {
-									"$ref": "#/components/schemas/MmlMonthlyPlanResponse"
+									"type": "array",
+									"items": {
+										"$ref": "#/components/schemas/MmlMonthlyDetails"
+									}
 								}
 							}
 						},
@@ -1284,12 +1278,6 @@
 					"400": {
 						"content": {
 							"application/json": {
-								"examples": {
-									"BAD_REQUEST": {
-										"description": "BAD_REQUEST",
-										"value": "ErrorResponse"
-									}
-								},
 								"schema": {
 									"$ref": "#/components/schemas/ErrorResponse"
 								}
@@ -1304,81 +1292,6 @@
 			}
 		},
 		"/v1/forecast/mml/planned-weekly": {
-			"patch": {
-				"description": "Update the weekly MML record(s) with any user changes.",
-				"operationId": "updateWeeklyData",
-				"parameters": [
-					{
-						"description": "Copy to monthly",
-						"in": "query",
-						"name": "copy-to-monthly",
-						"required": false,
-						"schema": {
-							"type": "boolean"
-						}
-					}
-				],
-				"requestBody": {
-					"content": {
-						"application/json": {
-							"schema": {
-								"$ref": "#/components/schemas/MmlWeeklyUpdateRequest"
-							}
-						}
-					},
-					"required": true
-				},
-				"responses": {
-					"200": {
-						"content": {
-							"application/json": {
-								"examples": {
-									"OK": {
-										"description": "OK",
-										"value": "Void (no body)"
-									}
-								},
-								"schema": {
-									"$ref": "#/components/schemas/ErrorResponse"
-								}
-							}
-						},
-						"description": "Successfully processed the provided request and no user changes detected. Client should not make another request to refresh weekly details."
-					},
-					"201": {
-						"content": {
-							"application/json": {
-								"examples": {
-									"CREATED": {
-										"description": "CREATED",
-										"value": "Void (no body)"
-									}
-								}
-							}
-						},
-						"description": "Successfully processed the provided request and user changes were detected. Client should make another request to refresh weekly details."
-					},
-					"400": {
-						"content": {
-							"application/json": {
-								"examples": {
-									"BAD_REQUEST": {
-										"description": "BAD_REQUEST",
-										"value": "ErrorResponse"
-									}
-								},
-								"schema": {
-									"$ref": "#/components/schemas/ErrorResponse"
-								}
-							}
-						},
-						"description": "Bad request."
-					}
-				},
-				"tags": [
-					"Forecasting MML (aka MML)"
-				]
-			},
 			"post": {
 				"description": "Returns the planned weekly forecast (MML) details for the provided request.",
 				"operationId": "getWeeklyPlanData",
@@ -1396,14 +1309,11 @@
 					"200": {
 						"content": {
 							"application/json": {
-								"examples": {
-									"OK": {
-										"description": "OK",
-										"value": "Success"
-									}
-								},
 								"schema": {
-									"$ref": "#/components/schemas/ErrorResponse"
+									"type": "array",
+									"items": {
+										"$ref": "#/components/schemas/MmlWeeklyDetails"
+									}
 								}
 							}
 						},
@@ -1432,6 +1342,69 @@
 			}
 		},
 		"/v1/forecast/mml/weekly": {
+			"patch": {
+				"description": "Update the weekly MML record(s) with any user changes.",
+				"operationId": "updateWeeklyData",
+				"parameters": [
+					{
+						"description": "Copy to monthly",
+						"in": "query",
+						"name": "copy-to-monthly",
+						"required": false,
+						"schema": {
+							"type": "boolean"
+						}
+					}
+				],
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/MmlWeeklyUpdateRequest"
+							}
+						}
+					},
+					"required": true
+				},
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ErrorResponse"
+								}
+							}
+						},
+						"description": "Successfully processed the provided request and no user changes detected. Client should not make another request to refresh weekly details."
+					},
+					"201": {
+						"content": {
+							"application/json": {
+							}
+						},
+						"description": "Successfully processed the provided request and user changes were detected. Client should make another request to refresh weekly details."
+					},
+					"400": {
+						"content": {
+							"application/json": {
+								"examples": {
+									"BAD_REQUEST": {
+										"description": "BAD_REQUEST",
+										"value": "ErrorResponse"
+									}
+								},
+								"schema": {
+									"$ref": "#/components/schemas/ErrorResponse"
+								}
+							}
+						},
+						"description": "Bad request."
+					}
+				},
+				"tags": [
+					"Forecasting MML (aka MML)"
+				]
+			},
 			"post": {
 				"description": "Returns the weekly forecast (MML) details for the provided request.",
 				"operationId": "getWeeklyData",
@@ -1449,14 +1422,11 @@
 					"200": {
 						"content": {
 							"application/json": {
-								"examples": {
-									"OK": {
-										"description": "OK",
-										"value": "MmlWeeklyResponse"
-									}
-								},
 								"schema": {
-									"$ref": "#/components/schemas/MmlWeeklyResponse"
+									"type": "array",
+									"items": {
+										"$ref": "#/components/schemas/MmlWeeklyDetails"
+									}
 								}
 							}
 						},
@@ -1465,12 +1435,6 @@
 					"400": {
 						"content": {
 							"application/json": {
-								"examples": {
-									"BAD_REQUEST": {
-										"description": "BAD_REQUEST",
-										"value": "ErrorResponse"
-									}
-								},
 								"schema": {
 									"$ref": "#/components/schemas/ErrorResponse"
 								}
