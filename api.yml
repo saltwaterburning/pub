@@ -40,6 +40,486 @@
 		}
 	],
 	"paths": {
+		"/v1/forecast/annual/le/planned-monthly": {
+			"patch": {
+				"description": "Update the monthly quantity forecast (MML) record(s) with any user changes.",
+				"operationId": "updateMonthlyPlans_2",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/MmlQtyMonthlyResponse"
+							}
+						}
+					},
+					"required": true
+				},
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"examples": {
+									"OK": {
+										"description": "OK",
+										"value": "Void (no body)"
+									}
+								},
+								"schema": {
+									"$ref": "#/components/schemas/ErrorResponse"
+								}
+							}
+						},
+						"description": "Successfully processed the provided request and no user changes detected. Client should not make another request to refresh weekly details."
+					},
+					"201": {
+						"content": {
+							"application/json": {
+								"examples": {
+									"CREATED": {
+										"description": "CREATED",
+										"value": "Void (no body)"
+									}
+								},
+								"schema": {
+									"$ref": "#/components/schemas/ErrorResponse"
+								}
+							}
+						},
+						"description": "Successfully processed the provided request and user changes were detected. Client should make another request to refresh weekly details."
+					},
+					"400": {
+						"content": {
+							"application/json": {
+								"examples": {
+									"BAD_REQUEST": {
+										"description": "BAD_REQUEST",
+										"value": "ErrorResponse"
+									}
+								},
+								"schema": {
+									"$ref": "#/components/schemas/ErrorResponse"
+								}
+							}
+						},
+						"description": "Bad request."
+					}
+				},
+				"tags": [
+					"Forecasting LE Annual (aka MML)"
+				]
+			},
+			"post": {
+				"description": "Returns details the annual forecast by month (MML) for the provided request.",
+				"operationId": "getMonthlyQtyPlans_1",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/MmlQtyRequest"
+							}
+						}
+					},
+					"required": true
+				},
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"examples": {
+									"OK": {
+										"description": "OK",
+										"value": "MonthlyQtyResponse"
+									}
+								},
+								"schema": {
+									"$ref": "#/components/schemas/MmlQtyMonthlyResponse"
+								}
+							}
+						},
+						"description": "Successfully processed the provided request."
+					},
+					"400": {
+						"content": {
+							"application/json": {
+								"examples": {
+									"BAD_REQUEST": {
+										"description": "BAD_REQUEST",
+										"value": "ErrorResponse"
+									}
+								},
+								"schema": {
+									"$ref": "#/components/schemas/ErrorResponse"
+								}
+							}
+						},
+						"description": "Bad request."
+					}
+				},
+				"tags": [
+					"Forecasting LE Annual (aka MML)"
+				]
+			}
+		},
+		"/v1/forecast/annual/le/planned-weekly": {
+			"patch": {
+				"description": "Update the weekly quantity forecast (MML) record(s) with any user changes.",
+				"operationId": "updateWeeklyPlans_2",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/MmlQtyWeeklyResponse"
+							}
+						}
+					},
+					"required": true
+				},
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"examples": {
+									"OK": {
+										"description": "OK",
+										"value": "Void"
+									}
+								},
+								"schema": {
+									"$ref": "#/components/schemas/ErrorResponse"
+								}
+							}
+						},
+						"description": "Successfully processed the provided request and no user changes detected. Client should not make another request to refresh weekly details."
+					},
+					"201": {
+						"content": {
+							"application/json": {
+								"examples": {
+									"OK": {
+										"description": "OK",
+										"value": "Void"
+									}
+								},
+								"schema": {
+									"$ref": "#/components/schemas/ErrorResponse"
+								}
+							}
+						},
+						"description": "Successfully processed the provided request and user changes were detected. Client should make another request to refresh weekly details."
+					},
+					"400": {
+						"content": {
+							"application/json": {
+								"examples": {
+									"BAD_REQUEST": {
+										"description": "BAD_REQUEST",
+										"value": "ErrorResponse"
+									}
+								},
+								"schema": {
+									"$ref": "#/components/schemas/ErrorResponse"
+								}
+							}
+						},
+						"description": "Bad request."
+					}
+				},
+				"tags": [
+					"Forecasting LE Annual (aka MML)"
+				]
+			},
+			"post": {
+				"description": "Returns details the annual forecast by week (MML) for the provided request.",
+				"operationId": "getWeeklyQtyPlans_1",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/MmlQtyRequest"
+							}
+						}
+					},
+					"required": true
+				},
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"examples": {
+									"OK": {
+										"description": "OK",
+										"value": "WeeklyQtyResponse"
+									}
+								},
+								"schema": {
+									"$ref": "#/components/schemas/MmlQtyWeeklyResponse"
+								}
+							}
+						},
+						"description": "Successfully processed the provided request."
+					},
+					"400": {
+						"content": {
+							"application/json": {
+								"examples": {
+									"BAD_REQUEST": {
+										"description": "BAD_REQUEST",
+										"value": "ErrorResponse"
+									}
+								},
+								"schema": {
+									"$ref": "#/components/schemas/ErrorResponse"
+								}
+							}
+						},
+						"description": "Bad request."
+					}
+				},
+				"tags": [
+					"Forecasting LE Annual (aka MML)"
+				]
+			}
+		},
+		"/v1/forecast/annual/mml/planned-monthly": {
+			"patch": {
+				"description": "Update the monthly quantity forecast (MML) record(s) with any user changes.",
+				"operationId": "updateMonthlyPlans_1",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/MmlQtyMonthlyResponse"
+							}
+						}
+					},
+					"required": true
+				},
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"examples": {
+									"OK": {
+										"description": "OK",
+										"value": "Void (no body)"
+									}
+								},
+								"schema": {
+									"$ref": "#/components/schemas/ErrorResponse"
+								}
+							}
+						},
+						"description": "Successfully processed the provided request and no user changes detected. Client should not make another request to refresh weekly details."
+					},
+					"201": {
+						"content": {
+							"application/json": {
+								"examples": {
+									"CREATED": {
+										"description": "CREATED",
+										"value": "Void (no body)"
+									}
+								},
+								"schema": {
+									"$ref": "#/components/schemas/ErrorResponse"
+								}
+							}
+						},
+						"description": "Successfully processed the provided request and user changes were detected. Client should make another request to refresh weekly details."
+					},
+					"400": {
+						"content": {
+							"application/json": {
+								"examples": {
+									"BAD_REQUEST": {
+										"description": "BAD_REQUEST",
+										"value": "ErrorResponse"
+									}
+								},
+								"schema": {
+									"$ref": "#/components/schemas/ErrorResponse"
+								}
+							}
+						},
+						"description": "Bad request."
+					}
+				},
+				"tags": [
+					"Forecasting MML Annual (aka MML)"
+				]
+			},
+			"post": {
+				"description": "Returns the monthly quantity forecast (MML) details for the provided request.",
+				"operationId": "getMonthlyQtyPlans",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/MmlQtyRequest"
+							}
+						}
+					},
+					"required": true
+				},
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"examples": {
+									"OK": {
+										"description": "OK",
+										"value": "MonthlyQtyResponse"
+									}
+								},
+								"schema": {
+									"$ref": "#/components/schemas/MmlQtyMonthlyResponse"
+								}
+							}
+						},
+						"description": "Successfully processed the provided request."
+					},
+					"400": {
+						"content": {
+							"application/json": {
+								"examples": {
+									"BAD_REQUEST": {
+										"description": "BAD_REQUEST",
+										"value": "ErrorResponse"
+									}
+								},
+								"schema": {
+									"$ref": "#/components/schemas/ErrorResponse"
+								}
+							}
+						},
+						"description": "Bad request."
+					}
+				},
+				"tags": [
+					"Forecasting MML Annual (aka MML)"
+				]
+			}
+		},
+		"/v1/forecast/annual/mml/planned-weekly": {
+			"patch": {
+				"description": "Update the weekly quantity forecast (MML) record(s) with any user changes.",
+				"operationId": "updateWeeklyPlans_1",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/MmlQtyWeeklyResponse"
+							}
+						}
+					},
+					"required": true
+				},
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"examples": {
+									"OK": {
+										"description": "OK",
+										"value": "Void"
+									}
+								},
+								"schema": {
+									"$ref": "#/components/schemas/ErrorResponse"
+								}
+							}
+						},
+						"description": "Successfully processed the provided request and no user changes detected. Client should not make another request to refresh weekly details."
+					},
+					"201": {
+						"content": {
+							"application/json": {
+								"examples": {
+									"OK": {
+										"description": "OK",
+										"value": "Void"
+									}
+								},
+								"schema": {
+									"$ref": "#/components/schemas/ErrorResponse"
+								}
+							}
+						},
+						"description": "Successfully processed the provided request and user changes were detected. Client should make another request to refresh weekly details."
+					},
+					"400": {
+						"content": {
+							"application/json": {
+								"examples": {
+									"BAD_REQUEST": {
+										"description": "BAD_REQUEST",
+										"value": "ErrorResponse"
+									}
+								},
+								"schema": {
+									"$ref": "#/components/schemas/ErrorResponse"
+								}
+							}
+						},
+						"description": "Bad request."
+					}
+				},
+				"tags": [
+					"Forecasting MML Annual (aka MML)"
+				]
+			},
+			"post": {
+				"description": "Returns the weekly quantity forecast (MML) details for the provided request.",
+				"operationId": "getWeeklyQtyPlans",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/MmlQtyRequest"
+							}
+						}
+					},
+					"required": true
+				},
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"examples": {
+									"OK": {
+										"description": "OK",
+										"value": "WeeklyQtyResponse"
+									}
+								},
+								"schema": {
+									"$ref": "#/components/schemas/MmlQtyWeeklyResponse"
+								}
+							}
+						},
+						"description": "Successfully processed the provided request."
+					},
+					"400": {
+						"content": {
+							"application/json": {
+								"examples": {
+									"BAD_REQUEST": {
+										"description": "BAD_REQUEST",
+										"value": "ErrorResponse"
+									}
+								},
+								"schema": {
+									"$ref": "#/components/schemas/ErrorResponse"
+								}
+							}
+						},
+						"description": "Bad request."
+					}
+				},
+				"tags": [
+					"Forecasting MML Annual (aka MML)"
+				]
+			}
+		},
 		"/v1/forecast/annual/planned-monthly": {
 			"patch": {
 				"description": "Update the annual monthly forecast (MML) record(s) with any user changes.",
@@ -105,7 +585,7 @@
 					}
 				},
 				"tags": [
-					"Annual Forecasting (MML)"
+					"Forecasting Annual (aka MML)"
 				]
 			},
 			"post": {
@@ -115,7 +595,7 @@
 					"content": {
 						"application/json": {
 							"schema": {
-								"$ref": "#/components/schemas/ForecastPlanRequest"
+								"$ref": "#/components/schemas/AnnualPlanRequest"
 							}
 						}
 					},
@@ -156,7 +636,7 @@
 					}
 				},
 				"tags": [
-					"Annual Forecasting (MML)"
+					"Forecasting Annual (aka MML)"
 				]
 			}
 		},
@@ -225,7 +705,7 @@
 					}
 				},
 				"tags": [
-					"Annual Forecasting (MML)"
+					"Forecasting Annual (aka MML)"
 				]
 			},
 			"post": {
@@ -235,7 +715,7 @@
 					"content": {
 						"application/json": {
 							"schema": {
-								"$ref": "#/components/schemas/ForecastPlanRequest"
+								"$ref": "#/components/schemas/AnnualPlanRequest"
 							}
 						}
 					},
@@ -276,11 +756,426 @@
 					}
 				},
 				"tags": [
-					"Annual Forecasting (MML)"
+					"Forecasting Annual (aka MML)"
 				]
 			}
 		},
-		"/v1/forecast/monthly/details": {
+		"/v1/forecast/le/monthly": {
+			"post": {
+				"description": "Returns the monthly forecast (MML) details for the provided request.",
+				"operationId": "getMonthlyData_1",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/MmlMonthlyRequest"
+							}
+						}
+					},
+					"required": true
+				},
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"examples": {
+									"OK": {
+										"description": "OK",
+										"value": "MmlMonthlyPlanResponse"
+									}
+								},
+								"schema": {
+									"$ref": "#/components/schemas/MmlMonthlyResponse"
+								}
+							}
+						},
+						"description": "Successfully processed the provided request."
+					},
+					"400": {
+						"content": {
+							"application/json": {
+								"examples": {
+									"BAD_REQUEST": {
+										"description": "BAD_REQUEST",
+										"value": "ErrorResponse"
+									}
+								},
+								"schema": {
+									"$ref": "#/components/schemas/ErrorResponse"
+								}
+							}
+						},
+						"description": "Bad request."
+					}
+				},
+				"tags": [
+					"Forecasting MML (aka MML)"
+				]
+			}
+		},
+		"/v1/forecast/le/planned-monthly": {
+			"patch": {
+				"description": "Update the monthly MML record(s) with any user changes.",
+				"operationId": "updateMonthlyData_1",
+				"parameters": [
+					{
+						"description": "Copy to monthly",
+						"in": "query",
+						"name": "copy-to-monthly",
+						"required": false,
+						"schema": {
+							"type": "boolean"
+						}
+					}
+				],
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/MmlMonthlyUpdateRequest"
+							}
+						}
+					},
+					"required": true
+				},
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"examples": {
+									"OK": {
+										"description": "OK",
+										"value": "Void (no body)"
+									}
+								},
+								"schema": {
+									"$ref": "#/components/schemas/ErrorResponse"
+								}
+							}
+						},
+						"description": "Successfully processed the provided request and no user changes detected. Client should not make another request to refresh monthly details."
+					},
+					"201": {
+						"content": {
+							"application/json": {
+								"examples": {
+									"CREATED": {
+										"description": "CREATED",
+										"value": "Void (no body)"
+									}
+								}
+							}
+						},
+						"description": "Successfully processed the provided request and user changes were detected. Client should make another request to refresh monthly details."
+					},
+					"400": {
+						"content": {
+							"application/json": {
+								"examples": {
+									"BAD_REQUEST": {
+										"description": "BAD_REQUEST",
+										"value": "ErrorResponse"
+									}
+								},
+								"schema": {
+									"$ref": "#/components/schemas/ErrorResponse"
+								}
+							}
+						},
+						"description": "Bad request."
+					}
+				},
+				"tags": [
+					"Forecasting MML (aka MML)"
+				]
+			},
+			"post": {
+				"description": "Returns the planned monthly forecast (MML) details for the provided request.",
+				"operationId": "getMonthlyPlanData_1",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/MmlMonthlyRequest"
+							}
+						}
+					},
+					"required": true
+				},
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"examples": {
+									"OK": {
+										"description": "OK",
+										"value": "MmlMonthlyPlanResponse"
+									}
+								},
+								"schema": {
+									"$ref": "#/components/schemas/MmlMonthlyPlanResponse"
+								}
+							}
+						},
+						"description": "Successfully processed the provided request."
+					},
+					"400": {
+						"content": {
+							"application/json": {
+								"examples": {
+									"BAD_REQUEST": {
+										"description": "BAD_REQUEST",
+										"value": "ErrorResponse"
+									}
+								},
+								"schema": {
+									"$ref": "#/components/schemas/ErrorResponse"
+								}
+							}
+						},
+						"description": "Bad request."
+					}
+				},
+				"tags": [
+					"Forecasting MML (aka MML)"
+				]
+			}
+		},
+		"/v1/forecast/le/planned-weekly": {
+			"patch": {
+				"description": "Update the weekly MML record(s) with any user changes.",
+				"operationId": "updateWeeklyData_1",
+				"parameters": [
+					{
+						"description": "Copy to monthly",
+						"in": "query",
+						"name": "copy-to-monthly",
+						"required": false,
+						"schema": {
+							"type": "boolean"
+						}
+					}
+				],
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/MmlWeeklyUpdateRequest"
+							}
+						}
+					},
+					"required": true
+				},
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"examples": {
+									"OK": {
+										"description": "OK",
+										"value": "Void (no body)"
+									}
+								},
+								"schema": {
+									"$ref": "#/components/schemas/ErrorResponse"
+								}
+							}
+						},
+						"description": "Successfully processed the provided request and no user changes detected. Client should not make another request to refresh weekly details."
+					},
+					"201": {
+						"content": {
+							"application/json": {
+								"examples": {
+									"CREATED": {
+										"description": "CREATED",
+										"value": "Void (no body)"
+									}
+								}
+							}
+						},
+						"description": "Successfully processed the provided request and user changes were detected. Client should make another request to refresh weekly details."
+					},
+					"400": {
+						"content": {
+							"application/json": {
+								"examples": {
+									"BAD_REQUEST": {
+										"description": "BAD_REQUEST",
+										"value": "ErrorResponse"
+									}
+								},
+								"schema": {
+									"$ref": "#/components/schemas/ErrorResponse"
+								}
+							}
+						},
+						"description": "Bad request."
+					}
+				},
+				"tags": [
+					"Forecasting MML (aka MML)"
+				]
+			},
+			"post": {
+				"description": "Returns the planned weekly forecast (MML) details for the provided request.",
+				"operationId": "getWeeklyPlanData_1",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/MmlWeeklyRequest"
+							}
+						}
+					},
+					"required": true
+				},
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"examples": {
+									"OK": {
+										"description": "OK",
+										"value": "Success"
+									}
+								},
+								"schema": {
+									"$ref": "#/components/schemas/ErrorResponse"
+								}
+							}
+						},
+						"description": "Successfully processed the provided request."
+					},
+					"400": {
+						"content": {
+							"application/json": {
+								"examples": {
+									"BAD_REQUEST": {
+										"description": "BAD_REQUEST",
+										"value": "ErrorResponse"
+									}
+								},
+								"schema": {
+									"$ref": "#/components/schemas/ErrorResponse"
+								}
+							}
+						},
+						"description": "Bad request."
+					}
+				},
+				"tags": [
+					"Forecasting MML (aka MML)"
+				]
+			}
+		},
+		"/v1/forecast/le/weekly": {
+			"post": {
+				"description": "Returns the weekly forecast (MML) details for the provided request.",
+				"operationId": "getWeeklyData_1",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/MmlWeeklyRequest"
+							}
+						}
+					},
+					"required": true
+				},
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"examples": {
+									"OK": {
+										"description": "OK",
+										"value": "MmlWeeklyResponse"
+									}
+								},
+								"schema": {
+									"$ref": "#/components/schemas/MmlWeeklyResponse"
+								}
+							}
+						},
+						"description": "Successfully processed the provided request."
+					},
+					"400": {
+						"content": {
+							"application/json": {
+								"examples": {
+									"BAD_REQUEST": {
+										"description": "BAD_REQUEST",
+										"value": "ErrorResponse"
+									}
+								},
+								"schema": {
+									"$ref": "#/components/schemas/ErrorResponse"
+								}
+							}
+						},
+						"description": "Bad request."
+					}
+				},
+				"tags": [
+					"Forecasting MML (aka MML)"
+				]
+			}
+		},
+		"/v1/forecast/mml/monthly": {
+			"post": {
+				"description": "Returns the monthly forecast (MML) details for the provided request.",
+				"operationId": "getMonthlyData",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/MmlMonthlyRequest"
+							}
+						}
+					},
+					"required": true
+				},
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"examples": {
+									"OK": {
+										"description": "OK",
+										"value": "MmlMonthlyPlanResponse"
+									}
+								},
+								"schema": {
+									"$ref": "#/components/schemas/MmlMonthlyResponse"
+								}
+							}
+						},
+						"description": "Successfully processed the provided request."
+					},
+					"400": {
+						"content": {
+							"application/json": {
+								"examples": {
+									"BAD_REQUEST": {
+										"description": "BAD_REQUEST",
+										"value": "ErrorResponse"
+									}
+								},
+								"schema": {
+									"$ref": "#/components/schemas/ErrorResponse"
+								}
+							}
+						},
+						"description": "Bad request."
+					}
+				},
+				"tags": [
+					"Forecasting MML (aka MML)"
+				]
+			}
+		},
+		"/v1/forecast/mml/planned-monthly": {
 			"patch": {
 				"description": "Update the monthly MML record(s) with any user changes.",
 				"operationId": "updateMonthlyData",
@@ -353,62 +1248,9 @@
 					}
 				},
 				"tags": [
-					"Forecasting (MML)"
+					"Forecasting MML (aka MML)"
 				]
 			},
-			"post": {
-				"description": "Returns the monthly forecast (MML) details for the provided request.",
-				"operationId": "getMonthlyData",
-				"requestBody": {
-					"content": {
-						"application/json": {
-							"schema": {
-								"$ref": "#/components/schemas/MmlMonthlyRequest"
-							}
-						}
-					},
-					"required": true
-				},
-				"responses": {
-					"200": {
-						"content": {
-							"application/json": {
-								"examples": {
-									"OK": {
-										"description": "OK",
-										"value": "MmlMonthlyPlanResponse"
-									}
-								},
-								"schema": {
-									"$ref": "#/components/schemas/MmlMonthlyResponse"
-								}
-							}
-						},
-						"description": "Successfully processed the provided request."
-					},
-					"400": {
-						"content": {
-							"application/json": {
-								"examples": {
-									"BAD_REQUEST": {
-										"description": "BAD_REQUEST",
-										"value": "ErrorResponse"
-									}
-								},
-								"schema": {
-									"$ref": "#/components/schemas/ErrorResponse"
-								}
-							}
-						},
-						"description": "Bad request."
-					}
-				},
-				"tags": [
-					"Forecasting (MML)"
-				]
-			}
-		},
-		"/v1/forecast/monthly/planned-details": {
 			"post": {
 				"description": "Returns the planned monthly forecast (MML) details for the provided request.",
 				"operationId": "getMonthlyPlanData",
@@ -457,11 +1299,11 @@
 					}
 				},
 				"tags": [
-					"Forecasting (MML)"
+					"Forecasting MML (aka MML)"
 				]
 			}
 		},
-		"/v1/forecast/weekly/details": {
+		"/v1/forecast/mml/planned-weekly": {
 			"patch": {
 				"description": "Update the weekly MML record(s) with any user changes.",
 				"operationId": "updateWeeklyData",
@@ -534,62 +1376,9 @@
 					}
 				},
 				"tags": [
-					"Forecasting (MML)"
+					"Forecasting MML (aka MML)"
 				]
 			},
-			"post": {
-				"description": "Returns the weekly forecast (MML) details for the provided request.",
-				"operationId": "getWeeklyData",
-				"requestBody": {
-					"content": {
-						"application/json": {
-							"schema": {
-								"$ref": "#/components/schemas/MmlWeeklyRequest"
-							}
-						}
-					},
-					"required": true
-				},
-				"responses": {
-					"200": {
-						"content": {
-							"application/json": {
-								"examples": {
-									"OK": {
-										"description": "OK",
-										"value": "MmlWeeklyResponse"
-									}
-								},
-								"schema": {
-									"$ref": "#/components/schemas/MmlWeeklyResponse"
-								}
-							}
-						},
-						"description": "Successfully processed the provided request."
-					},
-					"400": {
-						"content": {
-							"application/json": {
-								"examples": {
-									"BAD_REQUEST": {
-										"description": "BAD_REQUEST",
-										"value": "ErrorResponse"
-									}
-								},
-								"schema": {
-									"$ref": "#/components/schemas/ErrorResponse"
-								}
-							}
-						},
-						"description": "Bad request."
-					}
-				},
-				"tags": [
-					"Forecasting (MML)"
-				]
-			}
-		},
-		"/v1/forecast/weekly/planned-details": {
 			"post": {
 				"description": "Returns the planned weekly forecast (MML) details for the provided request.",
 				"operationId": "getWeeklyPlanData",
@@ -638,14 +1427,67 @@
 					}
 				},
 				"tags": [
-					"Forecasting (MML)"
+					"Forecasting MML (aka MML)"
+				]
+			}
+		},
+		"/v1/forecast/mml/weekly": {
+			"post": {
+				"description": "Returns the weekly forecast (MML) details for the provided request.",
+				"operationId": "getWeeklyData",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/MmlWeeklyRequest"
+							}
+						}
+					},
+					"required": true
+				},
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"examples": {
+									"OK": {
+										"description": "OK",
+										"value": "MmlWeeklyResponse"
+									}
+								},
+								"schema": {
+									"$ref": "#/components/schemas/MmlWeeklyResponse"
+								}
+							}
+						},
+						"description": "Successfully processed the provided request."
+					},
+					"400": {
+						"content": {
+							"application/json": {
+								"examples": {
+									"BAD_REQUEST": {
+										"description": "BAD_REQUEST",
+										"value": "ErrorResponse"
+									}
+								},
+								"schema": {
+									"$ref": "#/components/schemas/ErrorResponse"
+								}
+							}
+						},
+						"description": "Bad request."
+					}
+				},
+				"tags": [
+					"Forecasting MML (aka MML)"
 				]
 			}
 		}
 	},
 	"components": {
 		"schemas": {
-			"AnnualMonthlyForecastPlan": {
+			"AnnualMonthlyForecastPlanDetails": {
 				"type": "object",
 				"properties": {
 					"category": {
@@ -666,7 +1508,7 @@
 					"monthlyPlans": {
 						"type": "array",
 						"items": {
-							"$ref": "#/components/schemas/MonthlyForecastPlan"
+							"$ref": "#/components/schemas/AnnualMonthlyPlan"
 						}
 					},
 					"planCalendar": {
@@ -687,7 +1529,7 @@
 					},
 					"planType": {
 						"type": "string",
-						"description": "The PlanPlanType enumeration. Numeric enum values: 0=INDUCTION, 1=SHIPMENT, 2=REVENUE",
+						"description": "The PlanPlanType enumeration. Numeric enum values: 0=INDUCTION, 1=SHIPMENT (Completions), 2=REVENUE (Gate3 Start)",
 						"enum": [
 							"0",
 							"1",
@@ -717,18 +1559,83 @@
 			"AnnualMonthlyForecastPlanResponse": {
 				"type": "object",
 				"properties": {
-					"annualPlans": {
+					"annualPlanDetails": {
 						"type": "array",
 						"items": {
-							"$ref": "#/components/schemas/AnnualMonthlyForecastPlan"
+							"$ref": "#/components/schemas/AnnualMonthlyForecastPlanDetails"
 						}
 					}
 				},
 				"required": [
-					"annualPlans"
+					"annualPlanDetails"
 				]
 			},
-			"AnnualWeeklyForecastPlan": {
+			"AnnualMonthlyPlan": {
+				"type": "object",
+				"properties": {
+					"planCounter": {
+						"type": "integer",
+						"format": "int32"
+					},
+					"planId": {
+						"type": "integer",
+						"format": "int32"
+					},
+					"planMonth": {
+						"type": "integer",
+						"format": "int32"
+					}
+				}
+			},
+			"AnnualPlanRequest": {
+				"type": "object",
+				"properties": {
+					"engineCenterId": {
+						"type": "string"
+					},
+					"engineGroupId": {
+						"type": "string"
+					},
+					"planCalendar": {
+						"type": "string",
+						"description": "The PlanCalendar enumeration. Numeric enum values: 0=CALENDAR, 1=FISCAL",
+						"enum": [
+							"0",
+							"1"
+						]
+					},
+					"planMarket": {
+						"type": "string",
+						"description": "The PlanMarket enumeration. Numeric enum values: 0=COMMERCIAL, 1=AFTERMARKET",
+						"enum": [
+							"0",
+							"1"
+						]
+					},
+					"planType": {
+						"type": "string",
+						"description": "The PlanPlanType enumeration. Numeric enum values: 0=INDUCTION, 1=SHIPMENT (Completions), 2=REVENUE (Gate3 Start)",
+						"enum": [
+							"0",
+							"1",
+							"2"
+						]
+					},
+					"year": {
+						"type": "integer",
+						"format": "int32"
+					}
+				},
+				"required": [
+					"engineCenterId",
+					"engineGroupId",
+					"planCalendar",
+					"planMarket",
+					"planType",
+					"year"
+				]
+			},
+			"AnnualWeeklyForecastPlanDetails": {
 				"type": "object",
 				"properties": {
 					"category": {
@@ -764,7 +1671,7 @@
 					},
 					"planType": {
 						"type": "string",
-						"description": "The PlanPlanType enumeration. Numeric enum values: 0=INDUCTION, 1=SHIPMENT, 2=REVENUE",
+						"description": "The PlanPlanType enumeration. Numeric enum values: 0=INDUCTION, 1=SHIPMENT (Completions), 2=REVENUE (Gate3 Start)",
 						"enum": [
 							"0",
 							"1",
@@ -781,7 +1688,7 @@
 					"weeklyPlans": {
 						"type": "array",
 						"items": {
-							"$ref": "#/components/schemas/WeeklyForecastPlan"
+							"$ref": "#/components/schemas/AnnualWeeklyPlan"
 						}
 					}
 				},
@@ -800,16 +1707,33 @@
 			"AnnualWeeklyForecastPlanResponse": {
 				"type": "object",
 				"properties": {
-					"annualPlans": {
+					"annualPlanDetails": {
 						"type": "array",
 						"items": {
-							"$ref": "#/components/schemas/AnnualWeeklyForecastPlan"
+							"$ref": "#/components/schemas/AnnualWeeklyForecastPlanDetails"
 						}
 					}
 				},
 				"required": [
-					"annualPlans"
+					"annualPlanDetails"
 				]
+			},
+			"AnnualWeeklyPlan": {
+				"type": "object",
+				"properties": {
+					"planCounter": {
+						"type": "integer",
+						"format": "int32"
+					},
+					"planId": {
+						"type": "integer",
+						"format": "int32"
+					},
+					"planWeek": {
+						"type": "integer",
+						"format": "int32"
+					}
+				}
 			},
 			"ErrorResponse": {
 				"type": "object",
@@ -841,54 +1765,6 @@
 						"format": "int32"
 					}
 				}
-			},
-			"ForecastPlanRequest": {
-				"type": "object",
-				"properties": {
-					"engineCenterId": {
-						"type": "string"
-					},
-					"engineGroupId": {
-						"type": "string"
-					},
-					"planCalendar": {
-						"type": "string",
-						"description": "The PlanCalendar enumeration. Numeric enum values: 0=CALENDAR, 1=FISCAL",
-						"enum": [
-							"0",
-							"1"
-						]
-					},
-					"planMarket": {
-						"type": "string",
-						"description": "The PlanMarket enumeration. Numeric enum values: 0=COMMERCIAL, 1=AFTERMARKET",
-						"enum": [
-							"0",
-							"1"
-						]
-					},
-					"planType": {
-						"type": "string",
-						"description": "The PlanPlanType enumeration. Numeric enum values: 0=INDUCTION, 1=SHIPMENT, 2=REVENUE",
-						"enum": [
-							"0",
-							"1",
-							"2"
-						]
-					},
-					"year": {
-						"type": "integer",
-						"format": "int32"
-					}
-				},
-				"required": [
-					"engineCenterId",
-					"engineGroupId",
-					"planCalendar",
-					"planMarket",
-					"planType",
-					"year"
-				]
 			},
 			"MmlMonthlyDetails": {
 				"type": "object",
@@ -942,6 +1818,11 @@
 						"type": "string",
 						"description": "EngineTrack planned induction date.",
 						"format": "date"
+					},
+					"year": {
+						"type": "integer",
+						"description": "The selected year.",
+						"format": "int32"
 					}
 				},
 				"required": [
@@ -1008,17 +1889,9 @@
 							"1"
 						]
 					},
-					"planSubtype": {
-						"type": "string",
-						"description": "The PlanSubtype enumeration. Numeric enum values: 0=ESN, 1=QUANTITY",
-						"enum": [
-							"0",
-							"1"
-						]
-					},
 					"planType": {
 						"type": "string",
-						"description": "The PlanPlanType enumeration. Numeric enum values: 0=INDUCTION, 1=SHIPMENT, 2=REVENUE",
+						"description": "The PlanPlanType enumeration. Numeric enum values: 0=INDUCTION, 1=SHIPMENT (Completions), 2=REVENUE (Gate3 Start)",
 						"enum": [
 							"0",
 							"1",
@@ -1037,7 +1910,6 @@
 					"month",
 					"planCalendar",
 					"planMarket",
-					"planSubtype",
 					"planType",
 					"year"
 				]
@@ -1100,17 +1972,9 @@
 							"1"
 						]
 					},
-					"planSubtype": {
-						"type": "string",
-						"description": "The PlanSubtype enumeration. Numeric enum values: 0=ESN, 1=QUANTITY",
-						"enum": [
-							"0",
-							"1"
-						]
-					},
 					"planType": {
 						"type": "string",
-						"description": "The PlanPlanType enumeration. Numeric enum values: 0=INDUCTION, 1=SHIPMENT, 2=REVENUE",
+						"description": "The PlanPlanType enumeration. Numeric enum values: 0=INDUCTION, 1=SHIPMENT (Completions), 2=REVENUE (Gate3 Start)",
 						"enum": [
 							"0",
 							"1",
@@ -1130,9 +1994,266 @@
 					"month",
 					"planCalendar",
 					"planMarket",
-					"planSubtype",
 					"planType",
 					"year"
+				]
+			},
+			"MmlQtyMonthlyPlan": {
+				"type": "object",
+				"description": "Plans by month.",
+				"properties": {
+					"planCounter": {
+						"type": "integer",
+						"format": "int32"
+					},
+					"planId": {
+						"type": "integer",
+						"format": "int32"
+					},
+					"planMonth": {
+						"type": "integer",
+						"format": "int32"
+					}
+				}
+			},
+			"MmlQtyMonthlyPlanDetails": {
+				"type": "object",
+				"description": "Monthly plan details for the year.",
+				"properties": {
+					"category": {
+						"type": "string"
+					},
+					"engCenterId": {
+						"type": "string"
+					},
+					"engCenterName": {
+						"type": "string"
+					},
+					"engGroupId": {
+						"type": "string"
+					},
+					"engGroupName": {
+						"type": "string"
+					},
+					"monthlyPlans": {
+						"type": "array",
+						"description": "Plans by month.",
+						"items": {
+							"$ref": "#/components/schemas/MmlQtyMonthlyPlan"
+						}
+					},
+					"planCalendar": {
+						"type": "string",
+						"description": "The PlanCalendar enumeration. Numeric enum values: 0=CALENDAR, 1=FISCAL",
+						"enum": [
+							"0",
+							"1"
+						]
+					},
+					"planMarket": {
+						"type": "string",
+						"description": "The PlanMarket enumeration. Numeric enum values: 0=COMMERCIAL, 1=AFTERMARKET",
+						"enum": [
+							"0",
+							"1"
+						]
+					},
+					"planType": {
+						"type": "string",
+						"description": "The PlanPlanType enumeration. Numeric enum values: 0=INDUCTION, 1=SHIPMENT (Completions), 2=REVENUE (Gate3 Start)",
+						"enum": [
+							"0",
+							"1",
+							"2"
+						]
+					},
+					"planYear": {
+						"type": "integer",
+						"format": "int32"
+					},
+					"salesOrderType": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"category",
+					"engCenterId",
+					"engGroupId",
+					"monthlyPlans",
+					"planCalendar",
+					"planMarket",
+					"planType",
+					"planYear",
+					"salesOrderType"
+				]
+			},
+			"MmlQtyMonthlyResponse": {
+				"type": "object",
+				"description": "Annual plan details by month response.",
+				"properties": {
+					"annualPlanDetails": {
+						"type": "array",
+						"description": "Monthly plan details for the year.",
+						"items": {
+							"$ref": "#/components/schemas/MmlQtyMonthlyPlanDetails"
+						}
+					}
+				},
+				"required": [
+					"annualPlanDetails"
+				]
+			},
+			"MmlQtyRequest": {
+				"type": "object",
+				"properties": {
+					"engineCenterId": {
+						"type": "string"
+					},
+					"engineGroupId": {
+						"type": "string"
+					},
+					"planCalendar": {
+						"type": "string",
+						"description": "The PlanCalendar enumeration. Numeric enum values: 0=CALENDAR, 1=FISCAL",
+						"enum": [
+							"0",
+							"1"
+						]
+					},
+					"planMarket": {
+						"type": "string",
+						"description": "The PlanMarket enumeration. Numeric enum values: 0=COMMERCIAL, 1=AFTERMARKET",
+						"enum": [
+							"0",
+							"1"
+						]
+					},
+					"planType": {
+						"type": "string",
+						"description": "The PlanPlanType enumeration. Numeric enum values: 0=INDUCTION, 1=SHIPMENT (Completions), 2=REVENUE (Gate3 Start)",
+						"enum": [
+							"0",
+							"1",
+							"2"
+						]
+					},
+					"year": {
+						"type": "integer",
+						"format": "int32"
+					}
+				},
+				"required": [
+					"engineCenterId",
+					"engineGroupId",
+					"planCalendar",
+					"planMarket",
+					"planType",
+					"year"
+				]
+			},
+			"MmlQtyWeeklyPlan": {
+				"type": "object",
+				"description": "Plans by week.",
+				"properties": {
+					"planCounter": {
+						"type": "integer",
+						"format": "int32"
+					},
+					"planId": {
+						"type": "integer",
+						"format": "int32"
+					},
+					"planWeek": {
+						"type": "integer",
+						"format": "int32"
+					}
+				}
+			},
+			"MmlQtyWeeklyPlanDetails": {
+				"type": "object",
+				"description": "Weekly plan details for the year.",
+				"properties": {
+					"category": {
+						"type": "string"
+					},
+					"engCenterId": {
+						"type": "string"
+					},
+					"engCenterName": {
+						"type": "string"
+					},
+					"engGroupId": {
+						"type": "string"
+					},
+					"engGroupName": {
+						"type": "string"
+					},
+					"planCalendar": {
+						"type": "string",
+						"description": "The PlanCalendar enumeration. Numeric enum values: 0=CALENDAR, 1=FISCAL",
+						"enum": [
+							"0",
+							"1"
+						]
+					},
+					"planMarket": {
+						"type": "string",
+						"description": "The PlanMarket enumeration. Numeric enum values: 0=COMMERCIAL, 1=AFTERMARKET",
+						"enum": [
+							"0",
+							"1"
+						]
+					},
+					"planType": {
+						"type": "string",
+						"description": "The PlanPlanType enumeration. Numeric enum values: 0=INDUCTION, 1=SHIPMENT (Completions), 2=REVENUE (Gate3 Start)",
+						"enum": [
+							"0",
+							"1",
+							"2"
+						]
+					},
+					"planYear": {
+						"type": "integer",
+						"format": "int32"
+					},
+					"salesOrderType": {
+						"type": "string"
+					},
+					"weeklyPlans": {
+						"type": "array",
+						"description": "Plans by week.",
+						"items": {
+							"$ref": "#/components/schemas/MmlQtyWeeklyPlan"
+						}
+					}
+				},
+				"required": [
+					"category",
+					"engCenterId",
+					"engGroupId",
+					"planCalendar",
+					"planMarket",
+					"planType",
+					"planYear",
+					"salesOrderType",
+					"weeklyPlans"
+				]
+			},
+			"MmlQtyWeeklyResponse": {
+				"type": "object",
+				"description": "Annual plan details by week response.",
+				"properties": {
+					"annualPlanDetails": {
+						"type": "array",
+						"description": "Weekly plan details for the year.",
+						"items": {
+							"$ref": "#/components/schemas/MmlQtyWeeklyPlanDetails"
+						}
+					}
+				},
+				"required": [
+					"annualPlanDetails"
 				]
 			},
 			"MmlWeeklyDetails": {
@@ -1187,6 +2308,11 @@
 						"type": "integer",
 						"description": "Week of the year.",
 						"format": "int32"
+					},
+					"year": {
+						"type": "integer",
+						"description": "The selected year.",
+						"format": "int32"
 					}
 				},
 				"required": [
@@ -1230,17 +2356,9 @@
 							"1"
 						]
 					},
-					"planSubtype": {
-						"type": "string",
-						"description": "The PlanSubtype enumeration. Numeric enum values: 0=ESN, 1=QUANTITY",
-						"enum": [
-							"0",
-							"1"
-						]
-					},
 					"planType": {
 						"type": "string",
-						"description": "The PlanPlanType enumeration. Numeric enum values: 0=INDUCTION, 1=SHIPMENT, 2=REVENUE",
+						"description": "The PlanPlanType enumeration. Numeric enum values: 0=INDUCTION, 1=SHIPMENT (Completions), 2=REVENUE (Gate3 Start)",
 						"enum": [
 							"0",
 							"1",
@@ -1265,7 +2383,6 @@
 					"engineGroupId",
 					"planCalendar",
 					"planMarket",
-					"planSubtype",
 					"planType",
 					"week",
 					"year"
@@ -1322,17 +2439,9 @@
 							"1"
 						]
 					},
-					"planSubtype": {
-						"type": "string",
-						"description": "The PlanSubtype enumeration. Numeric enum values: 0=ESN, 1=QUANTITY",
-						"enum": [
-							"0",
-							"1"
-						]
-					},
 					"planType": {
 						"type": "string",
-						"description": "The PlanPlanType enumeration. Numeric enum values: 0=INDUCTION, 1=SHIPMENT, 2=REVENUE",
+						"description": "The PlanPlanType enumeration. Numeric enum values: 0=INDUCTION, 1=SHIPMENT (Completions), 2=REVENUE (Gate3 Start)",
 						"enum": [
 							"0",
 							"1",
@@ -1358,45 +2467,10 @@
 					"mmlDetails",
 					"planCalendar",
 					"planMarket",
-					"planSubtype",
 					"planType",
 					"week",
 					"year"
 				]
-			},
-			"MonthlyForecastPlan": {
-				"type": "object",
-				"properties": {
-					"planCounter": {
-						"type": "integer",
-						"format": "int32"
-					},
-					"planId": {
-						"type": "integer",
-						"format": "int32"
-					},
-					"planMonth": {
-						"type": "integer",
-						"format": "int32"
-					}
-				}
-			},
-			"WeeklyForecastPlan": {
-				"type": "object",
-				"properties": {
-					"planCounter": {
-						"type": "integer",
-						"format": "int32"
-					},
-					"planId": {
-						"type": "integer",
-						"format": "int32"
-					},
-					"planWeek": {
-						"type": "integer",
-						"format": "int32"
-					}
-				}
 			}
 		},
 		"securitySchemes": {
