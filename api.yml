@@ -1,4 +1,4 @@
-openapi: 3.0.1
+openapi: 3.1.0
 info:
   contact:
     email: chuck.marco@prattwhitney.com
@@ -23,7 +23,7 @@ tags:
   name: MRO Collab
 paths:
   /v1/forecast/annual/le/monthly:
-    put:
+    patch:
       description: Update the annual monthly quantity LE forecast (MML) record(s)
         with any user changes.
       operationId: updateMonthlyPlans_2
@@ -32,6 +32,7 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/MmlAnnualMonthlyRequestResponse"
+              example: null
         required: true
       responses:
         "200":
@@ -43,6 +44,7 @@ paths:
                   value: Void (no body)
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
+                example: null
           description: Successfully processed the provided request and no user changes
             detected. Client should not make another request to refresh monthly details.
         "201":
@@ -54,6 +56,7 @@ paths:
                   value: Void (no body)
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
+                example: null
           description: Successfully processed the provided request and user changes
             were detected. Client should make another request to refresh monthly details.
         "400":
@@ -65,6 +68,7 @@ paths:
                   value: ErrorResponse
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
+                example: null
           description: Bad request.
       tags:
       - Forecasting Annual LE (aka MML)
@@ -77,15 +81,19 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/MmlAnnualRequest"
+              example: null
         required: true
       responses:
         "200":
           content:
             application/json:
               schema:
-                type: array
+                type:
+                - array
+                example: null
                 items:
                   $ref: "#/components/schemas/MmlAnnualMonthlyPlanDetails"
+                  example: null
           description: Successfully processed the provided request.
         "400":
           content:
@@ -96,6 +104,7 @@ paths:
                   value: ErrorResponse
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
+                example: null
           description: Bad request.
       tags:
       - Forecasting Annual LE (aka MML)
@@ -108,15 +117,19 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/MmlAnnualRequest"
+              example: null
         required: true
       responses:
         "200":
           content:
             application/json:
               schema:
-                type: array
+                type:
+                - array
+                example: null
                 items:
                   $ref: "#/components/schemas/MmlAnnualWeeklyPlanDetails"
+                  example: null
           description: Successfully processed the provided request.
         "400":
           content:
@@ -127,11 +140,12 @@ paths:
                   value: ErrorResponse
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
+                example: null
           description: Bad request.
       tags:
       - Forecasting Annual LE (aka MML)
   /v1/forecast/annual/le/weekly:
-    put:
+    patch:
       description: Update the weekly quantity LE forecast (MML) record(s) with any
         user changes.
       operationId: updateWeeklyPlans_2
@@ -140,6 +154,7 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/MmlAnnualWeeklyRequestResponse"
+              example: null
         required: true
       responses:
         "200":
@@ -151,6 +166,7 @@ paths:
                   value: Void
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
+                example: null
           description: Successfully processed the provided request and no user changes
             detected. Client should not make another request to refresh weekly details.
         "201":
@@ -162,6 +178,7 @@ paths:
                   value: Void
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
+                example: null
           description: Successfully processed the provided request and user changes
             were detected. Client should make another request to refresh weekly details.
         "400":
@@ -173,11 +190,12 @@ paths:
                   value: ErrorResponse
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
+                example: null
           description: Bad request.
       tags:
       - Forecasting Annual LE (aka MML)
   /v1/forecast/annual/mml/monthly:
-    put:
+    patch:
       description: Update the annual monthly quantity MML forecast (MML) record(s)
         with any user changes.
       operationId: updateMonthlyPlans_1
@@ -186,6 +204,7 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/MmlAnnualMonthlyRequestResponse"
+              example: null
         required: true
       responses:
         "200":
@@ -197,6 +216,7 @@ paths:
                   value: Void (no body)
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
+                example: null
           description: Successfully processed the provided request and no user changes
             detected. Client should not make another request to refresh weekly details.
         "201":
@@ -208,6 +228,7 @@ paths:
                   value: Void (no body)
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
+                example: null
           description: Successfully processed the provided request and user changes
             were detected. Client should make another request to refresh weekly details.
         "400":
@@ -219,6 +240,7 @@ paths:
                   value: ErrorResponse
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
+                example: null
           description: Bad request.
       tags:
       - Forecasting Annual MML (aka MML)
@@ -231,15 +253,19 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/MmlAnnualRequest"
+              example: null
         required: true
       responses:
         "200":
           content:
             application/json:
               schema:
-                type: array
+                type:
+                - array
+                example: null
                 items:
                   $ref: "#/components/schemas/MmlAnnualMonthlyPlanDetails"
+                  example: null
           description: OK
         "400":
           content:
@@ -250,6 +276,7 @@ paths:
                   value: ErrorResponse
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
+                example: null
           description: Bad request.
       tags:
       - Forecasting Annual MML (aka MML)
@@ -262,15 +289,19 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/MmlAnnualRequest"
+              example: null
         required: true
       responses:
         "200":
           content:
             application/json:
               schema:
-                type: array
+                type:
+                - array
+                example: null
                 items:
                   $ref: "#/components/schemas/MmlAnnualWeeklyPlanDetails"
+                  example: null
           description: OK
         "400":
           content:
@@ -281,11 +312,12 @@ paths:
                   value: ErrorResponse
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
+                example: null
           description: Bad request.
       tags:
       - Forecasting Annual MML (aka MML)
   /v1/forecast/annual/mml/weekly:
-    put:
+    patch:
       description: Update the annual weekly quantity MML forecast (MML) record(s)
         with any user changes.
       operationId: updateWeeklyPlans_1
@@ -294,6 +326,7 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/MmlAnnualWeeklyRequestResponse"
+              example: null
         required: true
       responses:
         "200":
@@ -305,6 +338,7 @@ paths:
                   value: Void
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
+                example: null
           description: Successfully processed the provided request and no user changes
             detected. Client should not make another request to refresh weekly details.
         "201":
@@ -316,6 +350,7 @@ paths:
                   value: Void
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
+                example: null
           description: Successfully processed the provided request and user changes
             were detected. Client should make another request to refresh weekly details.
         "400":
@@ -327,11 +362,12 @@ paths:
                   value: ErrorResponse
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
+                example: null
           description: Bad request.
       tags:
       - Forecasting Annual MML (aka MML)
   /v1/forecast/annual/monthly:
-    put:
+    patch:
       description: Update the annual monthly forecast (MML) record(s) with any user
         changes.
       operationId: updateMonthlyPlans
@@ -340,6 +376,7 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/MmlAnnualMonthlyRequestResponse"
+              example: null
         required: true
       responses:
         "200":
@@ -351,6 +388,7 @@ paths:
                   value: Void (no body)
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
+                example: null
           description: Successfully processed the provided request and no user changes
             detected. Client should not make another request to refresh weekly details.
         "201":
@@ -362,6 +400,7 @@ paths:
                   value: Void (no body)
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
+                example: null
           description: Successfully processed the provided request and user changes
             were detected. Client should make another request to refresh weekly details.
         "400":
@@ -373,6 +412,7 @@ paths:
                   value: ErrorResponse
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
+                example: null
           description: Bad request.
       tags:
       - Forecasting Annual (aka MML)
@@ -385,15 +425,19 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/MmlAnnualRequest"
+              example: null
         required: true
       responses:
         "200":
           content:
             application/json:
               schema:
-                type: array
+                type:
+                - array
+                example: null
                 items:
                   $ref: "#/components/schemas/MmlAnnualMonthlyPlanDetails"
+                  example: null
           description: Successfully processed the provided request.
         "400":
           content:
@@ -404,6 +448,7 @@ paths:
                   value: ErrorResponse
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
+                example: null
           description: Bad request.
       tags:
       - Forecasting Annual (aka MML)
@@ -416,15 +461,19 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/MmlAnnualRequest"
+              example: null
         required: true
       responses:
         "200":
           content:
             application/json:
               schema:
-                type: array
+                type:
+                - array
+                example: null
                 items:
                   $ref: "#/components/schemas/MmlAnnualWeeklyPlanDetails"
+                  example: null
           description: Successfully processed the provided request.
         "400":
           content:
@@ -435,11 +484,12 @@ paths:
                   value: ErrorResponse
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
+                example: null
           description: Bad request.
       tags:
       - Forecasting Annual (aka MML)
   /v1/forecast/annual/weekly:
-    put:
+    patch:
       description: Update the annual planned weekly forecast (MML) record(s) with
         any user changes.
       operationId: updateWeeklyPlans
@@ -448,6 +498,7 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/MmlAnnualWeeklyRequestResponse"
+              example: null
         required: true
       responses:
         "200":
@@ -459,6 +510,7 @@ paths:
                   value: Void
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
+                example: null
           description: Successfully processed the provided request and no user changes
             detected. Client should not make another request to refresh weekly details.
         "201":
@@ -470,6 +522,7 @@ paths:
                   value: Void
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
+                example: null
           description: Successfully processed the provided request and user changes
             were detected. Client should make another request to refresh weekly details.
         "400":
@@ -481,42 +534,12 @@ paths:
                   value: ErrorResponse
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
+                example: null
           description: Bad request.
       tags:
       - Forecasting Annual (aka MML)
   /v1/forecast/le/monthly:
-    post:
-      description: Returns the monthly LE forecast (MML) details for the provided
-        request.
-      operationId: getMonthlyData_1
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/ForecastingMonthlyRequest"
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/ForecastingMonthlyDetails"
-          description: Successfully processed the provided request.
-        "400":
-          content:
-            application/json:
-              examples:
-                BAD_REQUEST:
-                  description: BAD_REQUEST
-                  value: ErrorResponse
-              schema:
-                $ref: "#/components/schemas/ErrorResponse"
-          description: Bad request.
-      tags:
-      - Forecasting LE (aka MML)
-    put:
+    patch:
       description: Update the monthly LE record(s) with any user changes.
       operationId: updateMonthlyData_1
       parameters:
@@ -525,12 +548,15 @@ paths:
         name: copy-to-monthly
         required: false
         schema:
-          type: boolean
+          type:
+          - boolean
+          example: null
       requestBody:
         content:
           application/json:
             schema:
               $ref: "#/components/schemas/ForecastingMonthlyUpdateRequest"
+              example: null
         required: true
       responses:
         "200":
@@ -542,6 +568,7 @@ paths:
                   value: Void (no body)
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
+                example: null
           description: Successfully processed the provided request and no user changes
             detected. Client should not make another request to refresh monthly details.
         "201":
@@ -562,6 +589,43 @@ paths:
                   value: ErrorResponse
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
+                example: null
+          description: Bad request.
+      tags:
+      - Forecasting LE (aka MML)
+    post:
+      description: Returns the monthly LE forecast (MML) details for the provided
+        request.
+      operationId: getMonthlyData_1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ForecastingMonthlyRequest"
+              example: null
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type:
+                - array
+                example: null
+                items:
+                  $ref: "#/components/schemas/ForecastingMonthlyDetails"
+                  example: null
+          description: Successfully processed the provided request.
+        "400":
+          content:
+            application/json:
+              examples:
+                BAD_REQUEST:
+                  description: BAD_REQUEST
+                  value: ErrorResponse
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+                example: null
           description: Bad request.
       tags:
       - Forecasting LE (aka MML)
@@ -575,15 +639,19 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/ForecastingMonthlyRequest"
+              example: null
         required: true
       responses:
         "200":
           content:
             application/json:
               schema:
-                type: array
+                type:
+                - array
+                example: null
                 items:
                   $ref: "#/components/schemas/ForecastingMonthlyDetails"
+                  example: null
           description: Successfully processed the provided request.
         "400":
           content:
@@ -594,6 +662,7 @@ paths:
                   value: ErrorResponse
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
+                example: null
           description: Bad request.
       tags:
       - Forecasting LE (aka MML)
@@ -607,15 +676,19 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/ForecastingWeeklyRequest"
+              example: null
         required: true
       responses:
         "200":
           content:
             application/json:
               schema:
-                type: array
+                type:
+                - array
+                example: null
                 items:
                   $ref: "#/components/schemas/ForecastingWeeklyDetails"
+                  example: null
           description: Successfully processed the provided request.
         "400":
           content:
@@ -626,41 +699,12 @@ paths:
                   value: ErrorResponse
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
+                example: null
           description: Bad request.
       tags:
       - Forecasting LE (aka MML)
   /v1/forecast/le/weekly:
-    post:
-      description: Returns the weekly LE forecast (MML) details for the provided request.
-      operationId: getWeeklyData_1
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/ForecastingWeeklyRequest"
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/ForecastingWeeklyDetails"
-          description: Successfully processed the provided request.
-        "400":
-          content:
-            application/json:
-              examples:
-                BAD_REQUEST:
-                  description: BAD_REQUEST
-                  value: ErrorResponse
-              schema:
-                $ref: "#/components/schemas/ErrorResponse"
-          description: Bad request.
-      tags:
-      - Forecasting LE (aka MML)
-    put:
+    patch:
       description: Update the weekly LE record(s) with any user changes.
       operationId: updateWeeklyData_1
       parameters:
@@ -669,12 +713,15 @@ paths:
         name: copy-to-monthly
         required: false
         schema:
-          type: boolean
+          type:
+          - boolean
+          example: null
       requestBody:
         content:
           application/json:
             schema:
               $ref: "#/components/schemas/ForecastingWeeklyUpdateRequest"
+              example: null
         required: true
       responses:
         "200":
@@ -686,6 +733,7 @@ paths:
                   value: Void (no body)
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
+                example: null
           description: Successfully processed the provided request and no user changes
             detected. Client should not make another request to refresh weekly details.
         "201":
@@ -706,38 +754,47 @@ paths:
                   value: ErrorResponse
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
+                example: null
           description: Bad request.
       tags:
       - Forecasting LE (aka MML)
-  /v1/forecast/mml/monthly:
     post:
-      description: Returns the monthly MML forecast (MML) details for the provided
-        request.
-      operationId: getMonthlyData
+      description: Returns the weekly LE forecast (MML) details for the provided request.
+      operationId: getWeeklyData_1
       requestBody:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/ForecastingMonthlyRequest"
+              $ref: "#/components/schemas/ForecastingWeeklyRequest"
+              example: null
         required: true
       responses:
         "200":
           content:
             application/json:
               schema:
-                type: array
+                type:
+                - array
+                example: null
                 items:
-                  $ref: "#/components/schemas/ForecastingMonthlyDetails"
+                  $ref: "#/components/schemas/ForecastingWeeklyDetails"
+                  example: null
           description: Successfully processed the provided request.
         "400":
           content:
             application/json:
+              examples:
+                BAD_REQUEST:
+                  description: BAD_REQUEST
+                  value: ErrorResponse
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
+                example: null
           description: Bad request.
       tags:
-      - Forecasting MML (aka MML)
-    put:
+      - Forecasting LE (aka MML)
+  /v1/forecast/mml/monthly:
+    patch:
       description: Update the monthly MML record(s) with any user changes.
       operationId: updateMonthlyData
       parameters:
@@ -746,12 +803,15 @@ paths:
         name: copy-to-monthly
         required: false
         schema:
-          type: boolean
+          type:
+          - boolean
+          example: null
       requestBody:
         content:
           application/json:
             schema:
               $ref: "#/components/schemas/ForecastingMonthlyUpdateRequest"
+              example: null
         required: true
       responses:
         "200":
@@ -763,6 +823,7 @@ paths:
                   value: Void (no body)
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
+                example: null
           description: Successfully processed the provided request and no user changes
             detected. Client should not make another request to refresh monthly details.
         "201":
@@ -783,6 +844,39 @@ paths:
                   value: ErrorResponse
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
+                example: null
+          description: Bad request.
+      tags:
+      - Forecasting MML (aka MML)
+    post:
+      description: Returns the monthly MML forecast (MML) details for the provided
+        request.
+      operationId: getMonthlyData
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ForecastingMonthlyRequest"
+              example: null
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type:
+                - array
+                example: null
+                items:
+                  $ref: "#/components/schemas/ForecastingMonthlyDetails"
+                  example: null
+          description: Successfully processed the provided request.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+                example: null
           description: Bad request.
       tags:
       - Forecasting MML (aka MML)
@@ -796,21 +890,26 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/ForecastingMonthlyRequest"
+              example: null
         required: true
       responses:
         "200":
           content:
             application/json:
               schema:
-                type: array
+                type:
+                - array
+                example: null
                 items:
                   $ref: "#/components/schemas/ForecastingMonthlyDetails"
+                  example: null
           description: Successfully processed the provided request.
         "400":
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
+                example: null
           description: Bad request.
       tags:
       - Forecasting MML (aka MML)
@@ -824,15 +923,19 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/ForecastingWeeklyRequest"
+              example: null
         required: true
       responses:
         "200":
           content:
             application/json:
               schema:
-                type: array
+                type:
+                - array
+                example: null
                 items:
                   $ref: "#/components/schemas/ForecastingWeeklyDetails"
+                  example: null
           description: Successfully processed the provided request.
         "400":
           content:
@@ -843,38 +946,12 @@ paths:
                   value: ErrorResponse
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
+                example: null
           description: Bad request.
       tags:
       - Forecasting MML (aka MML)
   /v1/forecast/mml/weekly:
-    post:
-      description: Returns the weekly MML forecast (MML) details for the provided
-        request.
-      operationId: getWeeklyData
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/ForecastingWeeklyRequest"
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/ForecastingWeeklyDetails"
-          description: Successfully processed the provided request.
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ErrorResponse"
-          description: Bad request.
-      tags:
-      - Forecasting MML (aka MML)
-    put:
+    patch:
       description: Update the weekly MML record(s) with any user changes.
       operationId: updateWeeklyData
       parameters:
@@ -883,12 +960,15 @@ paths:
         name: copy-to-monthly
         required: false
         schema:
-          type: boolean
+          type:
+          - boolean
+          example: null
       requestBody:
         content:
           application/json:
             schema:
               $ref: "#/components/schemas/ForecastingWeeklyUpdateRequest"
+              example: null
         required: true
       responses:
         "200":
@@ -896,6 +976,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
+                example: null
           description: Successfully processed the provided request and no user changes
             detected. Client should not make another request to refresh weekly details.
         "201":
@@ -912,92 +993,170 @@ paths:
                   value: ErrorResponse
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
+                example: null
+          description: Bad request.
+      tags:
+      - Forecasting MML (aka MML)
+    post:
+      description: Returns the weekly MML forecast (MML) details for the provided
+        request.
+      operationId: getWeeklyData
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ForecastingWeeklyRequest"
+              example: null
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type:
+                - array
+                example: null
+                items:
+                  $ref: "#/components/schemas/ForecastingWeeklyDetails"
+                  example: null
+          description: Successfully processed the provided request.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+                example: null
           description: Bad request.
       tags:
       - Forecasting MML (aka MML)
 components:
   schemas:
     ErrorResponse:
-      type: object
+      type:
+      - object
       description: Application response schema.
+      example: null
       properties:
         errors:
-          type: array
+          type:
+          - array
           description: Chain of application error messages.
+          example: null
           items:
-            type: string
-            description: Chain of application error messages.
+            type:
+            - string
+            example: null
         message:
-          type: string
+          type:
+          - string
           description: Application message.
+          example: null
         reason:
-          type: string
+          type:
+          - string
           description: "The HttpStatus Reason Phrase  (e.g., NOT FOUND)."
+          example: null
         status:
-          type: string
+          type:
+          - string
           description: "The HttpStatus name (e.g., NOT_FOUND)."
+          example: null
         statusCode:
-          type: integer
+          type:
+          - integer
           format: int32
           description: "The HttpStatus value  (e.g., 404)."
+          example: null
     ForecastingMonthlyDetails:
-      type: object
+      type:
+      - object
       description: Monthly MML forecasting details.
+      example: null
       properties:
         actualReceipentDate:
-          type: string
+          type:
+          - string
           format: date
           description: EngineTrack actual receive date.
+          example: null
         customerName:
-          type: string
+          type:
+          - string
           description: Engine customer name.
+          example: null
         engineCategory:
-          type: string
+          type:
+          - string
           description: Engine category.
+          example: null
         engineCenterName:
-          type: string
+          type:
+          - string
           description: Engine center name.
+          example: null
         engineGroupId:
-          type: string
+          type:
+          - string
           description: Engine group Id.
+          example: null
         engineGroupName:
-          type: string
+          type:
+          - string
           description: Engine group name.
+          example: null
         engineId:
-          type: integer
+          type:
+          - integer
           format: int32
           description: Engine Id.
+          example: null
         engineSerialNumber:
-          type: string
+          type:
+          - string
           description: Engine serial number.
+          example: null
         gate3StartDate:
-          type: string
+          type:
+          - string
           format: date
           description: Gate 3 Start.
+          example: null
         month:
-          type: integer
+          type:
+          - integer
           format: int32
           description: Month of the year.
+          example: null
         planCompletionDate:
-          type: string
+          type:
+          - string
           format: date
           description: EngineTracking.engtrackPlanEngComplete.
+          example: null
         planCoreDate:
-          type: string
+          type:
+          - string
           format: date
           description: EngineTracking.enginePlanCoreAssemblyDate.
+          example: null
         planId:
-          type: integer
+          type:
+          - integer
           format: int32
           description: DB Plan record Id.
+          example: null
         planInductionDate:
-          type: string
+          type:
+          - string
           format: date
           description: EngineTrack planned induction date.
+          example: null
         year:
-          type: integer
+          type:
+          - integer
           format: int32
           description: The selected year.
+          example: null
       required:
       - actualReceipentDate
       - customerName
@@ -1013,47 +1172,60 @@ components:
       - planCoreDate
       - planInductionDate
     ForecastingMonthlyRequest:
-      type: object
+      type:
+      - object
       description: Request for monthly MML forecasting details.
+      example: null
       properties:
         engineCenterId:
-          type: string
+          type:
+          - string
           description: The selected engine center Id.
+          example: null
         engineGroupId:
-          type: string
+          type:
+          - string
           description: The selected engine group Id.
+          example: null
         month:
-          type: integer
+          type:
+          - integer
           format: int32
           description: The month number.
+          example: null
           maximum: 12
           minimum: 1
         planCalendar:
-          type: string
-          description: "The PlanCalendar enumeration. Numeric enum values: 0=CALENDAR,\
-            \ 1=FISCAL"
+          type:
+          - string
+          description: The selected PlanCalendar value.
           enum:
           - "0"
           - "1"
+          example: null
         planMarket:
-          type: string
-          description: "The PlanMarket enumeration. Numeric enum values: 0=COMMERCIAL,\
-            \ 1=AFTERMARKET"
+          type:
+          - string
+          description: The selected PlanCalendar value.
           enum:
           - "0"
           - "1"
+          example: null
         planType:
-          type: string
-          description: "The PlanPlanType enumeration. Numeric enum values: 0=INDUCTION,\
-            \ 1=SHIPMENT (Completions), 2=REVENUE (Gate3 Start)"
+          type:
+          - string
+          description: The selected PlanType value.
           enum:
           - "0"
           - "1"
           - "2"
+          example: null
         year:
-          type: integer
+          type:
+          - integer
           format: int32
           description: The selected plan year.
+          example: null
       required:
       - engineCenterId
       - engineGroupId
@@ -1063,52 +1235,68 @@ components:
       - planType
       - year
     ForecastingMonthlyUpdateRequest:
-      type: object
+      type:
+      - object
       description: Update request for monthly MML forecasting.
+      example: null
       properties:
         engineCenterId:
-          type: string
+          type:
+          - string
           description: The selected engine center Id.
+          example: null
         engineGroupId:
-          type: string
+          type:
+          - string
           description: The selected engine group Id.
+          example: null
         mmlDetails:
-          type: array
+          type:
+          - array
           description: Collection of monthly MML forecasting details.
+          example: null
           items:
             $ref: "#/components/schemas/ForecastingMonthlyDetails"
+            example: null
         month:
-          type: integer
+          type:
+          - integer
           format: int32
           description: The month number.
+          example: null
           maximum: 12
           minimum: 1
         planCalendar:
-          type: string
-          description: "The PlanCalendar enumeration. Numeric enum values: 0=CALENDAR,\
-            \ 1=FISCAL"
+          type:
+          - string
+          description: The selected PlanCalendar value.
           enum:
           - "0"
           - "1"
+          example: null
         planMarket:
-          type: string
-          description: "The PlanMarket enumeration. Numeric enum values: 0=COMMERCIAL,\
-            \ 1=AFTERMARKET"
+          type:
+          - string
+          description: The selected PlanCalendar value.
           enum:
           - "0"
           - "1"
+          example: null
         planType:
-          type: string
-          description: "The PlanPlanType enumeration. Numeric enum values: 0=INDUCTION,\
-            \ 1=SHIPMENT (Completions), 2=REVENUE (Gate3 Start)"
+          type:
+          - string
+          description: The selected PlanType value.
           enum:
           - "0"
           - "1"
           - "2"
+          example: null
         year:
-          type: integer
+          type:
+          - integer
           format: int32
           description: The selected plan year.
+          example: null
       required:
       - engineCenterId
       - engineGroupId
@@ -1119,63 +1307,95 @@ components:
       - planType
       - year
     ForecastingWeeklyDetails:
-      type: object
+      type:
+      - object
       description: Weekly MML forecasting details.
+      example: null
       properties:
         actualReceipentDate:
-          type: string
+          type:
+          - string
           format: date
           description: EngineTrack actual receive date.
+          example: null
         customerName:
-          type: string
+          type:
+          - string
           description: Engine customer name.
+          example: null
         engineCategory:
-          type: string
+          type:
+          - string
           description: Engine category.
+          example: null
         engineCenterName:
-          type: string
+          type:
+          - string
           description: Engine center name.
+          example: null
         engineGroupId:
-          type: string
+          type:
+          - string
           description: Engine group Id.
+          example: null
         engineGroupName:
-          type: string
+          type:
+          - string
           description: Engine group name.
+          example: null
         engineId:
-          type: integer
+          type:
+          - integer
           format: int32
           description: Engine Id.
+          example: null
         engineSerialNumber:
-          type: string
+          type:
+          - string
           description: Engine serial number.
+          example: null
         gate3StartDate:
-          type: string
+          type:
+          - string
           format: date
           description: Gate 3 Start.
+          example: null
         planCompletionDate:
-          type: string
+          type:
+          - string
           format: date
           description: EngineTracking.engtrackPlanEngComplete.
+          example: null
         planCoreDate:
-          type: string
+          type:
+          - string
           format: date
           description: EngineTracking.enginePlanCoreAssemblyDate.
+          example: null
         planId:
-          type: integer
+          type:
+          - integer
           format: int32
           description: DB Plan record Id.
+          example: null
         planInductionDate:
-          type: string
+          type:
+          - string
           format: date
           description: EngineTrack planned induction date.
+          example: null
         week:
-          type: integer
+          type:
+          - integer
           format: int32
           description: Week of the year.
+          example: null
         year:
-          type: integer
+          type:
+          - integer
           format: int32
           description: The selected year.
+          example: null
       required:
       - actualReceipentDate
       - customerName
@@ -1191,47 +1411,60 @@ components:
       - planInductionDate
       - week
     ForecastingWeeklyRequest:
-      type: object
+      type:
+      - object
       description: Request for weekly MML forecasting details.
+      example: null
       properties:
         engineCenterId:
-          type: string
+          type:
+          - string
           description: The selected engine center Id.
+          example: null
         engineGroupId:
-          type: string
+          type:
+          - string
           description: The selected engine group Id.
+          example: null
         planCalendar:
-          type: string
-          description: "The PlanCalendar enumeration. Numeric enum values: 0=CALENDAR,\
-            \ 1=FISCAL"
+          type:
+          - string
+          description: The selected PlanCalendar value.
           enum:
           - "0"
           - "1"
+          example: null
         planMarket:
-          type: string
-          description: "The PlanMarket enumeration. Numeric enum values: 0=COMMERCIAL,\
-            \ 1=AFTERMARKET"
+          type:
+          - string
+          description: The selected PlanCalendar value.
           enum:
           - "0"
           - "1"
+          example: null
         planType:
-          type: string
-          description: "The PlanPlanType enumeration. Numeric enum values: 0=INDUCTION,\
-            \ 1=SHIPMENT (Completions), 2=REVENUE (Gate3 Start)"
+          type:
+          - string
+          description: The selected PlanType value.
           enum:
           - "0"
           - "1"
           - "2"
+          example: null
         week:
-          type: integer
+          type:
+          - integer
           format: int32
           description: The week number.
+          example: null
           maximum: 52
           minimum: 1
         year:
-          type: integer
+          type:
+          - integer
           format: int32
           description: The selected plan year.
+          example: null
       required:
       - engineCenterId
       - engineGroupId
@@ -1241,52 +1474,68 @@ components:
       - week
       - year
     ForecastingWeeklyUpdateRequest:
-      type: object
+      type:
+      - object
       description: Update request for weekly MML forecasting.
+      example: null
       properties:
         engineCenterId:
-          type: string
+          type:
+          - string
           description: The selected engine center Id.
+          example: null
         engineGroupId:
-          type: string
+          type:
+          - string
           description: The selected engine group Id.
+          example: null
         mmlDetails:
-          type: array
+          type:
+          - array
           description: Update request for weekly MML forecasting.
+          example: null
           items:
             $ref: "#/components/schemas/ForecastingWeeklyDetails"
+            example: null
         planCalendar:
-          type: string
-          description: "The PlanCalendar enumeration. Numeric enum values: 0=CALENDAR,\
-            \ 1=FISCAL"
+          type:
+          - string
+          description: The selected PlanCalendar value.
           enum:
           - "0"
           - "1"
+          example: null
         planMarket:
-          type: string
-          description: "The PlanMarket enumeration. Numeric enum values: 0=COMMERCIAL,\
-            \ 1=AFTERMARKET"
+          type:
+          - string
+          description: The selected PlanCalendar value.
           enum:
           - "0"
           - "1"
+          example: null
         planType:
-          type: string
-          description: "The PlanPlanType enumeration. Numeric enum values: 0=INDUCTION,\
-            \ 1=SHIPMENT (Completions), 2=REVENUE (Gate3 Start)"
+          type:
+          - string
+          description: The selected PlanType value.
           enum:
           - "0"
           - "1"
           - "2"
+          example: null
         week:
-          type: integer
+          type:
+          - integer
           format: int32
           description: The week number.
+          example: null
           maximum: 52
           minimum: 1
         year:
-          type: integer
+          type:
+          - integer
           format: int32
           description: The selected plan year.
+          example: null
       required:
       - engineCenterId
       - engineGroupId
@@ -1297,73 +1546,113 @@ components:
       - week
       - year
     MmlAnnualMonthlyPlan:
-      type: object
-      description: Plans by month.
+      type:
+      - object
+      example: null
       properties:
         planCounter:
-          type: integer
+          type:
+          - integer
           format: int32
+          example: null
         planId:
-          type: integer
+          type:
+          - integer
           format: int32
+          example: null
         planMonth:
-          type: integer
+          type:
+          - integer
           format: int32
+          example: null
     MmlAnnualMonthlyPlanDetails:
-      type: object
+      type:
+      - object
       description: Monthly plan details for the year.
+      example: null
       properties:
         category:
-          type: string
+          type:
+          - string
+          example: null
         engCenterId:
-          type: string
+          type:
+          - string
+          example: null
         engCenterName:
-          type: string
+          type:
+          - string
+          example: null
         engGroupId:
-          type: string
+          type:
+          - string
+          example: null
         engGroupName:
-          type: string
+          type:
+          - string
+          example: null
         monthlyPlans:
-          type: array
+          type:
+          - array
           description: Plans by month.
+          example: null
           items:
             $ref: "#/components/schemas/MmlAnnualMonthlyPlan"
+            example: null
         planCalendar:
-          type: string
+          type:
+          - string
           description: "The PlanCalendar enumeration. Numeric enum values: 0=CALENDAR,\
             \ 1=FISCAL"
           enum:
           - "0"
           - "1"
+          example: null
         planCalendarDescription:
-          type: string
+          type:
+          - string
+          example: null
         planCounterSum:
-          type: integer
+          type:
+          - integer
           format: int32
+          example: null
         planMarket:
-          type: string
+          type:
+          - string
           description: "The PlanMarket enumeration. Numeric enum values: 0=COMMERCIAL,\
             \ 1=AFTERMARKET"
           enum:
           - "0"
           - "1"
+          example: null
         planMarketDescription:
-          type: string
+          type:
+          - string
+          example: null
         planType:
-          type: string
+          type:
+          - string
           description: "The PlanPlanType enumeration. Numeric enum values: 0=INDUCTION,\
             \ 1=SHIPMENT (Completions), 2=REVENUE (Gate3 Start)"
           enum:
           - "0"
           - "1"
           - "2"
+          example: null
         planTypeDescription:
-          type: string
+          type:
+          - string
+          example: null
         planYear:
-          type: integer
+          type:
+          - integer
           format: int32
+          example: null
         salesOrderType:
-          type: string
+          type:
+          - string
+          example: null
       required:
       - category
       - engCenterId
@@ -1375,48 +1664,67 @@ components:
       - planYear
       - salesOrderType
     MmlAnnualMonthlyRequestResponse:
-      type: object
+      type:
+      - object
       description: Annual plan details by month response.
+      example: null
       properties:
         annualPlanDetails:
-          type: array
+          type:
+          - array
           description: Monthly plan details for the year.
+          example: null
           items:
             $ref: "#/components/schemas/MmlAnnualMonthlyPlanDetails"
+            example: null
       required:
       - annualPlanDetails
     MmlAnnualRequest:
-      type: object
+      type:
+      - object
+      example: null
       properties:
         engineCenterId:
-          type: string
+          type:
+          - string
+          example: null
         engineGroupId:
-          type: string
+          type:
+          - string
+          example: null
         planCalendar:
-          type: string
+          type:
+          - string
           description: "The PlanCalendar enumeration. Numeric enum values: 0=CALENDAR,\
             \ 1=FISCAL"
           enum:
           - "0"
           - "1"
+          example: null
         planMarket:
-          type: string
+          type:
+          - string
           description: "The PlanMarket enumeration. Numeric enum values: 0=COMMERCIAL,\
             \ 1=AFTERMARKET"
           enum:
           - "0"
           - "1"
+          example: null
         planType:
-          type: string
+          type:
+          - string
           description: "The PlanPlanType enumeration. Numeric enum values: 0=INDUCTION,\
             \ 1=SHIPMENT (Completions), 2=REVENUE (Gate3 Start)"
           enum:
           - "0"
           - "1"
           - "2"
+          example: null
         year:
-          type: integer
+          type:
+          - integer
           format: int32
+          example: null
       required:
       - engineCenterId
       - engineGroupId
@@ -1425,73 +1733,113 @@ components:
       - planType
       - year
     MmlAnnualWeeklyPlan:
-      type: object
-      description: Plans by week.
+      type:
+      - object
+      example: null
       properties:
         planCounter:
-          type: integer
+          type:
+          - integer
           format: int32
+          example: null
         planId:
-          type: integer
+          type:
+          - integer
           format: int32
+          example: null
         planWeek:
-          type: integer
+          type:
+          - integer
           format: int32
+          example: null
     MmlAnnualWeeklyPlanDetails:
-      type: object
+      type:
+      - object
       description: Weekly plan details for the year.
+      example: null
       properties:
         category:
-          type: string
+          type:
+          - string
+          example: null
         engCenterId:
-          type: string
+          type:
+          - string
+          example: null
         engCenterName:
-          type: string
+          type:
+          - string
+          example: null
         engGroupId:
-          type: string
+          type:
+          - string
+          example: null
         engGroupName:
-          type: string
+          type:
+          - string
+          example: null
         planCalendar:
-          type: string
+          type:
+          - string
           description: "The PlanCalendar enumeration. Numeric enum values: 0=CALENDAR,\
             \ 1=FISCAL"
           enum:
           - "0"
           - "1"
+          example: null
         planCalendarDescription:
-          type: string
+          type:
+          - string
+          example: null
         planCounterSum:
-          type: integer
+          type:
+          - integer
           format: int32
+          example: null
         planMarket:
-          type: string
+          type:
+          - string
           description: "The PlanMarket enumeration. Numeric enum values: 0=COMMERCIAL,\
             \ 1=AFTERMARKET"
           enum:
           - "0"
           - "1"
+          example: null
         planMarketDescription:
-          type: string
+          type:
+          - string
+          example: null
         planType:
-          type: string
+          type:
+          - string
           description: "The PlanPlanType enumeration. Numeric enum values: 0=INDUCTION,\
             \ 1=SHIPMENT (Completions), 2=REVENUE (Gate3 Start)"
           enum:
           - "0"
           - "1"
           - "2"
+          example: null
         planTypeDescription:
-          type: string
+          type:
+          - string
+          example: null
         planYear:
-          type: integer
+          type:
+          - integer
           format: int32
+          example: null
         salesOrderType:
-          type: string
+          type:
+          - string
+          example: null
         weeklyPlans:
-          type: array
+          type:
+          - array
           description: Plans by week.
+          example: null
           items:
             $ref: "#/components/schemas/MmlAnnualWeeklyPlan"
+            example: null
       required:
       - category
       - engCenterId
@@ -1503,14 +1851,19 @@ components:
       - salesOrderType
       - weeklyPlans
     MmlAnnualWeeklyRequestResponse:
-      type: object
+      type:
+      - object
       description: Annual plan details by week response.
+      example: null
       properties:
         annualPlanDetails:
-          type: array
+          type:
+          - array
           description: Weekly plan details for the year.
+          example: null
           items:
             $ref: "#/components/schemas/MmlAnnualWeeklyPlanDetails"
+            example: null
       required:
       - annualPlanDetails
   securitySchemes:
