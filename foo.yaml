@@ -484,20 +484,24 @@ paths:
         provided request.
       operationId: getAvailableMonthlyData
       parameters:
-      - in: query
+      - description: The pageNumber used to support data pagination.
+        in: query
         name: pageNumber
         required: false
         schema:
           type: integer
           format: int32
           default: 0
-      - in: query
+          description: The pageNumber used to support data pagination.
+      - description: The pageSize used to support data pagination.
+        in: query
         name: pageSize
         required: false
         schema:
           type: integer
           format: int32
           default: 500
+          description: The pageSize used to support data pagination.
       requestBody:
         content:
           application/json:
@@ -531,20 +535,24 @@ paths:
         provided request.
       operationId: getAvailableWeeklyData
       parameters:
-      - in: query
+      - description: The pageNumber used to support data pagination.
+        in: query
         name: pageNumber
         required: false
         schema:
           type: integer
           format: int32
           default: 0
-      - in: query
+          description: The pageNumber used to support data pagination.
+      - description: The pageSize used to support data pagination.
+        in: query
         name: pageSize
         required: false
         schema:
           type: integer
           format: int32
           default: 500
+          description: The pageSize used to support data pagination.
       requestBody:
         content:
           application/json:
@@ -620,20 +628,24 @@ paths:
         request.
       operationId: getPlannedMonthlyData
       parameters:
-      - in: query
+      - description: The pageNumber used to support data pagination.
+        in: query
         name: pageNumber
         required: false
         schema:
           type: integer
           format: int32
           default: 0
-      - in: query
+          description: The pageNumber used to support data pagination.
+      - description: The pageSize used to support data pagination.
+        in: query
         name: pageSize
         required: false
         schema:
           type: integer
           format: int32
           default: 500
+          description: The pageSize used to support data pagination.
       requestBody:
         content:
           application/json:
@@ -709,20 +721,24 @@ paths:
         request.
       operationId: getPlannedWeeklyData
       parameters:
-      - in: query
+      - description: The pageNumber used to support data pagination.
+        in: query
         name: pageNumber
         required: false
         schema:
           type: integer
           format: int32
           default: 0
-      - in: query
+          description: The pageNumber used to support data pagination.
+      - description: The pageSize used to support data pagination.
+        in: query
         name: pageSize
         required: false
         schema:
           type: integer
           format: int32
           default: 500
+          description: The pageSize used to support data pagination.
       requestBody:
         content:
           application/json:
@@ -756,20 +772,24 @@ paths:
         provided request.
       operationId: getMonthlyPlanData
       parameters:
-      - in: query
+      - description: The pageNumber used to support data pagination.
+        in: query
         name: pageNumber
         required: false
         schema:
           type: integer
           format: int32
           default: 0
-      - in: query
+          description: The pageNumber used to support data pagination.
+      - description: The pageSize used to support data pagination.
+        in: query
         name: pageSize
         required: false
         schema:
           type: integer
           format: int32
           default: 500
+          description: The pageSize used to support data pagination.
       requestBody:
         content:
           application/json:
@@ -799,20 +819,24 @@ paths:
         request.
       operationId: getWeeklyPlanData
       parameters:
-      - in: query
+      - description: The pageNumber used to support data pagination.
+        in: query
         name: pageNumber
         required: false
         schema:
           type: integer
           format: int32
           default: 0
-      - in: query
+          description: The pageNumber used to support data pagination.
+      - description: The pageSize used to support data pagination.
+        in: query
         name: pageSize
         required: false
         schema:
           type: integer
           format: int32
           default: 500
+          description: The pageSize used to support data pagination.
       requestBody:
         content:
           application/json:
@@ -895,20 +919,24 @@ paths:
         request.
       operationId: getMonthlyData
       parameters:
-      - in: query
+      - description: The pageNumber used to support data pagination.
+        in: query
         name: pageNumber
         required: false
         schema:
           type: integer
           format: int32
           default: 0
-      - in: query
+          description: The pageNumber used to support data pagination.
+      - description: The pageSize used to support data pagination.
+        in: query
         name: pageSize
         required: false
         schema:
           type: integer
           format: int32
           default: 500
+          description: The pageSize used to support data pagination.
       requestBody:
         content:
           application/json:
@@ -979,20 +1007,24 @@ paths:
         request.
       operationId: getWeeklyData
       parameters:
-      - in: query
+      - description: The pageNumber used to support data pagination.
+        in: query
         name: pageNumber
         required: false
         schema:
           type: integer
           format: int32
           default: 0
-      - in: query
+          description: The pageNumber used to support data pagination.
+      - description: The pageSize used to support data pagination.
+        in: query
         name: pageSize
         required: false
         schema:
           type: integer
           format: int32
           default: 500
+          description: The pageSize used to support data pagination.
       requestBody:
         content:
           application/json:
