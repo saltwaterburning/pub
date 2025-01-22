@@ -982,13 +982,6 @@ paths:
     patch:
       description: Update the monthly MML record(s) with any user changes.
       operationId: updatePlannedMonthly
-      parameters:
-      - description: Copy to monthly
-        in: query
-        name: copy-to-monthly
-        required: false
-        schema:
-          type: boolean
       requestBody:
         content:
           application/json:
@@ -1078,13 +1071,6 @@ paths:
     patch:
       description: Update the weekly MML record(s) with any user changes.
       operationId: updatePlannedWeekly
-      parameters:
-      - description: Copy to monthly
-        in: query
-        name: copy-to-monthly
-        required: false
-        schema:
-          type: boolean
       requestBody:
         content:
           application/json:
@@ -1314,6 +1300,12 @@ components:
           description: Collection of monthly MML forecasting details to be added.
           items:
             $ref: "#/components/schemas/ForecastingMonthlyDetails"
+        changedPlans:
+          type: array
+          description: Collection of monthly MML forecasting details to be added or
+            deleted.
+          items:
+            $ref: "#/components/schemas/ForecastingMonthlyDetails"
         deletePlans:
           type: array
           description: Collection of monthly MML forecasting details to be deleted.
@@ -1371,6 +1363,11 @@ components:
         addPlans:
           type: array
           description: Collection of weekly MML forecasting details to be added.
+          items:
+            $ref: "#/components/schemas/ForecastingWeeklyDetails"
+        changedPlans:
+          type: array
+          description: Collection of weekly MML forecasting details to be deleted.
           items:
             $ref: "#/components/schemas/ForecastingWeeklyDetails"
         deletePlans:
