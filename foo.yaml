@@ -71,6 +71,25 @@ paths:
     post:
       description: Returns the planned annual LE forecast by month (MML).
       operationId: getMonthlyQtyPlans_1
+      parameters:
+      - description: The pageNumber used to support data pagination.
+        in: query
+        name: pageNumber
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 0
+          description: The pageNumber used to support data pagination.
+      - description: The pageSize used to support data pagination.
+        in: query
+        name: pageSize
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 500
+          description: The pageSize used to support data pagination.
       requestBody:
         content:
           application/json:
@@ -147,6 +166,25 @@ paths:
     post:
       description: Returns the planned annual LE forecast by week (MML).
       operationId: getWeeklyQtyPlans_1
+      parameters:
+      - description: The pageNumber used to support data pagination.
+        in: query
+        name: pageNumber
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 0
+          description: The pageNumber used to support data pagination.
+      - description: The pageSize used to support data pagination.
+        in: query
+        name: pageSize
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 500
+          description: The pageSize used to support data pagination.
       requestBody:
         content:
           application/json:
@@ -223,6 +261,25 @@ paths:
     post:
       description: Returns the planned annual MML forecast by month (MML).
       operationId: getMonthlyQtyPlans
+      parameters:
+      - description: The pageNumber used to support data pagination.
+        in: query
+        name: pageNumber
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 0
+          description: The pageNumber used to support data pagination.
+      - description: The pageSize used to support data pagination.
+        in: query
+        name: pageSize
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 500
+          description: The pageSize used to support data pagination.
       requestBody:
         content:
           application/json:
@@ -299,6 +356,25 @@ paths:
     post:
       description: Returns the planned annual MML forecast by month (MML).
       operationId: getWeeklyQtyPlans
+      parameters:
+      - description: The pageNumber used to support data pagination.
+        in: query
+        name: pageNumber
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 0
+          description: The pageNumber used to support data pagination.
+      - description: The pageSize used to support data pagination.
+        in: query
+        name: pageSize
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 500
+          description: The pageSize used to support data pagination.
       requestBody:
         content:
           application/json:
@@ -375,6 +451,25 @@ paths:
     post:
       description: Returns the planned annual monthly forecast (MML) details.
       operationId: getMonthlyAnnualPlans
+      parameters:
+      - description: The pageNumber used to support data pagination.
+        in: query
+        name: pageNumber
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 0
+          description: The pageNumber used to support data pagination.
+      - description: The pageSize used to support data pagination.
+        in: query
+        name: pageSize
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 500
+          description: The pageSize used to support data pagination.
       requestBody:
         content:
           application/json:
@@ -451,6 +546,25 @@ paths:
     post:
       description: Returns the planned annual weekly forecast (MML) details.
       operationId: getWeeklyAnnualPlans
+      parameters:
+      - description: The pageNumber used to support data pagination.
+        in: query
+        name: pageNumber
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 0
+          description: The pageNumber used to support data pagination.
+      - description: The pageSize used to support data pagination.
+        in: query
+        name: pageSize
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 500
+          description: The pageSize used to support data pagination.
       requestBody:
         content:
           application/json:
@@ -482,7 +596,7 @@ paths:
     post:
       description: Returns the available monthly LE forecast (MML) details for the
         provided request.
-      operationId: getAvailableMonthlyData
+      operationId: getAvailableMonthly_1
       parameters:
       - description: The pageNumber used to support data pagination.
         in: query
@@ -533,7 +647,7 @@ paths:
     post:
       description: Returns the available weekly LE forecast (MML) details for the
         provided request.
-      operationId: getAvailableWeeklyData
+      operationId: getAvailableWeekly_1
       parameters:
       - description: The pageNumber used to support data pagination.
         in: query
@@ -583,7 +697,7 @@ paths:
   /v1/forecast/le/planned-monthly:
     patch:
       description: Update the planned monthly LE record(s) with any user changes.
-      operationId: updatePlannedMonthlyData
+      operationId: updatePlannedMonthly_1
       requestBody:
         content:
           application/json:
@@ -626,7 +740,7 @@ paths:
     post:
       description: Returns the monthly planned LE forecast (MML) details for the provided
         request.
-      operationId: getPlannedMonthlyData
+      operationId: getPlannedMonthly_1
       parameters:
       - description: The pageNumber used to support data pagination.
         in: query
@@ -676,7 +790,7 @@ paths:
   /v1/forecast/le/planned-weekly:
     patch:
       description: Update the planned weekly LE record(s) with any user changes.
-      operationId: updatePlannedWeeklyData
+      operationId: updatePlannedWeekly_1
       requestBody:
         content:
           application/json:
@@ -719,7 +833,7 @@ paths:
     post:
       description: Returns the planned weekly LE forecast (MML) details for the provided
         request.
-      operationId: getPlannedWeeklyData
+      operationId: getPlannedWeekly_1
       parameters:
       - description: The pageNumber used to support data pagination.
         in: query
@@ -770,7 +884,7 @@ paths:
     post:
       description: Returns the planned monthly MML forecast (MML) details for the
         provided request.
-      operationId: getMonthlyPlanData
+      operationId: getAvailableMonthly
       parameters:
       - description: The pageNumber used to support data pagination.
         in: query
@@ -817,7 +931,7 @@ paths:
     post:
       description: Returns the planned weekly MML forecast (MML) details for the provided
         request.
-      operationId: getWeeklyPlanData
+      operationId: getAvailableWeekly
       parameters:
       - description: The pageNumber used to support data pagination.
         in: query
@@ -867,7 +981,7 @@ paths:
   /v1/forecast/mml/planned-monthly:
     patch:
       description: Update the monthly MML record(s) with any user changes.
-      operationId: updateMonthlyData
+      operationId: updatePlannedMonthly
       parameters:
       - description: Copy to monthly
         in: query
@@ -917,7 +1031,7 @@ paths:
     post:
       description: Returns the monthly MML forecast (MML) details for the provided
         request.
-      operationId: getMonthlyData
+      operationId: getPlannedMonthly
       parameters:
       - description: The pageNumber used to support data pagination.
         in: query
@@ -963,7 +1077,7 @@ paths:
   /v1/forecast/mml/planned-weekly:
     patch:
       description: Update the weekly MML record(s) with any user changes.
-      operationId: updateWeeklyData
+      operationId: updatePlannedWeekly
       parameters:
       - description: Copy to monthly
         in: query
@@ -1005,7 +1119,7 @@ paths:
     post:
       description: Returns the weekly MML forecast (MML) details for the provided
         request.
-      operationId: getWeeklyData
+      operationId: getPlannedWeekly
       parameters:
       - description: The pageNumber used to support data pagination.
         in: query
@@ -1195,17 +1309,22 @@ components:
       type: object
       description: Update request for monthly MML forecasting.
       properties:
+        addPlans:
+          type: array
+          description: Collection of monthly MML forecasting details to be added.
+          items:
+            $ref: "#/components/schemas/ForecastingMonthlyDetails"
+        deletePlans:
+          type: array
+          description: Collection of monthly MML forecasting details to be deleted.
+          items:
+            $ref: "#/components/schemas/ForecastingMonthlyDetails"
         engineCenterId:
           type: string
           description: The selected engine center Id.
         engineGroupId:
           type: string
           description: The selected engine group Id.
-        mmlDetails:
-          type: array
-          description: Collection of monthly MML forecasting details.
-          items:
-            $ref: "#/components/schemas/ForecastingMonthlyDetails"
         month:
           type: integer
           format: int32
@@ -1236,9 +1355,10 @@ components:
           format: int32
           description: The selected plan year.
       required:
+      - addPlans
+      - deletePlans
       - engineCenterId
       - engineGroupId
-      - mmlDetails
       - month
       - planCalendar
       - planMarket
@@ -1248,17 +1368,22 @@ components:
       type: object
       description: Update request for weekly MML forecasting.
       properties:
+        addPlans:
+          type: array
+          description: Collection of weekly MML forecasting details to be added.
+          items:
+            $ref: "#/components/schemas/ForecastingWeeklyDetails"
+        deletePlans:
+          type: array
+          description: Collection of weekly MML forecasting details to be deleted.
+          items:
+            $ref: "#/components/schemas/ForecastingWeeklyDetails"
         engineCenterId:
           type: string
           description: The selected engine center Id.
         engineGroupId:
           type: string
           description: The selected engine group Id.
-        mmlDetails:
-          type: array
-          description: Update request for weekly MML forecasting.
-          items:
-            $ref: "#/components/schemas/ForecastingWeeklyDetails"
         planCalendar:
           type: string
           description: The selected PlanCalendar value.
@@ -1289,9 +1414,10 @@ components:
           format: int32
           description: The selected plan year.
       required:
+      - addPlans
+      - deletePlans
       - engineCenterId
       - engineGroupId
-      - mmlDetails
       - planCalendar
       - planMarket
       - planType
@@ -1502,6 +1628,8 @@ components:
           description: Monthly plan details for the year.
           items:
             $ref: "#/components/schemas/MmlAnnualMonthlyPlanDetails"
+        page:
+          $ref: "#/components/schemas/PageableResponse"
       required:
       - annualPlanDetails
     MmlAnnualRequest:
@@ -1511,6 +1639,8 @@ components:
           type: string
         engineGroupId:
           type: string
+        page:
+          $ref: "#/components/schemas/PageableResponse"
         planCalendar:
           type: string
           description: "The PlanCalendar enumeration. Numeric enum values: 0=CALENDAR,\
@@ -1629,8 +1759,47 @@ components:
           description: Weekly plan details for the year.
           items:
             $ref: "#/components/schemas/MmlAnnualWeeklyPlanDetails"
+        page:
+          $ref: "#/components/schemas/PageableResponse"
       required:
       - annualPlanDetails
+    PageableResponse:
+      type: object
+      properties:
+        first:
+          type: boolean
+        last:
+          type: boolean
+        numberOfElements:
+          type: integer
+          format: int32
+        pageNumber:
+          type: integer
+          format: int32
+        pageSize:
+          type: integer
+          format: int32
+        paged:
+          type: boolean
+        sort:
+          $ref: "#/components/schemas/SortObject"
+        totalElements:
+          type: integer
+          format: int64
+        totalPages:
+          type: integer
+          format: int32
+        unpaged:
+          type: boolean
+    SortObject:
+      type: object
+      properties:
+        empty:
+          type: boolean
+        sorted:
+          type: boolean
+        unsorted:
+          type: boolean
   securitySchemes:
     bearerAuth:
       bearerFormat: jwt
