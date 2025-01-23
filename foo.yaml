@@ -1302,8 +1302,6 @@ components:
           enum:
           - "0"
           - "1"
-        planCalendarDescription:
-          type: string
         planCounterSum:
           type: integer
           format: int32
@@ -1314,8 +1312,6 @@ components:
           enum:
           - "0"
           - "1"
-        planMarketDescription:
-          type: string
         planType:
           type: string
           description: "The PlanPlanType enumeration. Numeric enum values: 0=INDUCTION,\
@@ -1324,8 +1320,6 @@ components:
           - "0"
           - "1"
           - "2"
-        planTypeDescription:
-          type: string
         planYear:
           type: integer
           format: int32
@@ -1424,8 +1418,6 @@ components:
           enum:
           - "0"
           - "1"
-        planCalendarDescription:
-          type: string
         planCounterSum:
           type: integer
           format: int32
@@ -1436,8 +1428,6 @@ components:
           enum:
           - "0"
           - "1"
-        planMarketDescription:
-          type: string
         planType:
           type: string
           description: "The PlanPlanType enumeration. Numeric enum values: 0=INDUCTION,\
@@ -1446,8 +1436,6 @@ components:
           - "0"
           - "1"
           - "2"
-        planTypeDescription:
-          type: string
         planYear:
           type: integer
           format: int32
