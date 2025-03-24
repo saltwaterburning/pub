@@ -4,9 +4,10 @@ info:
     email: chuck.marco@prattwhitney.com
     name: Chuck Marco
     url: https://www.dbds.com
-  description: DOME Application RESTful Forecasting (MML) API.
+  description: "DOME Application RESTful MRO (maintenance, repair and operations)\
+    \ Collaboration API."
   title: Digital Overhaul Management of Engines
-  version: 2025-01-25
+  version: 2025-03-24
 externalDocs:
   description: Project SharePoint
 servers:
@@ -349,10 +350,8 @@ components:
       required:
       - customerApprovalDateTime
       - esn
-      - maintenanceId
       - mroShopCode
       - mroWorkOrder
-      - serviceTrackerId
     MroWorkOrderDeleteRequest:
       type: object
       description: Delete work order schema.
@@ -411,11 +410,9 @@ components:
       required:
       - esn
       - eventId
-      - maintenanceId
       - mroShopCode
       - mroWorkOrder
       - publishedDateTime
-      - serviceTrackerId
   securitySchemes:
     bearerAuth:
       bearerFormat: jwt
