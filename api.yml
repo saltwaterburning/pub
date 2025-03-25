@@ -76,6 +76,7 @@ components:
         maintenanceId:
           type: integer
           format: int32
+          description: many-to-one with serviceTrackerId
         operator:
           type: string
         provider:
@@ -83,6 +84,7 @@ components:
         serviceTrackerId:
           type: integer
           format: int32
+          description: one-to-many with maintenanceId
         smiNumber:
           type: string
         svClassification:
@@ -97,8 +99,10 @@ components:
           format: date-time
       required:
       - esn
+      - maintenanceId
       - operator
       - provider
+      - serviceTrackerId
       - smiNumber
       - svClassification
   securitySchemes:
