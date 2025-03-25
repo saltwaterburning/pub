@@ -4,7 +4,8 @@ info:
     email: chuck.marco@prattwhitney.com
     name: Chuck Marco
     url: https://www.dbds.com
-  description: DOME Application RESTful WST (Workscope Tool) API.
+  description: "DOME Application RESTful MRO (maintenance, repair and operations)\
+    \ Collaboration API."
   title: Digital Overhaul Management of Engines
   version: 2025-03-24
 externalDocs:
@@ -22,24 +23,276 @@ tags:
 - description: "MRO (maintenance, repair and operations) Collaboration API."
   name: MRO Collab
 paths:
-  /v1/workscopetool/pushworkscopedate:
-    post:
-      operationId: updateWorkscopeFromWST
+  /v1/mro-collab/customer-approval:
+    put:
+      description: Updates the matching ODIN record with the MRO Customer Approval
+        Date.
+      operationId: updateEngineComments
       requestBody:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/WorkscopeRequest"
+              $ref: "#/components/schemas/MroCustomerApprovalRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                OK:
+                  description: OK
+                  value: Success
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Successfully updated the matching ODIN record.
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: The approval date wasn't updated as one already exists.
+      tags:
+      - MRO Collab
+  /v1/mro-collab/push-all-comments-to-mro:
+    patch:
+      operationId: mroPushComments
+      responses:
+        "200":
+          content:
+            text/html:
+              schema:
+                type: string
+          description: OK
+      tags:
+      - MRO Collab
+  /v1/mro-collab/workorder:
+    delete:
+      deprecated: true
+      description: Deletes the matching EngineTracking MRO work order.
+      operationId: deleteWorkOrderFromMRO
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MroWorkOrderDeleteRequest"
+        required: true
+      responses:
+        "204":
+          content:
+            application/json:
+              schema:
+                type: object
+          description: WorkOrder dropped for matching EngineTracking record.
+        "400":
+          content:
+            application/json:
+              examples:
+                All request values fail validation.:
+                  description: All request values fail validation.
+                  summary: All request values made to fail validation.
+                  value:
+                    status: BAD_REQUEST
+                    statusCode: 400
+                    reason: Bad Request
+                    message: "Validation failed for argument [0] in public org.springframework.http.ResponseEntity<?>\
+                      \ com.pw.dome.mro.collab.workorder.MroWorkOrderController.deleteWorkOrderFromMRO(com.pw.dome.mro.collab.workorder.MroWorkOrderDeleteRequest)\
+                      \ with 3 errors: [Field error in object 'mroWorkOrderDeleteRequest'\
+                      \ on field 'mroShopCode': rejected value [ESAdskndsduhsudhisuhdshdshdhsdsdhishdis];\
+                      \ codes [Size.mroWorkOrderDeleteRequest.mroShopCode,Size.mroShopCode,Size.java.lang.String,Size];\
+                      \ arguments [org.springframework.context.support.DefaultMessageSourceResolvable:\
+                      \ codes [mroWorkOrderDeleteRequest.mroShopCode,mroShopCode];\
+                      \ arguments []; default message [mroShopCode],10,1]; default\
+                      \ message [size must be between 1 and 10]] [Field error in object\
+                      \ 'mroWorkOrderDeleteRequest' on field 'eventId': rejected value\
+                      \ [-1]; codes [Min.mroWorkOrderDeleteRequest.eventId,Min.eventId,Min.java.lang.Integer,Min];\
+                      \ arguments [org.springframework.context.support.DefaultMessageSourceResolvable:\
+                      \ codes [mroWorkOrderDeleteRequest.eventId,eventId]; arguments\
+                      \ []; default message [eventId],1]; default message [must be\
+                      \ greater than or equal to 1]] [Field error in object 'mroWorkOrderDeleteRequest'\
+                      \ on field 'esn': rejected value [723821odaauasashashashahsuhaushuahsasas];\
+                      \ codes [Size.mroWorkOrderDeleteRequest.esn,Size.esn,Size.java.lang.String,Size];\
+                      \ arguments [org.springframework.context.support.DefaultMessageSourceResolvable:\
+                      \ codes [mroWorkOrderDeleteRequest.esn,esn]; arguments []; default\
+                      \ message [esn],20,1]; default message [size must be between\
+                      \ 1 and 20]]"
+                    errors:
+                    - "mroShopCode: size must be between 1 and 10"
+                    - "eventId: must be greater than or equal to 1"
+                    - "esn: size must be between 1 and 20"
+                One request value fails validation.:
+                  description: One request value fails validation.
+                  summary: One request value is null and fails validation.
+                  value:
+                    status: BAD_REQUEST
+                    statusCode: 400
+                    reason: Bad Request
+                    message: "Validation failed for argument [0] in public org.springframework.http.ResponseEntity<?>\
+                      \ com.pw.dome.mro.collab.workorder.MroWorkOrderController.deleteWorkOrderFromMRO(com.pw.dome.mro.collab.workorder.MroWorkOrderDeleteRequest):\
+                      \ [Field error in object 'mroWorkOrderDeleteRequest' on field\
+                      \ 'eventId': rejected value [null]; codes [NotNull.mroWorkOrderDeleteRequest.eventId,NotNull.eventId,NotNull.java.lang.Integer,NotNull];\
+                      \ arguments [org.springframework.context.support.DefaultMessageSourceResolvable:\
+                      \ codes [mroWorkOrderDeleteRequest.eventId,eventId]; arguments\
+                      \ []; default message [eventId]]; default message [must not\
+                      \ be null]]"
+                    errors:
+                    - "eventId: must not be null"
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Bad Request
+        "404":
+          content:
+            application/json:
+              examples:
+                EventId doesn't match.:
+                  description: EventId doesn't match.
+                  summary: Error response when request EventId not matched.
+                  value:
+                    status: NOT_FOUND
+                    statusCode: 404
+                    reason: Not Found
+                    message: 'No matching records to update found. ESN=''723821''
+                      has 1 match(es). EventId=''40436799'' has 0 match(es). ShopCode=''ESA''
+                      has 3737 match(es). '
+                    errors:
+                    - 'No matching records to update found. ESN=''723821'' has 1 match(es).
+                      EventId=''40436799'' has 0 match(es). ShopCode=''ESA'' has 3737
+                      match(es). '
+                ShopCode doesn't match.:
+                  description: ShopCode doesn't match.
+                  summary: Error response when request ShopCode not matched.
+                  value:
+                    status: NOT_FOUND
+                    statusCode: 404
+                    reason: Not Found
+                    message: 'No matching records to update found. ESN=''723821''
+                      has 1 match(es). EventId=''4043679'' has 1 match(es). ShopCode=''ESAAA''
+                      has 0 match(es). '
+                    errors:
+                    - 'No matching records to update found. ESN=''723821'' has 1 match(es).
+                      EventId=''4043679'' has 1 match(es). ShopCode=''ESAAA'' has
+                      0 match(es). '
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Not Found
+      tags:
+      - MRO Collab
+    post:
+      deprecated: true
+      description: Updates the matching EngineTracking record with the MRO work order.
+      operationId: updateWorkOrderFromMRO
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MroWorkOrderUpdateRequest"
         required: true
       responses:
         "200":
           content:
             application/json:
               schema:
+                type: string
+          description: WorkOrder updated for matching EngineTracking record.
+        "400":
+          content:
+            application/json:
+              examples:
+                All request values fail validation.:
+                  description: All request values fail validation.
+                  summary: All request values made to fail validation.
+                  value:
+                    status: BAD_REQUEST
+                    statusCode: 400
+                    reason: Bad Request
+                    message: "Validation failed for argument [0] in public org.springframework.http.ResponseEntity<java.lang.String>\
+                      \ com.pw.dome.mro.collab.workorder.MroWorkOrderController.getMroInfo(com.pw.dome.mro.collab.workorder.MroWorkOrderRequest)\
+                      \ with 4 errors: [Field error in object 'mroWorkOrderRequest'\
+                      \ on field 'mroShopCode': rejected value [ESAjidjowjdosjdoijsdojsodjsdoisd];\
+                      \ codes [Length.mroWorkOrderRequest.mroShopCode,Length.mroShopCode,Length.java.lang.String,Length];\
+                      \ arguments [org.springframework.context.support.DefaultMessageSourceResolvable:\
+                      \ codes [mroWorkOrderRequest.mroShopCode,mroShopCode]; arguments\
+                      \ []; default message [mroShopCode],10,1]; default message [length\
+                      \ must be between 1 and 10]] [Field error in object 'mroWorkOrderRequest'\
+                      \ on field 'esn': rejected value [72382112902912912091290120912098u12];\
+                      \ codes [Length.mroWorkOrderRequest.esn,Length.esn,Length.java.lang.String,Length];\
+                      \ arguments [org.springframework.context.support.DefaultMessageSourceResolvable:\
+                      \ codes [mroWorkOrderRequest.esn,esn]; arguments []; default\
+                      \ message [esn],20,1]; default message [length must be between\
+                      \ 1 and 20]] [Field error in object 'mroWorkOrderRequest' on\
+                      \ field 'eventId': rejected value [-1]; codes [Range.mroWorkOrderRequest.eventId,Range.eventId,Range.java.lang.Integer,Range];\
+                      \ arguments [org.springframework.context.support.DefaultMessageSourceResolvable:\
+                      \ codes [mroWorkOrderRequest.eventId,eventId]; arguments [];\
+                      \ default message [eventId],9223372036854775807,1]; default\
+                      \ message [must be between 1 and 9223372036854775807]] [Field\
+                      \ error in object 'mroWorkOrderRequest' on field 'mroWorkOrder':\
+                      \ rejected value [0123456789mjdoiasjodjnwoidjowdjoidjoihjndo];\
+                      \ codes [Length.mroWorkOrderRequest.mroWorkOrder,Length.mroWorkOrder,Length.java.lang.String,Length];\
+                      \ arguments [org.springframework.context.support.DefaultMessageSourceResolvable:\
+                      \ codes [mroWorkOrderRequest.mroWorkOrder,mroWorkOrder]; arguments\
+                      \ []; default message [mroWorkOrder],25,1]; default message\
+                      \ [length must be between 1 and 25]]"
+                    errors:
+                    - "mroShopCode: length must be between 1 and 10"
+                    - "esn: length must be between 1 and 20"
+                    - "eventId: must be between 1 and 9223372036854775807"
+                    - "mroWorkOrder: length must be between 1 and 25"
+                One request value fails validation.:
+                  description: One request value fails validation.
+                  summary: One request value is null and fails validation.
+                  value:
+                    status: BAD_REQUEST
+                    statusCode: 400
+                    reason: Bad Request
+                    message: "Validation failed for argument [0] in public org.springframework.http.ResponseEntity<java.lang.String>\
+                      \ com.pw.dome.mro.collab.workorder.MroWorkOrderController.getMroInfo(com.pw.dome.mro.collab.workorder.MroWorkOrderRequest):\
+                      \ [Field error in object 'mroWorkOrderRequest' on field 'eventId':\
+                      \ rejected value [null]; codes [NotNull.mroWorkOrderRequest.eventId,NotNull.eventId,NotNull.java.lang.Integer,NotNull];\
+                      \ arguments [org.springframework.context.support.DefaultMessageSourceResolvable:\
+                      \ codes [mroWorkOrderRequest.eventId,eventId]; arguments [];\
+                      \ default message [eventId]]; default message [The field may\
+                      \ not be null.]]"
+                    errors:
+                    - "eventId: The field may not be null."
+              schema:
                 $ref: "#/components/schemas/ErrorResponse"
-          description: OK
+          description: Bad Request
+        "404":
+          content:
+            application/json:
+              examples:
+                ESN doesn't match.:
+                  description: ESN doesn't match.
+                  summary: Error response when request ESN not matched.
+                  value:
+                    status: NOT_FOUND
+                    statusCode: 404
+                    reason: Not Found
+                    message: 'No matching records to update found. ESN=''72382111''
+                      has 0 match(es). EventId=''4043679'' has 1 match(es). ShopCode=''ESA''
+                      has 3737 match(es). '
+                    errors:
+                    - 'No matching records to update found. ESN=''72382111'' has 0
+                      match(es). EventId=''4043679'' has 1 match(es). ShopCode=''ESA''
+                      has 3737 match(es). '
+                ShopCode doesn't match.:
+                  description: ShopCode doesn't match.
+                  summary: Error response when request ShopCode not matched.
+                  value:
+                    status: NOT_FOUND
+                    statusCode: 404
+                    reason: Not Found
+                    message: 'No matching records to update found. ESN=''723821''
+                      has 1 match(es). EventId=''4043679'' has 1 match(es). ShopCode=''ESAAA''
+                      has 0 match(es). '
+                    errors:
+                    - 'No matching records to update found. ESN=''723821'' has 1 match(es).
+                      EventId=''4043679'' has 1 match(es). ShopCode=''ESAAA'' has
+                      0 match(es). '
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Not Found
       tags:
-      - Workscope
+      - MRO Collab
 components:
   schemas:
     ErrorResponse:
@@ -64,12 +317,18 @@ components:
           type: integer
           format: int32
           description: "The HttpStatus value  (e.g., 404)."
-    WorkscopeRequest:
+    MroCustomerApprovalRequest:
       type: object
-      description: Delete work order schema.
       properties:
+        customerApprovalDateTime:
+          type: string
+          format: date-time
+          description: Strict ISO 8601 Format (yyyy-MM-dd'T'HH:mm:ss) - "2023-12-12T23:12:12"
+            or Relaxed ISO 8601 Format (yyyy-MM-dd HH:mm:ss) - "2023-12-12 23:12:12"
         esn:
           type: string
+          maxLength: 20
+          minLength: 1
         eventId:
           type: integer
           format: int32
@@ -77,34 +336,94 @@ components:
           type: integer
           format: int32
           description: many-to-one with serviceTrackerId
-        operator:
+        mroShopCode:
           type: string
-        provider:
+          maxLength: 10
+          minLength: 1
+        mroWorkOrder:
           type: string
+          description: Named SMI in MRO.
+          maxLength: 25
+          minLength: 1
         serviceTrackerId:
           type: integer
           format: int32
           description: one-to-many with maintenanceId
-        smiNumber:
+      required:
+      - customerApprovalDateTime
+      - esn
+      - maintenanceId
+      - mroShopCode
+      - mroWorkOrder
+      - serviceTrackerId
+    MroWorkOrderDeleteRequest:
+      type: object
+      description: Delete work order schema.
+      properties:
+        esn:
           type: string
-        svClassification:
+          maxLength: 20
+          minLength: 1
+        eventId:
+          type: integer
+          format: int32
+        maintenanceId:
+          type: integer
+          format: int32
+          description: many-to-one with serviceTrackerId
+        mroShopCode:
           type: string
-        wscreatedBy:
-          type: string
-        wsinitiationDateTime:
-          type: string
-          format: date-time
-        wspublishedDateTime:
-          type: string
-          format: date-time
+          maxLength: 10
+          minLength: 1
+        serviceTrackerId:
+          type: integer
+          format: int32
+          description: one-to-many with maintenanceId
       required:
       - esn
       - maintenanceId
-      - operator
-      - provider
+      - mroShopCode
       - serviceTrackerId
-      - smiNumber
-      - svClassification
+    MroWorkOrderUpdateRequest:
+      type: object
+      description: Update work order schema.
+      properties:
+        esn:
+          type: string
+          maxLength: 20
+          minLength: 1
+        eventId:
+          type: integer
+          format: int32
+        maintenanceId:
+          type: integer
+          format: int32
+          description: many-to-one with serviceTrackerId
+        mroShopCode:
+          type: string
+          maxLength: 10
+          minLength: 1
+        mroWorkOrder:
+          type: string
+          description: Named SMI in MRO.
+          maxLength: 25
+          minLength: 1
+        publishedDateTime:
+          type: string
+          format: date-time
+          description: Strict ISO 8601 Format (yyyy-MM-dd'T'HH:mm:ss) - "2023-12-12T23:12:12"
+            or Relaxed ISO 8601 Format (yyyy-MM-dd HH:mm:ss) - "2023-12-12 23:12:12"
+        serviceTrackerId:
+          type: integer
+          format: int32
+          description: one-to-many with maintenanceId
+      required:
+      - esn
+      - maintenanceId
+      - mroShopCode
+      - mroWorkOrder
+      - publishedDateTime
+      - serviceTrackerId
   securitySchemes:
     bearerAuth:
       bearerFormat: jwt
