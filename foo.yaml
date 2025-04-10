@@ -43,7 +43,7 @@ paths:
                   description: OK
                   value: Success
               schema:
-                $ref: "#/components/schemas/ErrorResponse"
+                type: string
           description: Successfully updated the matching ODIN record.
         "202":
           content:
@@ -53,7 +53,7 @@ paths:
                   description: ACCEPTED
                   value: Customer approval date is already set with the same date.
               schema:
-                type: string
+                $ref: "#/components/schemas/ErrorResponse"
           description: The request was accepted but no update was made since the date
             matches the existing customer approval date.
         "409":
@@ -64,7 +64,7 @@ paths:
                   description: CONFLICT
                   value: Customer approval date is already set with a different date.
               schema:
-                type: string
+                $ref: "#/components/schemas/ErrorResponse"
           description: The request was rejected because the date is different from
             the .
       tags:
