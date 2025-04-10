@@ -65,8 +65,7 @@ paths:
                   value: Customer approval date is already set with a different date.
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
-          description: The request was rejected because the date is different from
-            the .
+          description: The request was rejected because the date is different from the existing date.
       tags:
       - MRO Collab
   /v1/mro-collab/workorder:
