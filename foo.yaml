@@ -69,22 +69,9 @@ paths:
             the .
       tags:
       - MRO Collab
-  /v1/mro-collab/push-all-comments-to-mro:
-    patch:
-      operationId: mroPushComments
-      responses:
-        "200":
-          content:
-            text/html:
-              schema:
-                type: string
-          description: OK
-      tags:
-      - MRO Collab
   /v1/mro-collab/workorder:
     delete:
-      deprecated: true
-      description: Deletes the matching EngineTracking MRO work order.
+      description: Deletes (nulls) the matching work order DB field.
       operationId: deleteWorkOrderFromMRO
       requestBody:
         content:
@@ -98,7 +85,7 @@ paths:
             application/json:
               schema:
                 type: object
-          description: WorkOrder dropped for matching EngineTracking record.
+          description: The matching work order DB field was nulled.
         "400":
           content:
             application/json:
@@ -193,8 +180,7 @@ paths:
       tags:
       - MRO Collab
     post:
-      deprecated: true
-      description: Updates the matching EngineTracking record with the MRO work order.
+      description: Updates the matching DOME record with the MRO work order.
       operationId: updateWorkOrderFromMRO
       requestBody:
         content:
@@ -208,7 +194,7 @@ paths:
             application/json:
               schema:
                 type: string
-          description: WorkOrder updated for matching EngineTracking record.
+          description: WorkOrder updated for matching DOME record.
         "400":
           content:
             application/json:
