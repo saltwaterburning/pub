@@ -2,12 +2,23 @@ openapi: 3.1.0
 info:
   contact:
     email: chuck.marco@prattwhitney.com
-    name: Chuck Marco
-    url: https://www.dbds.com
-  description: "DOME Application RESTful MRO (maintenance, repair and operations)\
-    \ Collaboration API."
-  title: Digital Overhaul Management of Engines
-  version: 2025-04-10
+    name: Project manager- Chuck Marco
+  description: |
+    Documentation of DOME RESTful APIs for use by the MRO (Maintenance, Repair and Operations) Collaboration and WST (Workscope Tool) systems.
+    This documention is generated from the DOME OpenAPI Specification so is the most accurate and definitive possible.
+    Every effort was made to make the DOME APIs adherent to current industry standards and recommendations such as those by the
+    <a href="https://www.ietf.org/about/introduction/#about" target="_blank" rel="noopener noreferrer">Internet Engineering Task Force (IETF) for standards development for the Internet</a>.
+
+    **Relevant specifications and RESTful API standards used by DOME**
+
+    * <a href="https://beanvalidation.org/2.0/spec" target="_blank" rel="noopener noreferrer">API Request Validation Specification- Enforces Client API Contract</a>
+    * <a href="https://www.rfc-editor.org/rfc/rfc7807" target="_blank" rel="noopener noreferrer">Problem Details for HTTP APIs- Client Error Responses</a>
+    * <a href="https://datatracker.ietf.org/doc/rfc9457/" target="_blank" rel="noopener noreferrer">Problem Details for HTTP APIs (Latest)- Client Error Responses</a>
+    * <a href="https://www.openapis.org/what-is-openapi" target="_blank" rel="noopener noreferrer">OpenAPI Specification (OAS)- API Development Lifecycle</a>
+
+    ---
+  title: Digital Overhaul Management of Engines (DOME)
+  version: "Version: 2025-04-11"
 externalDocs:
   description: Project SharePoint
 servers:
@@ -25,9 +36,9 @@ tags:
 paths:
   /v1/mro-collab/customer-approval:
     put:
-      description: Updates the matching ODIN record with the MRO Customer Approval
-        Date.
-      operationId: updateEngineComments
+      description: Updates the matching DOME record with the MRO customer approval
+        date.
+      operationId: updateMroCustomerApprovalDate
       requestBody:
         content:
           application/json:
@@ -44,7 +55,8 @@ paths:
                   value: Success
               schema:
                 type: string
-          description: Successfully updated the matching ODIN record.
+          description: Successfully updated the matching DOME record with the MRO
+            customer approval date.
         "202":
           content:
             application/json:
@@ -65,13 +77,14 @@ paths:
                   value: Customer approval date is already set with a different date.
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
-          description: The request was rejected because the date is different from the existing date.
+          description: The request was rejected because the date is different from
+            the existing date.
       tags:
       - MRO Collab
   /v1/mro-collab/workorder:
     delete:
-      description: Deletes (nulls) the matching work order DB field.
-      operationId: deleteWorkOrderFromMRO
+      description: Deletes the MRO work order from the matching DOME record.
+      operationId: deleteMroWorkOrder
       requestBody:
         content:
           application/json:
@@ -84,7 +97,7 @@ paths:
             application/json:
               schema:
                 type: object
-          description: The matching work order DB field was nulled.
+          description: The MRO work order from the matching DOME record was nulled.
         "400":
           content:
             application/json:
@@ -180,7 +193,7 @@ paths:
       - MRO Collab
     post:
       description: Updates the matching DOME record with the MRO work order.
-      operationId: updateWorkOrderFromMRO
+      operationId: updateMroShopCodeAndWorkOrder
       requestBody:
         content:
           application/json:
@@ -294,6 +307,44 @@ paths:
           description: Not Found
       tags:
       - MRO Collab
+  /v1/workscopetool/pushworkscopedate:
+    post:
+      description: Updates the matching DOME record with the MRO customer approval
+        date.
+      operationId: updateWorkscopeInitiationDate
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/WstRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                OK:
+                  description: OK
+                  value: Update workscope date successful.
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Successfully updated the matching DOME record with the MRO
+            customer approval date.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: The request failed API contract compliance.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: "No DOME records matched the provided esn, smiNumber, maintenanceId\
+            \ and serviceTrackerId."
+      tags:
+      - Workscope Tool
 components:
   schemas:
     ErrorResponse:
@@ -320,6 +371,8 @@ components:
           description: "The HttpStatus value  (e.g., 404)."
     MroCustomerApprovalRequest:
       type: object
+      description: Encapsulates and ensures RESTful API contract compliance of the
+        updateMroCustomerApprovalDate request.
       properties:
         customerApprovalDateTime:
           type: string
@@ -328,22 +381,25 @@ components:
             or Relaxed ISO 8601 Format (yyyy-MM-dd HH:mm:ss) - "2023-12-12 23:12:12"
         esn:
           type: string
+          description: Engine Serial Number
           maxLength: 20
           minLength: 1
         eventId:
           type: integer
           format: int32
+          description: supplanted by maintenanceId and serviceTrackerId
         maintenanceId:
           type: integer
           format: int32
           description: many-to-one with serviceTrackerId
         mroShopCode:
           type: string
+          description: shop code used by MRO system
           maxLength: 10
           minLength: 1
         mroWorkOrder:
           type: string
-          description: Named SMI in MRO.
+          description: work order (AKA SMI) used by MRO system
           maxLength: 25
           minLength: 1
         serviceTrackerId:
@@ -359,21 +415,25 @@ components:
       - serviceTrackerId
     MroWorkOrderDeleteRequest:
       type: object
-      description: Delete work order schema.
+      description: Encapsulates and ensures RESTful API contract compliance of the
+        deleteMroWorkOrder request.
       properties:
         esn:
           type: string
+          description: Engine Serial Number
           maxLength: 20
           minLength: 1
         eventId:
           type: integer
           format: int32
+          description: supplanted by maintenanceId and serviceTrackerId
         maintenanceId:
           type: integer
           format: int32
           description: many-to-one with serviceTrackerId
         mroShopCode:
           type: string
+          description: shop code used by MRO system
           maxLength: 10
           minLength: 1
         serviceTrackerId:
@@ -387,26 +447,30 @@ components:
       - serviceTrackerId
     MroWorkOrderUpdateRequest:
       type: object
-      description: Update work order schema.
+      description: Encapsulates and ensures RESTful API contract compliance of the
+        updateWstShopCodeAndWorkOrder request.
       properties:
         esn:
           type: string
+          description: Engine Serial Number
           maxLength: 20
           minLength: 1
         eventId:
           type: integer
           format: int32
+          description: supplanted by maintenanceId and serviceTrackerId
         maintenanceId:
           type: integer
           format: int32
           description: many-to-one with serviceTrackerId
         mroShopCode:
           type: string
+          description: shop code used by MRO system
           maxLength: 10
           minLength: 1
         mroWorkOrder:
           type: string
-          description: Named SMI in MRO.
+          description: work order (AKA SMI) used by MRO system
           maxLength: 25
           minLength: 1
         publishedDateTime:
@@ -425,6 +489,57 @@ components:
       - mroWorkOrder
       - publishedDateTime
       - serviceTrackerId
+    WstRequest:
+      type: object
+      description: Encapsulates and ensures RESTful API contract compliance of the
+        updateWorkscopeInitiationDate request.
+      properties:
+        esn:
+          type: string
+          description: Engine Serial Number
+          minLength: 1
+        eventId:
+          type: integer
+          format: int32
+          description: supplanted by maintenanceId and serviceTrackerId
+        maintenanceId:
+          type: integer
+          format: int32
+          description: many-to-one with serviceTrackerId
+        operator:
+          type: string
+          description: operator name
+          minLength: 1
+        provider:
+          type: string
+          minLength: 1
+        serviceTrackerId:
+          type: integer
+          format: int32
+          description: one-to-many with maintenanceId
+        smiNumber:
+          type: string
+          description: SMI is also know as work order
+          minLength: 1
+        svClassification:
+          type: string
+          minLength: 1
+        wscreatedBy:
+          type: string
+        wsinitiationDateTime:
+          type: string
+          format: date-time
+        wspublishedDateTime:
+          type: string
+          format: date-time
+      required:
+      - esn
+      - maintenanceId
+      - operator
+      - provider
+      - serviceTrackerId
+      - smiNumber
+      - svClassification
   securitySchemes:
     bearerAuth:
       bearerFormat: jwt
