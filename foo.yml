@@ -27,7 +27,7 @@ info:
     The HTTP status code reflects the DOME application health as listed below.
     The health monitor response details are described <a href="https://docs.spring.io/spring-boot/api/rest/actuator/health.html" target="_blank" rel="noopener noreferrer">here</a>.
     In certain scenarios the response details may not be available so it's advised to rely upon the HTTP status code.
-    The health monitor also reports the health of a few appilcation components such as DB and diskSpace.
+    The health monitor also reports the health of a few application components such as DB and diskSpace.
 
     * Application health monitor HTTP Status Codes
         * **UP**: 200 (OK)
@@ -419,4 +419,3 @@ components:
       description: JWT Bearer Authorization.
       scheme: bearer
       type: http
-
