@@ -37,7 +37,7 @@ info:
     > Note: all required fields are indicated by an asterisk (\*) in the PDF version of this API documentation.
     ---
   title: Digital Overhaul Management of Engines (DOME)
-  version: "Version: 2025-04-21"
+  version: "2025-04-21"
 externalDocs:
   description: Project SharePoint
 servers:
