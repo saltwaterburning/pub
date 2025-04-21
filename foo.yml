@@ -14,8 +14,7 @@ info:
 
     * <a href="https://beanvalidation.org/2.0/spec" target="_blank" rel="noopener noreferrer">API Request Validation Specification</a> Ensures Client OpenAPI Specification Complicance
     * <a href="https://beanvalidation.org/2.0/spec" target="_blank" rel="noopener noreferrer">Azure Architecture Center</a> Cloud Applications Best Practices
-    * <a href="https://www.rfc-editor.org/rfc/rfc7807" target="_blank" rel="noopener noreferrer">Problem Details for HTTP APIs</a> Client Error Responses
-    * <a href="https://datatracker.ietf.org/doc/rfc9457/" target="_blank" rel="noopener noreferrer">Problem Details for HTTP APIs (Latest)</a> Client Error Responses
+    * <a href="https://datatracker.ietf.org/doc/rfc9457/" target="_blank" rel="noopener noreferrer">Problem Details for HTTP APIs</a> Client Error Responses
     * <a href="https://www.openapis.org/what-is-openapi" target="_blank" rel="noopener noreferrer">OpenAPI Specification (OAS)</a> API Development Lifecycle
 
     **DOME Application Monitoring**
@@ -38,7 +37,7 @@ info:
     > Note: all required fields are indicated by an asterisk (\*) in the PDF version of this API documentation.
     ---
   title: Digital Overhaul Management of Engines (DOME)
-  version: "2025-04-11"
+  version: "Version: 2025-04-21"
 externalDocs:
   description: Project SharePoint
 servers:
@@ -72,7 +71,7 @@ paths:
               examples:
                 OK:
                   description: OK
-                  value: Success
+                  value: updateMroCustomerApprovalDate was successful.
               schema:
                 type: string
           description: Successfully updated the matching DOME record with the MRO
@@ -85,20 +84,20 @@ paths:
                   description: ACCEPTED
                   value: Customer approval date is already set with the same date.
               schema:
-                $ref: "#/components/schemas/ApiResponseDetails"
+                $ref: "#/components/schemas/ProblemDetail"
           description: The request was accepted but no update was made since the date
             matches the existing customer approval date.
         "400":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ApiResponseDetails"
+                $ref: "#/components/schemas/ProblemDetail"
           description: The request failed OpenAPI Specification contract validation.
         "404":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ApiResponseDetails"
+                $ref: "#/components/schemas/ProblemDetail"
           description: "No DOME records matched the provided mroShopCode, mroWorkOrder,\
             \ maintenanceId and serviceTrackerId."
         "409":
@@ -109,7 +108,7 @@ paths:
                   description: CONFLICT
                   value: Customer approval date is already set with a different date.
               schema:
-                $ref: "#/components/schemas/ApiResponseDetails"
+                $ref: "#/components/schemas/ProblemDetail"
           description: The request was rejected because the date is different from
             the existing date.
       tags:
@@ -135,13 +134,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ApiResponseDetails"
+                $ref: "#/components/schemas/ProblemDetail"
           description: The request failed OpenAPI Specification contract validation.
         "404":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ApiResponseDetails"
+                $ref: "#/components/schemas/ProblemDetail"
           description: "No DOME records matched the provided esn, mroShopCode, maintenanceId\
             \ and serviceTrackerId."
       tags:
@@ -162,7 +161,7 @@ paths:
             application/json:
               schema:
                 type: string
-          description: MRO shop code and work order updated successfully.
+          description: updateShopCodeAndWorkOrder was successful.
         "400":
           content:
             application/json:
@@ -196,22 +195,46 @@ paths:
               examples:
                 OK:
                   description: OK
-                  value: Update workscope date successful.
+                  value: updateWorkscopeInitiationDate was successful.
               schema:
-                $ref: "#/components/schemas/ApiResponseDetails"
-          description: Successfully updated the matching DOME record with the MRO
-            customer approval date.
+                type: string
+          description: Update workscope date was successful.
         "400":
           content:
             application/json:
+              examples:
+                BAD_REQUEST:
+                  description: BAD_REQUEST
+                  value:
+                    detail: "Please provide a valid request;  smiNumber: must not\
+                      \ be blank, and esn: must not be blank"
+                    instance: /v1/workscopetool/pushworkscopedate
+                    status: 400
+                    title: BAD_REQUEST
+                    type: uri=/v1/workscopetool/pushworkscopedate;client=127.0.0.1;user=workscope.tool
+                    timestamp: 2025-04-21T17:43:33.387599400Z
               schema:
-                $ref: "#/components/schemas/ApiResponseDetails"
+                $ref: "#/components/schemas/ProblemDetail"
           description: The request failed OpenAPI Specification request validation.
         "404":
           content:
             application/json:
+              examples:
+                NOT_FOUND:
+                  description: NOT_FOUND
+                  value:
+                    errors:
+                    - "Unable to update workscope date; record not found. Request\
+                      \ params: ESN: FOO, MaintenanceId: 60042871, ServiceTrackerId:\
+                      \ 40054568, SmiNumber: 20L-LEP770301-03-LHT1"
+                    message: "Unable to update workscope date; record not found. Request\
+                      \ params: ESN: FOO, MaintenanceId: 60042871, ServiceTrackerId:\
+                      \ 40054568, SmiNumber: 20L-LEP770301-03-LHT1"
+                    reason: Not Found
+                    status: NOT_FOUND
+                    statusCode: 404
               schema:
-                $ref: "#/components/schemas/ApiResponseDetails"
+                $ref: "#/components/schemas/ProblemDetail"
           description: "No DOME records matched the provided esn, smiNumber, maintenanceId\
             \ and serviceTrackerId."
       tags:
@@ -248,8 +271,8 @@ components:
         customerApprovalDateTime:
           type: string
           format: date-time
-          description: Strict ISO 8601 Format (yyyy-MM-dd'T'HH:mm:ss) - "2023-12-12T23:12:12"
-            or Relaxed ISO 8601 Format (yyyy-MM-dd HH:mm:ss) - "2023-12-12 23:12:12"
+          description: Customer approval date time as yyyy-MM-dd HH:mm:ss or yyyy-MM-ddTHH:mm:ss
+            format.
         esn:
           type: string
           description: Engine Serial Number
@@ -347,8 +370,8 @@ components:
         publishedDateTime:
           type: string
           format: date-time
-          description: Strict ISO 8601 Format (yyyy-MM-dd'T'HH:mm:ss) - "2023-12-12T23:12:12"
-            or Relaxed ISO 8601 Format (yyyy-MM-dd HH:mm:ss) - "2023-12-12 23:12:12"
+          description: Published date time as yyyy-MM-dd HH:mm:ss or yyyy-MM-ddTHH:mm:ss
+            format.
         serviceTrackerId:
           type: integer
           format: int32
@@ -360,10 +383,42 @@ components:
       - mroWorkOrder
       - publishedDateTime
       - serviceTrackerId
+    ProblemDetail:
+      type: object
+      properties:
+        detail:
+          type: string
+        instance:
+          type: string
+          format: uri
+        properties:
+          type: object
+          additionalProperties:
+            type: object
+        status:
+          type: integer
+          format: int32
+        title:
+          type: string
+        type:
+          type: string
+          format: uri
     WstRequest:
       type: object
       description: Encapsulates updateWorkscopeInitiationDate request and ensures
         OpenAPI contract compliance.
+      example:
+        esn: "770301"
+        eventId: null
+        maintenanceId: 60042871
+        operator: ""
+        provider: ""
+        serviceTrackerId: 40054568
+        smiNumber: 20L-LEP770301-03-LHT1
+        svClassification: ""
+        wSCreatedBy: ""
+        wSInitiationDateTime: 2025-04-15T01:45:55
+        wSPublishedDateTime: null
       properties:
         esn:
           type: string
@@ -380,11 +435,9 @@ components:
         operator:
           type: string
           description: operator name
-          minLength: 1
         provider:
           type: string
           description: provider name
-          minLength: 1
         serviceTrackerId:
           type: integer
           format: int32
@@ -396,7 +449,11 @@ components:
         svClassification:
           type: string
           description: SV classification
-          minLength: 1
+        wSInitiationDateTime:
+          type: string
+          format: date-time
+          description: WS initiation date time as yyyy-MM-dd HH:mm:ss or yyyy-MM-ddTHH:mm:ss
+            format.
         wscreatedBy:
           type: string
         wsinitiationDateTime:
@@ -408,11 +465,9 @@ components:
       required:
       - esn
       - maintenanceId
-      - operator
-      - provider
       - serviceTrackerId
       - smiNumber
-      - svClassification
+      - wSInitiationDateTime
   securitySchemes:
     bearerAuth:
       bearerFormat: jwt
