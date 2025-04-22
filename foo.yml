@@ -71,9 +71,13 @@ paths:
               examples:
                 OK:
                   description: OK
-                  value: updateMroCustomerApprovalDate was successful.
+                  value:
+                    data: true
+                    exception: null
+                    message: updateMroCustomerApprovalDate was successful.
+                    statusCode: 200
               schema:
-                type: string
+                $ref: "#/components/schemas/MroApiResponse"
           description: Successfully updated the matching DOME record with the MRO
             customer approval date.
         "202":
@@ -82,20 +86,47 @@ paths:
               examples:
                 ACCEPTED:
                   description: ACCEPTED
-                  value: Customer approval date is already set with the same date.
+                  value:
+                    data: true
+                    exception: null
+                    message: Customer approval date is already set with the same date.
+                    statusCode: 204
               schema:
-                $ref: "#/components/schemas/ProblemDetail"
+                $ref: "#/components/schemas/MroApiResponse"
           description: The request was accepted but no update was made since the date
             matches the existing customer approval date.
         "400":
           content:
             application/json:
+              examples:
+                BAD_REQUEST:
+                  description: BAD_REQUEST
+                  value:
+                    detail: "Please provide a valid request;  customerApprovalDateTime:\
+                      \ must not be null"
+                    instance: /v1/mro-collab/customer-approval
+                    status: 400
+                    title: BAD_REQUEST
+                    type: uri=/v1/mro-collab/customer-approval;client=127.0.0.1;user=mro.collab
+                    timestamp: 2025-04-22T00:56:44.065838500Z
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
           description: The request failed OpenAPI Specification contract validation.
         "404":
           content:
             application/json:
+              examples:
+                NOT_FOUND:
+                  description: NOT_FOUND
+                  value:
+                    detail: "Unable to update customer approval date; record not found.\
+                      \ Request params: ESN: XXX, MroShopCode: DL9, MroWorkOrder:\
+                      \ 20L-LEP770301-03-LHT1, MaintenanceId: 60042871, ServiceTrackerId:\
+                      \ 40054568"
+                    instance: /v1/mro-collab/customer-approval
+                    status: 404
+                    title: Not Found
+                    type: uri=/v1/mro-collab/customer-approval;client=127.0.0.1;user=mro.collab
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
           description: "No DOME records matched the provided mroShopCode, mroWorkOrder,\
@@ -106,7 +137,6 @@ paths:
               examples:
                 CONFLICT:
                   description: CONFLICT
-                  value: Customer approval date is already set with a different date.
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
           description: The request was rejected because the date is different from
@@ -128,17 +158,39 @@ paths:
           content:
             application/json:
               schema:
-                type: object
+                $ref: "#/components/schemas/MroApiResponse"
           description: The MRO work order from the matching DOME record was nulled.
         "400":
           content:
             application/json:
+              examples:
+                BAD_REQUEST:
+                  description: BAD_REQUEST
+                  value:
+                    detail: "Please provide a valid request;  mroShopCode: must not\
+                      \ be blank, and mroShopCode: size must be between 1 and 10"
+                    instance: /v1/mro-collab/workorder
+                    status: 400
+                    title: BAD_REQUEST
+                    type: uri=/v1/mro-collab/workorder;client=127.0.0.1;user=mro.collab
+                    timestamp: 2025-04-22T01:54:22.925575800Z
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
           description: The request failed OpenAPI Specification contract validation.
         "404":
           content:
             application/json:
+              examples:
+                NOT_FOUND:
+                  description: NOT_FOUND
+                  value:
+                    detail: "MRO work order not deleted; record not found. Request:\
+                      \ MroWorkOrderDeleteRequest(maintenanceId=60042871, serviceTrackerId=40054568,\
+                      \ esn=XXX, eventId=null, mroShopCode=DL9)"
+                    instance: /v1/mro-collab/workorder
+                    status: 404
+                    title: Not Found
+                    type: uri=/v1/mro-collab/workorder;client=127.0.0.1;user=mro.collab
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
           description: "No DOME records matched the provided esn, mroShopCode, maintenanceId\
@@ -146,8 +198,8 @@ paths:
       tags:
       - MRO Collab
     post:
-      description: Updates the matching DOME record with the MRO shop code and work
-        order.
+      description: "Updates the matching DOME record with the MRO shop code, work\
+        \ order and published date."
       operationId: updateMroShopCodeAndWorkOrder
       requestBody:
         content:
@@ -159,18 +211,49 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                OK:
+                  description: OK
+                  value:
+                    data: true
+                    exception: null
+                    message: updateShopCodeAndWorkOrder was successful.
+                    statusCode: 200
               schema:
-                type: string
-          description: updateShopCodeAndWorkOrder was successful.
+                $ref: "#/components/schemas/MroApiResponse"
+          description: updateShopCodeAndWorkOrderAndPublishedDate was successful.
         "400":
           content:
             application/json:
+              examples:
+                BAD_REQUEST:
+                  description: BAD_REQUEST
+                  value:
+                    detail: "Please provide a valid request;  publishedDateTime: must\
+                      \ not be null"
+                    instance: /v1/mro-collab/workorder
+                    status: 400
+                    title: BAD_REQUEST
+                    type: uri=/v1/mro-collab/workorder;client=127.0.0.1;user=mro.collab
+                    timestamp: 2025-04-22T01:43:46.234137500Z
               schema:
                 $ref: "#/components/schemas/ApiResponseDetails"
           description: The request failed OpenAPI Specification contract validation.
         "404":
           content:
             application/json:
+              examples:
+                NOT_FOUND:
+                  description: NOT_FOUND
+                  value:
+                    detail: "MRO shop code and work order not updated; record not\
+                      \ found. Request: MroWorkOrderUpdateRequest(esn=XXX, eventId=null,\
+                      \ maintenanceId=60042871, mroShopCode=DL9, mroWorkOrder=20L-LEP770301-03-LHT1,\
+                      \ publishedDateTime=2026-04-15T01:45:55, serviceTrackerId=40054568)"
+                    instance: /v1/mro-collab/workorder
+                    status: 404
+                    title: Not Found
+                    type: uri=/v1/mro-collab/workorder;client=127.0.0.1;user=mro.collab
               schema:
                 $ref: "#/components/schemas/ApiResponseDetails"
           description: "No DOME records matched the provided mroShopCode, mroWorkOrder,\
@@ -192,12 +275,8 @@ paths:
         "200":
           content:
             application/json:
-              examples:
-                OK:
-                  description: OK
-                  value: updateWorkscopeInitiationDate was successful.
               schema:
-                type: string
+                $ref: "#/components/schemas/MroApiResponse"
           description: Update workscope date was successful.
         "400":
           content:
@@ -223,16 +302,13 @@ paths:
                 NOT_FOUND:
                   description: NOT_FOUND
                   value:
-                    errors:
-                    - "Unable to update workscope date; record not found. Request\
-                      \ params: ESN: FOO, MaintenanceId: 60042871, ServiceTrackerId:\
+                    detail: "Unable to update workscope date; record not found. Request\
+                      \ params: ESN: XX770301, MaintenanceId: 60042871, ServiceTrackerId:\
                       \ 40054568, SmiNumber: 20L-LEP770301-03-LHT1"
-                    message: "Unable to update workscope date; record not found. Request\
-                      \ params: ESN: FOO, MaintenanceId: 60042871, ServiceTrackerId:\
-                      \ 40054568, SmiNumber: 20L-LEP770301-03-LHT1"
-                    reason: Not Found
-                    status: NOT_FOUND
-                    statusCode: 404
+                    instance: /v1/workscopetool/pushworkscopedate
+                    status: 404
+                    title: Not Found
+                    type: uri=/v1/workscopetool/pushworkscopedate;client=127.0.0.1;user=workscope.tool
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
           description: "No DOME records matched the provided esn, smiNumber, maintenanceId\
@@ -263,6 +339,18 @@ components:
           type: integer
           format: int32
           description: "The HttpStatus value  (e.g., 404)."
+    MroApiResponse:
+      type: object
+      properties:
+        data:
+          type: boolean
+        exception:
+          type: string
+        message:
+          type: string
+        statusCode:
+          type: integer
+          format: int32
     MroCustomerApprovalRequest:
       type: object
       description: Encapsulates updateMroCustomerApprovalDate request and ensures
