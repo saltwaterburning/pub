@@ -1,0 +1,564 @@
+openapi: 3.1.0
+info:
+  contact:
+    email: chuck.marco@prattwhitney.com
+    name: Project manager- Chuck Marco
+  description: |
+    Documentation of DOME RESTful APIs for use by the MRO (Maintenance, Repair and Operations) Collaboration and WST (Workscope Tool) systems.
+
+    This documentation is generated from the actual DOME OpenAPI Specification so is the most authoritative possible.
+    Every effort was made to make the DOME and it's external APIs adherent the best-of-breed architectural design patterns and recommendations such as those by the
+    <a href="https://www.ietf.org/about/introduction/#about" target="_blank" rel="noopener noreferrer">Internet Engineering Task Force (IETF) for standards development for the Internet</a>.
+
+    **Relevant specifications and RESTful API standards**
+
+    * <a href="https://beanvalidation.org/2.0/spec" target="_blank" rel="noopener noreferrer">API Request Validation Specification</a> Ensures Client OpenAPI Specification Complicance
+    * <a href="https://beanvalidation.org/2.0/spec" target="_blank" rel="noopener noreferrer">Azure Architecture Center</a> Cloud Applications Best Practices
+    * <a href="https://datatracker.ietf.org/doc/rfc9457/" target="_blank" rel="noopener noreferrer">Problem Details for HTTP APIs</a> Client Error Responses
+    * <a href="https://www.openapis.org/what-is-openapi" target="_blank" rel="noopener noreferrer">OpenAPI Specification (OAS)</a> API Development Lifecycle
+
+    **DOME Application Monitoring**
+
+    The DOME application has a large number of monitoring and management features available.
+    In order to maintain operational security only a small number of these are enabled in production.
+
+    One monitor of note is the *GET /monitor/health* endpoint is available for monitoring the DOME application health.
+    The HTTP status code reflects the DOME application health as listed below.
+    The health monitor response details are described <a href="https://docs.spring.io/spring-boot/api/rest/actuator/health.html" target="_blank" rel="noopener noreferrer">here</a>.
+    In certain scenarios the response details may not be available so it's advised to rely upon the HTTP status code.
+    The health monitor also reports the health of a few application components such as DB and diskSpace.
+
+    * Application health monitor HTTP Status Codes
+        * **UP**: 200 (OK)
+        * **DOWN**: 503 (Service Unavailable)
+        * **OUT_OF_SERVICE**: 410 (Gone)
+        * **UNKNOWN**: 500 (Internal Server Error)
+
+    > Note: all required fields are indicated by an asterisk (\*) in the PDF version of this API documentation.
+    ---
+  title: Digital Overhaul Management of Engines (DOME)
+  version: "2025-04-22"
+externalDocs:
+  description: Project SharePoint
+servers:
+- description: DBDS Devlelopment
+  url: http://192.168.3.171:81/dome
+- description: DBDS Stage
+  url: http://192.168.3.171:82/dome
+- description: P&W Stage
+  url: https://dome-ui-test.prattwhitney.com/dome
+security:
+- bearerAuth: []
+tags:
+- description: "MRO (maintenance, repair and operations) Collaboration API."
+  name: MRO Collab
+paths:
+  /v1/mro-collab/customer-approval:
+    put:
+      description: Updates the matching DOME record with the MRO customer approval
+        date.
+      operationId: updateMroCustomerApprovalDate
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MroCustomerApprovalRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                OK:
+                  description: OK
+                  value:
+                    data: true
+                    exception: null
+                    message: updateMroCustomerApprovalDate was successful.
+                    statusCode: 200
+              schema:
+                $ref: "#/components/schemas/MroApiResponse"
+          description: Successfully updated the matching DOME record with the MRO
+            customer approval date.
+        "202":
+          content:
+            application/json:
+              examples:
+                ACCEPTED:
+                  description: ACCEPTED
+                  value:
+                    data: true
+                    exception: null
+                    message: Customer approval date is already set with the same date.
+                    statusCode: 204
+              schema:
+                $ref: "#/components/schemas/MroApiResponse"
+          description: The request was accepted but no update was made since the date
+            matches the existing customer approval date.
+        "400":
+          content:
+            application/json:
+              examples:
+                BAD_REQUEST:
+                  description: BAD_REQUEST
+                  value:
+                    detail: "Please provide a valid request;  customerApprovalDateTime:\
+                      \ must not be null"
+                    instance: /v1/mro-collab/customer-approval
+                    status: 400
+                    title: BAD_REQUEST
+                    type: uri=/v1/mro-collab/customer-approval;client=127.0.0.1;user=mro.collab
+                    timestamp: 2025-04-22T00:56:44.065838500Z
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+          description: The request failed OpenAPI Specification contract validation.
+        "404":
+          content:
+            application/json:
+              examples:
+                NOT_FOUND:
+                  description: NOT_FOUND
+                  value:
+                    detail: "Unable to update customer approval date; record not found.\
+                      \ Request params: ESN: XXX, MroShopCode: DL9, MroWorkOrder:\
+                      \ 20L-LEP770301-03-LHT1, MaintenanceId: 60042871, ServiceTrackerId:\
+                      \ 40054568"
+                    instance: /v1/mro-collab/customer-approval
+                    status: 404
+                    title: Not Found
+                    type: uri=/v1/mro-collab/customer-approval;client=127.0.0.1;user=mro.collab
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+          description: "No DOME records matched the provided mroShopCode, mroWorkOrder,\
+            \ maintenanceId and serviceTrackerId."
+        "409":
+          content:
+            application/json:
+              examples:
+                CONFLICT:
+                  description: CONFLICT
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+          description: The request was rejected because the date is different from
+            the existing date.
+      tags:
+      - MRO Collab
+  /v1/mro-collab/workorder:
+    delete:
+      description: Deletes the MRO work order from the matching DOME record.
+      operationId: deleteMroWorkOrder
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MroWorkOrderDeleteRequest"
+        required: true
+      responses:
+        "204":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MroApiResponse"
+          description: The MRO work order from the matching DOME record was nulled.
+        "400":
+          content:
+            application/json:
+              examples:
+                BAD_REQUEST:
+                  description: BAD_REQUEST
+                  value:
+                    detail: "Please provide a valid request;  mroShopCode: must not\
+                      \ be blank, and mroShopCode: size must be between 1 and 10"
+                    instance: /v1/mro-collab/workorder
+                    status: 400
+                    title: BAD_REQUEST
+                    type: uri=/v1/mro-collab/workorder;client=127.0.0.1;user=mro.collab
+                    timestamp: 2025-04-22T01:54:22.925575800Z
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+          description: The request failed OpenAPI Specification contract validation.
+        "404":
+          content:
+            application/json:
+              examples:
+                NOT_FOUND:
+                  description: NOT_FOUND
+                  value:
+                    detail: "MRO work order not deleted; record not found. Request:\
+                      \ MroWorkOrderDeleteRequest(maintenanceId=60042871, serviceTrackerId=40054568,\
+                      \ esn=XXX, eventId=null, mroShopCode=DL9)"
+                    instance: /v1/mro-collab/workorder
+                    status: 404
+                    title: Not Found
+                    type: uri=/v1/mro-collab/workorder;client=127.0.0.1;user=mro.collab
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+          description: "No DOME records matched the provided esn, mroShopCode, maintenanceId\
+            \ and serviceTrackerId."
+      tags:
+      - MRO Collab
+    post:
+      description: "Updates the matching DOME record with the MRO shop code, work\
+        \ order and published date."
+      operationId: updateMroShopCodeAndWorkOrder
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MroWorkOrderUpdateRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                OK:
+                  description: OK
+                  value:
+                    data: true
+                    exception: null
+                    message: updateShopCodeAndWorkOrder was successful.
+                    statusCode: 200
+              schema:
+                $ref: "#/components/schemas/MroApiResponse"
+          description: updateShopCodeAndWorkOrderAndPublishedDate was successful.
+        "400":
+          content:
+            application/json:
+              examples:
+                BAD_REQUEST:
+                  description: BAD_REQUEST
+                  value:
+                    detail: "Please provide a valid request;  publishedDateTime: must\
+                      \ not be null"
+                    instance: /v1/mro-collab/workorder
+                    status: 400
+                    title: BAD_REQUEST
+                    type: uri=/v1/mro-collab/workorder;client=127.0.0.1;user=mro.collab
+                    timestamp: 2025-04-22T01:43:46.234137500Z
+              schema:
+                $ref: "#/components/schemas/ApiResponseDetails"
+          description: The request failed OpenAPI Specification contract validation.
+        "404":
+          content:
+            application/json:
+              examples:
+                NOT_FOUND:
+                  description: NOT_FOUND
+                  value:
+                    detail: "MRO shop code and work order not updated; record not\
+                      \ found. Request: MroWorkOrderUpdateRequest(esn=XXX, eventId=null,\
+                      \ maintenanceId=60042871, mroShopCode=DL9, mroWorkOrder=20L-LEP770301-03-LHT1,\
+                      \ publishedDateTime=2026-04-15T01:45:55, serviceTrackerId=40054568)"
+                    instance: /v1/mro-collab/workorder
+                    status: 404
+                    title: Not Found
+                    type: uri=/v1/mro-collab/workorder;client=127.0.0.1;user=mro.collab
+              schema:
+                $ref: "#/components/schemas/ApiResponseDetails"
+          description: "No DOME records matched the provided mroShopCode, mroWorkOrder,\
+            \ maintenanceId and serviceTrackerId."
+      tags:
+      - MRO Collab
+  /v1/workscopetool/pushworkscopedate:
+    post:
+      description: Updates the matching DOME record with the MRO customer approval
+        date.
+      operationId: updateWorkscopeInitiationDate
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/WstRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MroApiResponse"
+          description: Update workscope date was successful.
+        "400":
+          content:
+            application/json:
+              examples:
+                BAD_REQUEST:
+                  description: BAD_REQUEST
+                  value:
+                    detail: "Please provide a valid request;  smiNumber: must not\
+                      \ be blank, and esn: must not be blank"
+                    instance: /v1/workscopetool/pushworkscopedate
+                    status: 400
+                    title: BAD_REQUEST
+                    type: uri=/v1/workscopetool/pushworkscopedate;client=127.0.0.1;user=workscope.tool
+                    timestamp: 2025-04-21T17:43:33.387599400Z
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+          description: The request failed OpenAPI Specification request validation.
+        "404":
+          content:
+            application/json:
+              examples:
+                NOT_FOUND:
+                  description: NOT_FOUND
+                  value:
+                    detail: "Unable to update workscope date; record not found. Request\
+                      \ params: ESN: XX770301, MaintenanceId: 60042871, ServiceTrackerId:\
+                      \ 40054568, SmiNumber: 20L-LEP770301-03-LHT1"
+                    instance: /v1/workscopetool/pushworkscopedate
+                    status: 404
+                    title: Not Found
+                    type: uri=/v1/workscopetool/pushworkscopedate;client=127.0.0.1;user=workscope.tool
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+          description: "No DOME records matched the provided esn, smiNumber, maintenanceId\
+            \ and serviceTrackerId."
+      tags:
+      - Workscope Tool
+components:
+  schemas:
+    ApiResponseDetails:
+      type: object
+      description: Application response schema.
+      properties:
+        errors:
+          type: array
+          description: Chain of application error messages.
+          items:
+            type: string
+        message:
+          type: string
+          description: Application message.
+        reason:
+          type: string
+          description: "The HttpStatus Reason Phrase  (e.g., NOT FOUND)."
+        status:
+          type: string
+          description: "The HttpStatus name (e.g., NOT_FOUND)."
+        statusCode:
+          type: integer
+          format: int32
+          description: "The HttpStatus value  (e.g., 404)."
+    MroApiResponse:
+      type: object
+      properties:
+        data:
+          type: boolean
+        exception:
+          type: string
+        message:
+          type: string
+        statusCode:
+          type: integer
+          format: int32
+    MroCustomerApprovalRequest:
+      type: object
+      description: Encapsulates updateMroCustomerApprovalDate request and ensures
+        OpenAPI contract compliance.
+      properties:
+        customerApprovalDateTime:
+          type: string
+          format: date-time
+          description: Customer approval date time as yyyy-MM-dd HH:mm:ss or yyyy-MM-ddTHH:mm:ss
+            format.
+        esn:
+          type: string
+          description: Engine Serial Number
+          maxLength: 20
+          minLength: 1
+        eventId:
+          type: integer
+          format: int32
+          description: supplanted by maintenanceId and serviceTrackerId
+        maintenanceId:
+          type: integer
+          format: int32
+          description: many-to-one with serviceTrackerId
+        mroShopCode:
+          type: string
+          description: shop code used by MRO system
+          maxLength: 10
+          minLength: 1
+        mroWorkOrder:
+          type: string
+          description: work order (AKA SMI) used by MRO system
+          maxLength: 25
+          minLength: 1
+        serviceTrackerId:
+          type: integer
+          format: int32
+          description: one-to-many with maintenanceId
+      required:
+      - customerApprovalDateTime
+      - esn
+      - maintenanceId
+      - mroShopCode
+      - mroWorkOrder
+      - serviceTrackerId
+    MroWorkOrderDeleteRequest:
+      type: object
+      description: Encapsulates deleteMroWorkOrder request and ensures OpenAPI contract
+        compliance.
+      properties:
+        esn:
+          type: string
+          description: Engine Serial Number
+          maxLength: 20
+          minLength: 1
+        eventId:
+          type: integer
+          format: int32
+          description: supplanted by maintenanceId and serviceTrackerId
+        maintenanceId:
+          type: integer
+          format: int32
+          description: many-to-one with serviceTrackerId
+        mroShopCode:
+          type: string
+          description: shop code used by MRO system
+          maxLength: 10
+          minLength: 1
+        serviceTrackerId:
+          type: integer
+          format: int32
+          description: one-to-many with maintenanceId
+      required:
+      - esn
+      - maintenanceId
+      - mroShopCode
+      - serviceTrackerId
+    MroWorkOrderUpdateRequest:
+      type: object
+      description: Encapsulates updateWstShopCodeAndWorkOrder request and ensures
+        OpenAPI contract compliance.
+      properties:
+        esn:
+          type: string
+          description: Engine Serial Number
+          maxLength: 20
+          minLength: 1
+        eventId:
+          type: integer
+          format: int32
+          description: supplanted by maintenanceId and serviceTrackerId
+        maintenanceId:
+          type: integer
+          format: int32
+          description: many-to-one with serviceTrackerId
+        mroShopCode:
+          type: string
+          description: shop code used by MRO system
+          maxLength: 10
+          minLength: 1
+        mroWorkOrder:
+          type: string
+          description: work order (AKA SMI) used by MRO system
+          maxLength: 25
+          minLength: 1
+        publishedDateTime:
+          type: string
+          format: date-time
+          description: Published date time as yyyy-MM-dd HH:mm:ss or yyyy-MM-ddTHH:mm:ss
+            format.
+        serviceTrackerId:
+          type: integer
+          format: int32
+          description: one-to-many with maintenanceId
+      required:
+      - esn
+      - maintenanceId
+      - mroShopCode
+      - mroWorkOrder
+      - publishedDateTime
+      - serviceTrackerId
+    ProblemDetail:
+      type: object
+      properties:
+        detail:
+          type: string
+        instance:
+          type: string
+          format: uri
+        properties:
+          type: object
+          additionalProperties:
+            type: object
+        status:
+          type: integer
+          format: int32
+        title:
+          type: string
+        type:
+          type: string
+          format: uri
+    WstRequest:
+      type: object
+      description: Encapsulates updateWorkscopeInitiationDate request and ensures
+        OpenAPI contract compliance.
+      example:
+        esn: "770301"
+        eventId: null
+        maintenanceId: 60042871
+        operator: ""
+        provider: ""
+        serviceTrackerId: 40054568
+        smiNumber: 20L-LEP770301-03-LHT1
+        svClassification: ""
+        wSCreatedBy: ""
+        wSInitiationDateTime: 2025-04-15T01:45:55
+        wSPublishedDateTime: null
+      properties:
+        esn:
+          type: string
+          description: Engine Serial Number
+          minLength: 1
+        eventId:
+          type: integer
+          format: int32
+          description: supplanted by maintenanceId and serviceTrackerId
+        maintenanceId:
+          type: integer
+          format: int32
+          description: many-to-one with serviceTrackerId
+        operator:
+          type: string
+          description: operator name
+        provider:
+          type: string
+          description: provider name
+        serviceTrackerId:
+          type: integer
+          format: int32
+          description: one-to-many with maintenanceId
+        smiNumber:
+          type: string
+          description: SMI is also know as work order
+          minLength: 1
+        svClassification:
+          type: string
+          description: SV classification
+        wSInitiationDateTime:
+          type: string
+          format: date-time
+          description: WS initiation date time as yyyy-MM-dd HH:mm:ss or yyyy-MM-ddTHH:mm:ss
+            format.
+        wscreatedBy:
+          type: string
+        wsinitiationDateTime:
+          type: string
+          format: date-time
+        wspublishedDateTime:
+          type: string
+          format: date-time
+      required:
+      - esn
+      - maintenanceId
+      - serviceTrackerId
+      - smiNumber
+      - wSInitiationDateTime
+  securitySchemes:
+    bearerAuth:
+      bearerFormat: jwt
+      description: JWT Bearer Authorization.
+      scheme: bearer
+      type: http
