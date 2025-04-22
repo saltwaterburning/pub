@@ -74,10 +74,9 @@ paths:
                   value:
                     data: true
                     exception: null
-                    message: updateMroCustomerApprovalDate was successful.
                     statusCode: 200
               schema:
-                $ref: "#/components/schemas/MroApiResponse"
+                $ref: "#/components/schemas/ApiResponseInfo"
           description: Successfully updated the matching DOME record with the MRO
             customer approval date.
         "202":
@@ -92,7 +91,7 @@ paths:
                     message: Customer approval date is already set with the same date.
                     statusCode: 204
               schema:
-                $ref: "#/components/schemas/MroApiResponse"
+                $ref: "#/components/schemas/ApiResponseInfo"
           description: The request was accepted but no update was made since the date
             matches the existing customer approval date.
         "400":
@@ -158,7 +157,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/MroApiResponse"
+                $ref: "#/components/schemas/ApiResponseInfo"
           description: The MRO work order from the matching DOME record was nulled.
         "400":
           content:
@@ -217,10 +216,9 @@ paths:
                   value:
                     data: true
                     exception: null
-                    message: updateShopCodeAndWorkOrder was successful.
                     statusCode: 200
               schema:
-                $ref: "#/components/schemas/MroApiResponse"
+                $ref: "#/components/schemas/ApiResponseInfo"
           description: updateShopCodeAndWorkOrderAndPublishedDate was successful.
         "400":
           content:
@@ -275,8 +273,15 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                OK:
+                  description: OK
+                  value:
+                    data: true
+                    exception: null
+                    statusCode: 200
               schema:
-                $ref: "#/components/schemas/MroApiResponse"
+                $ref: "#/components/schemas/ApiResponseInfo"
           description: Update workscope date was successful.
         "400":
           content:
@@ -339,14 +344,13 @@ components:
           type: integer
           format: int32
           description: "The HttpStatus value  (e.g., 404)."
-    MroApiResponse:
+    ApiResponseInfo:
       type: object
+      description: Response object used for 2xx Successful API information.
       properties:
         data:
           type: boolean
         exception:
-          type: string
-        message:
           type: string
         statusCode:
           type: integer
