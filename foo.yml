@@ -5,9 +5,11 @@ info:
     name: Project manager- Chuck Marco
   description: |
     Documentation of DOME RESTful APIs for use by the MRO (Maintenance, Repair and Operations) Collaboration and WST (Workscope Tool) systems.
+
     The **MRO Collab (Remote)** and **Workscope Tool (Remote)** API documentation server only to document the API Schemas (data models) used to send requests to the remote MRO and WST services.
     These requests are suffixed with **RemoteRequest**, e.g., **MroCommentRemoteRequest**.
-    All of these remote requests are sent only if the <a href="https://www.openapis.org/" target="_blank" rel="noopener noreferrer">OpenAPI Specification</a> contract passes validation.
+    All of these remote requests are sent only if its <a href="https://www.openapis.org/" target="_blank" rel="noopener noreferrer">OpenAPI Specification</a> contract passes validation.
+    In other words all required fields must be present and all field lengths, when specified, are validated.
 
     This documentation is generated from the actual DOME OpenAPI Specification so is the most authoritative possible.
     Every effort was made to make the DOME and it's external APIs adherent the best-of-breed architectural design patterns and recommendations such as those by the
