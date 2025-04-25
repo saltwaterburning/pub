@@ -6,7 +6,7 @@ info:
   description: |
     Documentation of DOME RESTful APIs for use by the MRO (Maintenance, Repair and Operations) Collaboration and WST (Workscope Tool) systems.
 
-    The **MRO Collab (Remote)** and **Workscope Tool (Remote)** API documentation server only to document the API Schemas (data models) used to send requests to the remote MRO and WST services.
+    The **MRO Collab (Remote)** and **Workscope Tool (Remote)** API documentation serves only to document the API Schemas (data models) used to send requests to the remote MRO and WST services.
     These requests are suffixed with **RemoteRequest**, e.g., **MroCommentRemoteRequest**.
     All of these remote requests are sent only if its <a href="https://www.openapis.org/" target="_blank" rel="noopener noreferrer">OpenAPI Specification</a> contract passes validation.
     In other words all required fields must be present and all field lengths, when specified, are validated.
