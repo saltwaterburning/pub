@@ -103,6 +103,7 @@ components:
         engineSerialNumber:
           type: string
           description: The mandatory engine serial number (ESN).
+          maxLength: 20
           minLength: 1
         estimatedArrivalEBUDate:
           type: string
