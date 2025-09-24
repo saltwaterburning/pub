@@ -3,9 +3,9 @@ info:
   contact:
     email: chuck.marco@prattwhitney.com
     name: Project manager- Chuck Marco
-  description: DOME Application RESTful API for use by Shipping Application.
+  description: DOME Application RESTful API for shop use.
   title: Digital Overhaul Management of Engines (DOME)
-  version: "Version: 2025-07-21"
+  version: "Version: 2025-09-23"
 externalDocs:
   description: Project SharePoint
 servers:
@@ -23,43 +23,42 @@ tags:
 - description: WST (Workscope Tool) API.
   name: Workscope Tool
 paths:
-  /v1/external/shipping/dome-shipping-details:
+  /v1/external/shop/dome-dates:
     post:
-      description: Updates the matching DOME record with the actual shipping information.
+      description: Updates the matching DOME record(s) with the provided non-null
+        shop dates. Dates are required to be in ISO 8601 format (yyyy-MM-dd).
       operationId: updateEngineComments
       requestBody:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/ShippingDatesRequest"
+              $ref: "#/components/schemas/ShopDatesRequest"
         required: true
       responses:
         "200":
           content:
             application/json:
+              examples:
+                OK:
+                  description: OK
+                  value: Success
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
-          description: Subsequent invocation with the same request payload.
-        "201":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ProblemDetail"
-          description: Shipping information was updated successfully.
+          description: Successfully updated the matching DOME record.
         "400":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ProblemDetail"
-          description: The request failed request validation.
+                type: string
+          description: Invalid request.
         "404":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ProblemDetail"
-          description: No DOME records matched the provided engine serial number.
+                type: string
+          description: The matching DOME record was not found.
       tags:
-      - ShipDates
+      - ShopDates
 components:
   schemas:
     ProblemDetail:
@@ -81,54 +80,137 @@ components:
         type:
           type: string
           format: uri
-    ShippingDatesRequest:
+    ShopDatesRequest:
       type: object
       properties:
-        actualArrivalEBUDate:
+        actualAssetCompleteDate:
           type: string
           format: date
-          description: The EBU actual arrival date or null if none. ISO 8601 format
-            (yyyy-MM-dd) required.
-        actualArrivalMaintCenterDate:
+        actualContractDate:
           type: string
           format: date
-          description: The maintenance center actual arrival date or null if none.  ISO
-            8601 format (yyyy-MM-dd) required.
-        airwayBill:
+        actualCoreAssemblyDate:
           type: string
-          description: The airway bill or null if none.
-        currentLocation:
+          format: date
+          description: The new shop date or null if none.
+        actualG1CloseDate:
           type: string
-          description: The current location or null if none.
+          format: date
+          description: The new shop date or null if none.
+        actualG3CloseDate:
+          type: string
+          format: date
+          description: The new shop date or null if none.
+        actualG3StartDate:
+          type: string
+          format: date
+          description: The new shop date or null if none.
+        actualInductDate:
+          type: string
+          format: date
+          description: The new shop date or null if none.
+        actualKitCompleteDate:
+          type: string
+          format: date
+          description: The new shop date or null if none.
+        actualReceiptDate:
+          type: string
+          format: date
+          description: The new shop date or null if none.
+        actualReceiveDate:
+          type: string
+          format: date
+          description: The new shop date or null if none.
+        actualShipDate:
+          type: string
+          format: date
+        actualShipToCustomerDate:
+          type: string
+          format: date
+        actualTestCompleteDate:
+          type: string
+          format: date
+          description: The new shop date or null if none.
+        actualTestStartDate:
+          type: string
+          format: date
+          description: The new shop date or null if none.
+        countCmplt:
+          type: boolean
+          description: AKA warranty.
+        countInduct:
+          type: boolean
+          description: AKA revenue.
+        engPassBSI:
+          type: boolean
+        engPassTest:
+          type: boolean
+        engineCenter:
+          type: string
+          description: "The mandatory engine center Id. Example: EC342"
+          minLength: 1
+        engineCenterName:
+          type: string
+          description: "The mandatory engine center name. Example: LHT AERO Alzey"
         engineSerialNumber:
           type: string
-          description: The mandatory engine serial number (ESN).
-          maxLength: 20
+          description: The mandatory ESN.
           minLength: 1
-        estimatedArrivalEBUDate:
+        planAssetCompleteDate:
           type: string
           format: date
-          description: The EBU estimated time of arrival or null if none. ISO 8601
-            format (yyyy-MM-dd) required.
-        estimatedArrivalMaintCenterDate:
+          description: The new planned shop date or null if none.
+        planCoreAssemblyDate:
           type: string
           format: date
-          description: The maintenance center estimated time of arrival date or null
-            if none. ISO 8601 format (yyyy-MM-dd) required.
-        pickupDate:
+          description: The new planned shop date or null if none.
+        planGate1CloseDate:
           type: string
           format: date
-          description: The pickup date or null if none. ISO 8601 format (yyyy-MM-dd)
-            required.
-        shipmentStatus:
+          description: The new planned shop date or null if none.
+        planGate3CloseDate:
           type: string
-          description: The shipping status or null if none.
-        shippingCompany:
+          format: date
+          description: The new planned shop date or null if none.
+        planGate3StartDate:
           type: string
-          description: The shipping company or null if none.
+          format: date
+          description: The new planned shop date or null if none.
+        planKitCompleteDate:
+          type: string
+          format: date
+          description: The new planned shop date or null if none.
+        planReceiptDate:
+          type: string
+          format: date
+          description: The new planned shop date or null if none.
+        planReceiveDate:
+          type: string
+          format: date
+          description: The new planned shop date or null if none.
+        planShipDate:
+          type: string
+          format: date
+          description: The new planned shop date or null if none.
+        planShipToCustomerDate:
+          type: string
+          format: date
+        planTestCompleteDate:
+          type: string
+          format: date
+          description: The new planned shop date or null if none.
+        planTestStartDate:
+          type: string
+          format: date
+          description: The new planned shop date or null if none.
+        salesOrderNo:
+          type: string
+        shopVisitNumber:
+          type: integer
+          format: int32
       required:
+      - engineCenter
       - engineSerialNumber
-      title: ShippingDatesRequestModel
   securitySchemes:
     bearerAuth:
       bearerFormat: jwt
