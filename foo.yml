@@ -207,7 +207,7 @@ components:
           type: string
           format: date
           description: The new planned shop date or null if none.
-        salesOrderNo:
+        salesOrder:
           type: string
         shopVisitNumber:
           type: integer
