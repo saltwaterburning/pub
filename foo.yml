@@ -86,9 +86,11 @@ components:
         actualAssetCompleteDate:
           type: string
           format: date
+          description: The new shop date or null if none.
         actualContractDate:
           type: string
           format: date
+          description: The new shop date or null if none.
         actualCoreAssemblyDate:
           type: string
           format: date
@@ -124,6 +126,7 @@ components:
         actualShipDate:
           type: string
           format: date
+          description: The new shop date or null if none.
         actualShipToCustomerDate:
           type: string
           format: date
@@ -195,6 +198,7 @@ components:
         planShipToCustomerDate:
           type: string
           format: date
+          description: The new shop date or null if none.
         planTestCompleteDate:
           type: string
           format: date
